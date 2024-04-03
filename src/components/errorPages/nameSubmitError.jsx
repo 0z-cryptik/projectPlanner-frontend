@@ -1,6 +1,6 @@
 export const NameSubmitError = () => {
   return (
-    <p>
+    <p className="w-1/2">
       An error occured while trying submit your name. Please go to the
       <a
         href="/login"

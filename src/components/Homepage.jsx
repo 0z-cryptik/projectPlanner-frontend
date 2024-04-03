@@ -3,7 +3,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { IoAddCircleOutline } from "react-icons/io5";
 
 export const Homepage = () => {
-  const {signUpUser, user} = useList()
+  const { user } = useList();
 
   return (
     <main className="w-screen h-screen flex flex-row">
@@ -13,7 +13,7 @@ export const Homepage = () => {
             size={"1.5rem"}
             className="mr-3"
           />
-          User
+          {user.name}
         </div>
         <button className="mt-2 text-sm text-orange-500">logout</button>
 

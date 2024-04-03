@@ -3,7 +3,7 @@ import App from "./App";
 import { SignUpPage } from "./components/signUpPage";
 import { LoginPage } from "./components/loginPage";
 import { EnterName } from "./components/enterName";
-import { Homepage } from "./components/Homepage";
+import { Homepage } from "./components/homepage";
 
 export const RoutedApp = () => {
   return (

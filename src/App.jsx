@@ -7,8 +7,8 @@ function App() {
     loginStateCheck();
   }, []);
 
+  const navigate = useNavigate();
   const loginStateCheck = async () => {
-    const navigate = useNavigate();
     const res = await fetch("/api/check");
     const response = await res.json();
     console.log(response);

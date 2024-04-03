@@ -1,8 +1,17 @@
 import { useState } from "react";
+import { useList } from "../hooks/stateProvider";
+import { useNavigate } from "react-router";
+import { LoginError } from "./errorPages/loginError";
+import { LoggingInUser } from "./loaders/loggingInUser";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loggingInUser, setLoggingInUser] = useState(false);
+  const [error, setError] = useState(false);
+  const { setUser } = useList();
+
+  const navigate = useNavigate();
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -12,10 +21,50 @@ export const LoginPage = () => {
     setPassword(e.target.value);
   };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+
+    const data2submit = {
+      email: form.get("email"),
+      password: form.get("password")
+    };
+
+    try {
+      setLoggingInUser(true);
+      const loginRes = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(data2submit),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const loginResponse = await loginRes.json();
+      console.log(loginResponse);
+
+      if (loginResponse.locals) {
+        setUser(loginResponse.locals.currentUser);
+        setLoggingInUser(false);
+        navigate("/homepage");
+      } else {
+        setError(true);
+        setLoggingInUser(false);
+      }
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    }
+  };
+
+  if (loggingInUser) {
+    return <LoggingInUser />;
+  }
+
   return (
     <main className="w-screen h-screen flex flex-col items-center justify-center">
       <h1 className="text-xl font-bold">Login</h1>
-      <form className="flex flex-col border w-[25%] p-5">
+      <form
+        className="flex flex-col border w-[25%] p-5"
+        onSubmit={submitHandler}>
         <label htmlFor="email">email:</label>
         <input
           className="border mb-3"
@@ -46,8 +95,14 @@ export const LoginPage = () => {
         </button>
       </form>
       <p>
-        Don't have an account yet? <a href="/signup">Sign Up</a>
+        Don't have an account yet?{" "}
+        <a
+          href="/signup"
+          className="text-blue-500 underline">
+          Sign Up
+        </a>
       </p>
+      {error && <LoginError />}
     </main>
   );
 };
