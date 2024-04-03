@@ -3,6 +3,7 @@ import App from "./App";
 import { SignUpPage } from "./components/signUpPage";
 import { LoginPage } from "./components/loginPage";
 import { EnterName } from "./components/enterName";
+import { Homepage } from "./components/Homepage";
 
 export const RoutedApp = () => {
   return (
@@ -22,6 +23,10 @@ export const RoutedApp = () => {
       <Route
         path="/enterName"
         element={<EnterName />}
+      />
+      <Route
+        path="/homepage"
+        element={<Homepage />}
       />
     </Routes>
   );

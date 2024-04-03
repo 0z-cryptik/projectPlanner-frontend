@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useList } from "../hooks/stateProvider";
+import { NameSubmitError } from "./errorComps";
 
 export const EnterName = () => {
   const [name, setName] = useState("");
-  const { signUpUser } = useList();
+  const [error, setError] = useState(false);
+  const [precessingUser, setProcessingUser] = useState(false);
+  const { signUpUser, setUser, email, password, user } = useList();
 
   const navigate = useNavigate();
 
@@ -14,6 +17,7 @@ export const EnterName = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setProcessingUser(true);
 
     const form = new FormData(e.target);
     try {
@@ -27,15 +31,36 @@ export const EnterName = () => {
       });
       const response = await res.json();
       console.log(response);
+
+      if (response.data) {
+        const res = await fetch("/api/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: { "Content-Type": "application/json" }
+        });
+
+        const response = await res.json();
+        console.log(response);
+
+        if (response.locals) {
+          setUser(res.locals.currentUser);
+          setProcessingUser(false);
+          navigate("/homepage");
+        } else {
+          setError(true);
+          setProcessingUser(false);
+        }
+      }
     } catch (err) {
       console.error(err);
+      setError(true)
     }
   };
 
   return (
     <main className="flex items-center justify-center h-screen w-screen">
       <center className="w-[38%] h-fit border py-5">
-        <p>Please enter your name</p>
+        <p>Please enter your name or your nickname</p>
         <form
           onSubmit={submitHandler}
           className="flex flex-col">
@@ -57,6 +82,7 @@ export const EnterName = () => {
             Submit
           </button>
         </form>
+        {error && <NameSubmitError />}
       </center>
     </main>
   );

@@ -7,6 +7,8 @@ export const useList = () => useContext(stateContext);
 export const StateProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [signUpUser, setSignUpUser] = useState(null);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <stateContext.Provider
@@ -14,7 +16,11 @@ export const StateProvider = ({ children }) => {
         user,
         setUser,
         signUpUser,
-        setSignUpUser
+        setSignUpUser,
+        password,
+        setPassword,
+        email,
+        setEmail
       }}>
       {children}
     </stateContext.Provider>

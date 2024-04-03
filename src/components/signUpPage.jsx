@@ -3,11 +3,10 @@ import { useNavigate } from "react-router";
 import { useList } from "../hooks/stateProvider";
 
 export const SignUpPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const { setSignUpUser } = useList();
+  const { setSignUpUser, email, setEmail, password, setPassword } =
+    useList();
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -16,6 +15,7 @@ export const SignUpPage = () => {
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   };
+  
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
