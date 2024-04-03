@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import App from "./App";
 import { SignUpPage } from "./components/signUpPage";
 import { LoginPage } from "./components/loginPage";
+import { EnterName } from "./components/enterName";
 
 export const RoutedApp = () => {
   return (
@@ -17,6 +18,10 @@ export const RoutedApp = () => {
       <Route
         path="/login"
         element={<LoginPage />}
+      />
+      <Route
+        path="/enterName"
+        element={<EnterName />}
       />
     </Routes>
   );

@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useList } from "../hooks/stateProvider";
 
 export const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const { setSignUpUser } = useList();
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -12,10 +16,11 @@ export const SignUpPage = () => {
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   };
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const navigate = useNavigate();
+
     const form = new FormData(e.target);
     const data2submit = {
       email: form.get("email"),
@@ -31,11 +36,16 @@ export const SignUpPage = () => {
       const response = await res.json();
       console.log(response);
       if (response.success) {
-        navigate("/name");
+        setSignUpUser(response.data);
+        navigate("/enterName");
+      } else if (!response.success) {
+        setError(true);
+        setErrorMsg(response.reason);
       }
     } catch (err) {
       console.error(err);
       console.log("it's an error");
+      setError(true);
     }
   };
 
@@ -68,12 +78,15 @@ export const SignUpPage = () => {
         />
         <button
           className="bg-blue-400"
-          id="submit"
           type="submit"
           value="submit">
           Sign Up
         </button>
       </form>
+      {error && errorMsg && <p>{errorMsg}</p>}
+      {error && (
+        <p>unexpected error, please refresh the page and try again</p>
+      )}
     </main>
   );
 };
