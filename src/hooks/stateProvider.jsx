@@ -9,19 +9,26 @@ export const StateProvider = ({ children }) => {
   const [signUpUser, setSignUpUser] = useState(null);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [creatingNewTask, setCreatingNewtask] = useState(false);
+
+  const stateObj = {
+    user,
+    setUser,
+    signUpUser,
+    setSignUpUser,
+    password,
+    setPassword,
+    email,
+    setEmail,
+    tasks,
+    setTasks,
+    creatingNewTask,
+    setCreatingNewtask
+  };
 
   return (
-    <stateContext.Provider
-      value={{
-        user,
-        setUser,
-        signUpUser,
-        setSignUpUser,
-        password,
-        setPassword,
-        email,
-        setEmail
-      }}>
+    <stateContext.Provider value={stateObj}>
       {children}
     </stateContext.Provider>
   );
