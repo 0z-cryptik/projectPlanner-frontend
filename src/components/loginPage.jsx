@@ -9,7 +9,7 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [loggingInUser, setLoggingInUser] = useState(false);
   const [error, setError] = useState(false);
-  const { setUser } = useList();
+  const { setUser, setTasks } = useList();
 
   const navigate = useNavigate();
 
@@ -41,8 +41,9 @@ export const LoginPage = () => {
       const loginResponse = await loginRes.json();
       console.log(loginResponse);
 
-      if (loginResponse.locals) {
-        setUser(loginResponse.locals.currentUser);
+      if (loginResponse.user) {
+        setUser(loginResponse.user);
+        setTasks(loginResponse.user.tasks);
         setLoggingInUser(false);
         navigate("/homepage");
       } else {

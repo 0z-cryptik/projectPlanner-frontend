@@ -11,6 +11,7 @@ export const StateProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [tasks, setTasks] = useState([]);
   const [creatingNewTask, setCreatingNewtask] = useState(false);
+  const [activeTask, setActiveTask] = useState(0);
 
   const stateObj = {
     user,
@@ -24,7 +25,9 @@ export const StateProvider = ({ children }) => {
     tasks,
     setTasks,
     creatingNewTask,
-    setCreatingNewtask
+    setCreatingNewtask,
+    activeTask,
+    setActiveTask
   };
 
   return (
