@@ -9,7 +9,7 @@ export const CreateNewTaskButton = () => {
         <button
           className="bg-orange-400 text-white px-3 rounded-xl"
           onClick={() => {
-            setCreatingNewtask(true);
+            setCreatingNewtask(true)
           }}>
           Create a new task +
         </button>

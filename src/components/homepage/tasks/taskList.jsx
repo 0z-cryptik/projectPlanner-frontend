@@ -24,7 +24,6 @@ export const TaskList = () => {
               <IoCheckbox
                 size={"1.4rem"}
                 color="green"
-                className=""
               />
             </button>
             <button className="">

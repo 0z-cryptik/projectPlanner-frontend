@@ -4,6 +4,7 @@ import { CreateNewTaskButton } from "./tasks/newTaskButton";
 import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { TaskPage } from "./tasks/tasksPage";
 
 export const Homepage = () => {
   const { user, tasks, setTasks, creatingNewTask, activeTask } = useList();
@@ -22,11 +23,7 @@ export const Homepage = () => {
 
         {!creatingNewTask && tasks.length === 0 && <CreateNewTaskButton />}
         {creatingNewTask && <CreateNewTaskForm />}
-        {!creatingNewTask && tasks.length > 0 && (
-          <section className="w-full h-full">
-            <h1>{tasks[activeTask].title}</h1>
-          </section>
-        )}
+        {!creatingNewTask && tasks.length > 0 && <TaskPage />}
       </main>
     );
   }
