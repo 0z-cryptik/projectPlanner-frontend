@@ -20,7 +20,6 @@ export const Homepage = () => {
     return (
       <main className="w-screen h-screen flex flex-row">
         <SideBar />
-
         {!creatingNewTask && tasks.length === 0 && <CreateNewTaskButton />}
         {creatingNewTask && <CreateNewTaskForm />}
         {!creatingNewTask && tasks.length > 0 && <TaskPage />}

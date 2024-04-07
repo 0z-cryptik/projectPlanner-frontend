@@ -76,6 +76,7 @@ export const SubtaskForm = () => {
           onChange={setDate}
           id="datePicker"
           minDate={new Date()}
+          maxDate={new Date(tasks[activeTask].dueDate)}
           name="date"
         />
       </span>

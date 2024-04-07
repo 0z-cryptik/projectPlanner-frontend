@@ -1,9 +1,12 @@
-export const SubmitName = ({submitFunc }) => {
-    const [name, setName] = useState("");
+import { useState } from "react";
 
-    const nameChangeHandler = (e) => {
-        setName(e.target.value);
-      };
+export const SubmitName = ({ submitFunc }) => {
+  const [name, setName] = useState("");
+
+  const nameChangeHandler = (e) => {
+    setName(e.target.value);
+  };
+
   return (
     <>
       <p>Please enter your name or your nickname</p>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useList } from "../hooks/stateProvider";
 import { NameSubmitError } from "./errorPages/nameSubmitError";
-import { ThreeDots } from "react-loader-spinner";
 import { SubmitName } from "./submitName";
 import { SettingUpUser } from "./loaders/settingUpUser";
 
@@ -41,8 +40,8 @@ export const EnterName = () => {
         const loginResponse = await loginRes.json();
         console.log(loginResponse);
 
-        if (loginResponse.locals) {
-          setUser(loginResponse.locals.currentUser);
+        if (loginResponse.loggedIn) {
+          setUser(loginResponse.user);
           setProcessingUser(false);
           navigate("/homepage");
         } else {
