@@ -15,6 +15,10 @@ export const CreateNewTaskForm = () => {
     setTaskName(e.target.value);
   };
 
+  const hideForm = () => {
+    setCreatingNewtask(false);
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -71,7 +75,9 @@ export const CreateNewTaskForm = () => {
         </span>
 
         <div className="w-fit mx-auto mt-3 gap-x-2 flex">
-          <button className="bg-red-700 text-white p-2 rounded-xl">
+          <button
+            onClick={hideForm}
+            className="bg-red-700 text-white p-2 rounded-xl">
             Cancel
           </button>
           <button

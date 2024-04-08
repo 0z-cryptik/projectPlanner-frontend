@@ -1,4 +1,5 @@
 import { useList } from "../../../hooks/stateProvider";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 export const CreateNewTaskButton = () => {
   const { setCreatingNewtask } = useList();
@@ -9,11 +10,29 @@ export const CreateNewTaskButton = () => {
         <button
           className="bg-orange-400 text-white px-3 rounded-xl"
           onClick={() => {
-            setCreatingNewtask(true)
+            setCreatingNewtask(true);
           }}>
           Create a new task +
         </button>
       </div>
     </section>
+  );
+};
+
+export const SideBarNewTaskButton = () => {
+  const { setCreatingNewtask } = useList();
+
+  return (
+    <button
+      onClick={() => {
+        setCreatingNewtask(true);
+      }}
+      className="flex flex-row mt-5">
+      <IoAddCircleOutline
+        size={"1.4rem"}
+        className="mr-2"
+      />
+      Add task
+    </button>
   );
 };

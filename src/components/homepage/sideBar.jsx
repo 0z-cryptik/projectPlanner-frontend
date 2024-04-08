@@ -2,6 +2,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useList } from "../../hooks/stateProvider";
 import { TaskList } from "./tasks/taskList";
+import { SideBarNewTaskButton } from "./tasks/newTaskButton";
+import { LogoutButton } from "./logoutButton";
 
 export const SideBar = () => {
   const { user } = useList();
@@ -15,15 +17,9 @@ export const SideBar = () => {
         />
         {user ? user.name : "User"}
       </div>
-      <button className="mt-2 text-sm text-orange-500">logout</button>
+      <LogoutButton />
 
-      <div className="flex flex-row mt-5">
-        <IoAddCircleOutline
-          size={"1.4rem"}
-          className="mr-2"
-        />
-        Add task
-      </div>
+      <SideBarNewTaskButton />
 
       <TaskList />
     </nav>

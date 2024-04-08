@@ -9,7 +9,7 @@ import "react-clock/dist/Clock.css";
 
 export const SubtaskForm = () => {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(null);
   const { tasks, setTasks, activeTask, setCreateNewSubTask } = useList();
 
   const titleChangeHandler = (e) => {
@@ -18,6 +18,7 @@ export const SubtaskForm = () => {
 
   const hideForm = () => {
     setTitle("");
+    setDate(null)
     setCreateNewSubTask(false);
   };
 
@@ -44,6 +45,7 @@ export const SubtaskForm = () => {
       if (response.success) {
         setTasks(response.user.tasks);
         setTitle("");
+        setDate(null)
       }
     } catch (err) {
       console.error(err);
