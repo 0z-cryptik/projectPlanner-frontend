@@ -9,7 +9,7 @@ export const SubTaskList = () => {
   const { tasks, activeTask, setTasks } = useList();
 
   const completed = async (id) => {
-    const res = await fetch("/api/deleteSubTask?_method=DELETE", {
+    const res = await fetch("/api/subTask/delete?_method=DELETE", {
       method: "POST",
       body: JSON.stringify({ subTaskId: id }),
       headers: { "Content-Type": "application/json" }

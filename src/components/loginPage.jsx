@@ -32,7 +32,7 @@ export const LoginPage = () => {
 
     try {
       setLoggingInUser(true);
-      const loginRes = await fetch("/api/login", {
+      const loginRes = await fetch("/api/user/login", {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }

@@ -33,7 +33,7 @@ export const SubtaskForm = () => {
     };
 
     try {
-      const res = await fetch("/api/createSubTask", {
+      const res = await fetch("/api/subTask/create", {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }

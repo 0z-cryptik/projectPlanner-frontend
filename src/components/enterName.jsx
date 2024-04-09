@@ -18,7 +18,7 @@ export const EnterName = () => {
 
     try {
       setProcessingUser(true);
-      const res = await fetch("/api/signup/submitName", {
+      const res = await fetch("/api/user/signup/submitName", {
         method: "POST",
         body: JSON.stringify({
           name: form.get("name"),
@@ -31,7 +31,7 @@ export const EnterName = () => {
 
       if (response.data) {
         const { email } = response.data;
-        const loginRes = await fetch("/api/login", {
+        const loginRes = await fetch("/api/user/login", {
           method: "POST",
           body: JSON.stringify({ email, password }),
           headers: { "Content-Type": "application/json" }

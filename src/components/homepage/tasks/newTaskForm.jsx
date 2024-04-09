@@ -29,7 +29,7 @@ export const CreateNewTaskForm = () => {
     };
 
     try {
-      const res = await fetch("/api/createTask", {
+      const res = await fetch("/api/task/create", {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }

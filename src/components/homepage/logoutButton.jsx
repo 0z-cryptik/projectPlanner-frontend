@@ -5,7 +5,7 @@ export const LogoutButton = () => {
 
   const clickHandler = async (e) => {
     try {
-      const res = await fetch("api/logout");
+      const res = await fetch("/api/user/logout");
       const response = await res.json();
       console.log(response);
 

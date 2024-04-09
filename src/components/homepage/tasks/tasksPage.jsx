@@ -19,7 +19,7 @@ export const TaskPage = () => {
   } = useList();
 
   const completed = async (id) => {
-    const res = await fetch("/api/deleteTask?_method=DELETE", {
+    const res = await fetch("/api/task/delete?_method=DELETE", {
       method: "POST",
       body: JSON.stringify({ taskId: id }),
       headers: { "Content-Type": "application/json" }
