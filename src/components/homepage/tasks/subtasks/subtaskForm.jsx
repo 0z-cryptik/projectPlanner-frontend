@@ -65,6 +65,7 @@ export const SubtaskForm = () => {
           value={title}
           onChange={titleChangeHandler}
           required
+          autoFocus
         />
       </span>
       <span className="">

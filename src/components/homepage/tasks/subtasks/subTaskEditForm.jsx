@@ -3,7 +3,7 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const SubTaskEditForm = ({ subTask }) => {
   const { tasks, activeTask, setSubTaskToEdit, setTasks } = useList();
@@ -60,6 +60,7 @@ export const SubTaskEditForm = ({ subTask }) => {
           value={title}
           onChange={titleChangeHandler}
           required
+          autoFocus
         />
       </span>
       <span className="">
