@@ -14,6 +14,7 @@ export const StateProvider = ({ children }) => {
   const [createNewSubTask, setCreateNewSubTask] = useState(false);
   const [activeTask, setActiveTask] = useState(0);
   const [subTaskToEdit, setSubTaskToEdit] = useState(null);
+  const [editTask, setEditTask] = useState(false);
 
   const stateObj = {
     user,
@@ -33,7 +34,9 @@ export const StateProvider = ({ children }) => {
     createNewSubTask,
     setCreateNewSubTask,
     subTaskToEdit,
-    setSubTaskToEdit
+    setSubTaskToEdit,
+    editTask,
+    setEditTask
   };
 
   return (
