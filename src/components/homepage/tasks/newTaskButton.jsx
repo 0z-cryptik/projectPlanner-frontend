@@ -27,12 +27,12 @@ export const SideBarNewTaskButton = () => {
       onClick={() => {
         setCreatingNewtask(true);
       }}
-      className="flex flex-row mt-5">
+      className="flex flex-row mt-5 text-[#ECA400]">
       <IoAddCircleOutline
         size={"1.4rem"}
         className="mr-2"
       />
-      Add task
+      Add Project
     </button>
   );
 };

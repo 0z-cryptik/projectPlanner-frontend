@@ -1,15 +1,14 @@
 import { useList } from "../../../hooks/stateProvider";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { IoCheckbox } from "react-icons/io5";
+import { LiaProjectDiagramSolid } from "react-icons/lia";
 
 export const TaskList = () => {
   const { tasks, activeTask, setActiveTask } = useList();
 
-  
-
   return (
     <>
-      <p className="font-bold mt-5">My tasks</p>
+      
 
       {tasks.map((task, i) => {
         return (
@@ -21,19 +20,8 @@ export const TaskList = () => {
             onClick={() => {
               setActiveTask(i);
             }}>
+            <LiaProjectDiagramSolid className="mt-1 mr-3"/>
             <p className="w-1/2">{task.title}</p>
-            <button className="ml-[4rem] mr-2">
-              <IoCheckbox
-                size={"1.4rem"}
-                color="green"
-              />
-            </button>
-            <button className="">
-              <RiDeleteBin7Fill
-                size={"1.4rem"}
-                color="red"
-              />
-            </button>
           </div>
         );
       })}

@@ -18,10 +18,12 @@ export const LogoutButton = () => {
   };
 
   return (
-    <button
-      onClick={clickHandler}
-      className="mt-2 text-sm text-orange-500">
-      logout
-    </button>
+    <center>
+      <button
+        onClick={clickHandler}
+        className="mt-2 text-sm text-orange-500">
+        logout
+      </button>
+    </center>
   );
 };

@@ -53,32 +53,11 @@ export const TaskPage = () => {
 
         {!editTask && (
           <>
-            <div className="ml-auto flex flex-row gap-x-2 mr-5">
-              <button
-                onClick={() => {
-                  completed(tasks[activeTask]._id);
-                }}
-                className="flex flex-row border p-2 text-sm gap-x-1">
-                Completed
-                <IoCheckbox />
-              </button>
-              <button className="flex flex-row border p-2 text-sm gap-x-1">
-                Delete
-                <RiDeleteBin7Fill />
-              </button>
-            </div>
-
-            <p className="text-sm border">
-              {tasks[activeTask].dueDate
-                ? dueDateHandler(tasks[activeTask].dueDate)
-                : "due in 3 days"}
-            </p>
-
             <button
               onClick={() => {
                 setEditTask(true);
               }}
-              className="ml-6 mr-3">
+              className="ml-6 mr-3 hidden">
               <MdEdit size={"1.5rem"} />
             </button>
           </>
