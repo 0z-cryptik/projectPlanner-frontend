@@ -17,7 +17,7 @@ export const SideBar = () => {
           size={"7rem"}
         />
         <p className="mx-auto w-fit">{user ? user.name : "User"}</p>
-        <p className="mx-auto w-fit">{user.email}</p>
+        <p className="mx-auto w-fit text-sm">{user.email}</p>
         <LogoutButton />
       </div>
       <p className="font-bold mt-5">My Projects</p>

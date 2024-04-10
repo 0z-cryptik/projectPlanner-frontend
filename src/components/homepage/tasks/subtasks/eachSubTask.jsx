@@ -4,9 +4,16 @@ import { BsCalendarDateFill } from "react-icons/bs";
 import { MdEdit } from "react-icons/md";
 import { dueDateHandler } from "../../../../functions/dueDateHandler";
 import { useList } from "../../../../hooks/stateProvider";
+import { IoIosCheckmark } from "react-icons/io";
+import { CheckMarkButton } from "./checkMarkButton";
 
 export const EachSubTask = ({ subTask, i, clickHandler }) => {
   const { subTaskToEdit, setSubTaskToEdit } = useList();
+
+  // for the editSubTask functionality
+  /* onClick={() => {
+              setSubTaskToEdit(i);
+            }} */
 
   return (
     <div
@@ -16,21 +23,17 @@ export const EachSubTask = ({ subTask, i, clickHandler }) => {
         <div>
           <button
             onClick={() => {
-              setSubTaskToEdit(i);
-            }}
-            className="text-[#6C6F7F] hover:text-black mr-3">
-            <MdEdit size={"1.3rem"} />
-          </button>
-          <button className="mr-3 hover:text-red-500 text-[#6C6F7F]">
-            <RiDeleteBin7Fill size={"1.3rem"} />
-          </button>
-          <button
-            onClick={() => {
               clickHandler(subTask._id);
             }}
-            className="mr-5 hover:text-green-500 text-[#6C6F7F]">
+            className="mr-5 hover:text-green-500 text-[#6C6F7F] hidden">
             <IoCheckbox size={"1.3rem"} />
           </button>
+
+          <CheckMarkButton
+            clickFunc={() => {
+              clickHandler(subTask._id);
+            }}
+          />
         </div>
         <p className="text-lg w-3/5">{subTask.title}</p>
       </div>
