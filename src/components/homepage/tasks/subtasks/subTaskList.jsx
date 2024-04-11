@@ -7,7 +7,7 @@ export const SubTaskList = () => {
   const { tasks, activeTask, setTasks, subTaskToEdit, setSubTaskToEdit } =
     useList();
 
-  const completed = async (id) => {
+  const completeOrDelete = async (id) => {
     const res = await fetch("/api/subTask/delete?_method=DELETE", {
       method: "POST",
       body: JSON.stringify({ subTaskId: id }),
@@ -30,7 +30,7 @@ export const SubTaskList = () => {
           <EachSubTask
             subTask={subTask}
             i={i}
-            clickHandler={completed}
+            clickHandler={completeOrDelete}
           />
         )
       )}

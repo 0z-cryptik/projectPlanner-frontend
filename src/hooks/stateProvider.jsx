@@ -15,6 +15,8 @@ export const StateProvider = ({ children }) => {
   const [activeTask, setActiveTask] = useState(0);
   const [subTaskToEdit, setSubTaskToEdit] = useState(null);
   const [editTask, setEditTask] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
 
   const stateObj = {
     user,

@@ -5,6 +5,7 @@ import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { TaskPage } from "./tasks/tasksPage";
+import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {
   const { user, tasks, setTasks, creatingNewTask, activeTask } = useList();
