@@ -9,14 +9,12 @@ export const StateProvider = ({ children }) => {
   const [signUpUser, setSignUpUser] = useState(null);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [tasks, setTasks] = useState([]);
-  const [creatingNewTask, setCreatingNewtask] = useState(false);
-  const [createNewSubTask, setCreateNewSubTask] = useState(false);
-  const [activeTask, setActiveTask] = useState(0);
-  const [subTaskToEdit, setSubTaskToEdit] = useState(null);
-  const [editTask, setEditTask] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
-  const [showOptions, setShowOptions] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [creatingNewProject, setCreatingNewProject] = useState(false);
+  const [createNewTask, setCreateNewTask] = useState(false);
+  const [activeProject, setActiveProject] = useState(0);
+  const [taskToEdit, setTaskToEdit] = useState(null);
+  const [editProject, setEditProject] = useState(false);
 
   const stateObj = {
     user,
@@ -27,18 +25,18 @@ export const StateProvider = ({ children }) => {
     setPassword,
     email,
     setEmail,
-    tasks,
-    setTasks,
-    creatingNewTask,
-    setCreatingNewtask,
-    activeTask,
-    setActiveTask,
-    createNewSubTask,
-    setCreateNewSubTask,
-    subTaskToEdit,
-    setSubTaskToEdit,
-    editTask,
-    setEditTask
+    projects,
+    setProjects,
+    creatingNewProject,
+    setCreatingNewProject,
+    activeProject,
+    setActiveProject,
+    createNewTask,
+    setCreateNewTask,
+    taskToEdit,
+    setTaskToEdit,
+    editProject,
+    setEditProject
   };
 
   return (

@@ -1,25 +1,17 @@
-import { useState } from "react";
 import { useList } from "../../../../hooks/stateProvider";
-import { IoCheckbox } from "react-icons/io5";
-import { MdCancel } from "react-icons/md";
 import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
+import { useState } from "react";
 
-export const SubtaskForm = () => {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState(null);
-  const { tasks, setTasks, activeTask, setCreateNewSubTask } = useList();
+export const TaskEditForm = ({ task }) => {
+  const { projects, activeProject, setTaskToEdit, setProjects } = useList();
+  const [title, setTitle] = useState(task.title);
+  const [date, setDate] = useState(new Date(task.dueDate));
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
-  };
-
-  const hideForm = () => {
-    setTitle("");
-    setDate(null)
-    setCreateNewSubTask(false);
   };
 
   const submitHandler = async (e) => {
@@ -28,12 +20,12 @@ export const SubtaskForm = () => {
 
     const data2submit = {
       title: form.get("title"),
-      parentTask: tasks[activeTask]._id,
-      dueDate: form.get("date")
+      dueDate: form.get("date"),
+      Id: task._id
     };
 
     try {
-      const res = await fetch("/api/subTask/create", {
+      const res = await fetch("/api/subTask/update?_method=PUT", {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }
@@ -43,19 +35,22 @@ export const SubtaskForm = () => {
       console.log(response);
 
       if (response.success) {
-        setTasks(response.user.tasks);
-        setTitle("");
-        setDate(null)
+        setProjects(response.user.tasks);
+        setTaskToEdit(null);
       }
     } catch (err) {
       console.error(err);
     }
   };
 
+  const hideForm = () => {
+    setTaskToEdit(null);
+  };
+
   return (
     <form
       onSubmit={submitHandler}
-      className="mt-4 ml-[4rem] w-[58%] border rounded-xl p-3">
+      className="mt-4 w-[58%] border rounded-xl p-3">
       <span className="flex flex-row border-b mb-3">
         <input
           className="outline-none w-3/4 h-[2rem]"
@@ -79,7 +74,7 @@ export const SubtaskForm = () => {
           onChange={setDate}
           id="datePicker"
           minDate={new Date()}
-          maxDate={new Date(tasks[activeTask].dueDate)}
+          maxDate={new Date(projects[activeProject].dueDate)}
           name="date"
         />
       </span>

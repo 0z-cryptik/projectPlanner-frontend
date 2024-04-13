@@ -11,11 +11,10 @@ import { useState } from "react";
 import { Overlay } from "../../../overlay/overlay";
 import { DeleteWarning } from "./deleteWarning";
 
-export const EachSubTask = ({ subTask, i, clickHandler }) => {
-  const { subTaskToEdit, setSubTaskToEdit } = useList();
+export const EachTask = ({ task, i, clickHandler }) => {
+  const { taskToEdit, setTaskToEdit } = useList();
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-
 
   return (
     <>
@@ -26,11 +25,11 @@ export const EachSubTask = ({ subTask, i, clickHandler }) => {
           <div>
             <CheckMarkButton
               clickFunc={() => {
-                clickHandler(subTask._id);
+                clickHandler(task._id);
               }}
             />
           </div>
-          <p className="text-lg flex-grow">{subTask.title}</p>
+          <p className="text-lg flex-grow">{task.title}</p>
           <button
             onClick={() => setShowOptions(!showOptions)}
             className={`w-fit h-fit px-2 ${
@@ -39,18 +38,14 @@ export const EachSubTask = ({ subTask, i, clickHandler }) => {
             <SlOptions />
           </button>
         </div>
-        <p className="text-xs">
-          {subTask.dueDate
-            ? dueDateHandler(subTask.dueDate)
-            : "Due in 3 days"}
-        </p>
+        <p className="text-xs">{dueDateHandler(subTask.dueDate)}</p>
         <div
           className={`border rounded-xl w-fit p-3 absolute bg-white z-20 left-[63%] mt-6 ${
             !showOptions && "hidden"
           }`}>
           <button
             onClick={() => {
-              setSubTaskToEdit(i);
+              setTaskToEdit(i);
             }}
             className="border-b flex flex-row gap-x-1">
             Edit

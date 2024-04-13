@@ -1,10 +1,10 @@
 import { useList } from "../../hooks/stateProvider";
-import { CreateNewTaskForm } from "./tasks/newTaskForm";
-import { CreateNewTaskButton } from "./tasks/newTaskButton";
+import { CreateNewTaskForm } from "./project/newProjectForm";
+import { CreateNewTaskButton } from "./project/newProjectButton";
 import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import { TaskPage } from "./tasks/tasksPage";
+import { TaskPage } from "./project/projectPage";
 import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {

@@ -1,18 +1,13 @@
 import { useList } from "../../../hooks/stateProvider";
-import { TaskFormButton } from "./taskFormButtons";
+import { ProjectFormButton } from "./projectFormButtons";
 import { useState } from "react";
-import DateTimePicker from "react-datetime-picker";
-import "react-datetime-picker/dist/DateTimePicker.css";
-import "react-calendar/dist/Calendar.css";
-import "react-clock/dist/Clock.css";
 
-export const CreateNewTaskForm = () => {
-  const [taskName, setTaskName] = useState("");
-  const [date, setDate] = useState();
-  const { setCreatingNewtask, tasks, setTasks } = useList();
+export const CreateNewProjectForm = () => {
+  const [projectName, setProjectName] = useState("");
+  const { setCreatingNewProject, projects, setProjects } = useList();
 
-  const taskNameHandler = (e) => {
-    setTaskName(e.target.value);
+  const projectNameHandler = (e) => {
+    setProjectName(e.target.value);
   };
 
   const hideForm = () => {
@@ -23,24 +18,21 @@ export const CreateNewTaskForm = () => {
     e.preventDefault();
     const form = new FormData(e.target);
 
-    const data2submit = {
-      title: form.get("title"),
-      dueDate: form.get("date")
-    };
-
     try {
-      const res = await fetch("/api/task/create", {
+      const res = await fetch("/api/project/create", {
         method: "POST",
-        body: JSON.stringify(data2submit),
+        body: JSON.stringify({
+          title: form.get("title")
+        }),
         headers: { "Content-Type": "application/json" }
       });
       const response = await res.json();
       console.log(response);
-      setTasks(response.data.tasks);
-      setCreatingNewtask(false);
+      setProjects(response.data.tasks);
+      setCreatingNewProject(false);
     } catch (err) {
       console.error(err);
-      setCreatingNewtask(false);
+      setCreatingNewProject(false);
     }
   };
 
@@ -54,25 +46,11 @@ export const CreateNewTaskForm = () => {
           type="text"
           name="title"
           placeholder="Task name"
-          value={taskName}
-          onChange={taskNameHandler}
+          value={projectName}
+          onChange={projectNameHandler}
           required
           autoFocus
         />
-        <span className="">
-          <label
-            className="mr-3"
-            htmlFor="datePicker">
-            Due date:
-          </label>
-          <DateTimePicker
-            value={date}
-            onChange={setDate}
-            id="datePicker"
-            minDate={new Date()}
-            name="date"
-          />
-        </span>
 
         <div className="w-fit mx-auto mt-3 gap-x-2 flex">
           <button

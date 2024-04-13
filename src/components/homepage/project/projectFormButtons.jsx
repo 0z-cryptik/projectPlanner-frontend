@@ -1,4 +1,4 @@
-export const TaskFormButton = ({ text, clickFunc }) => {
+export const ProjectFormButton = ({ text, clickFunc }) => {
   return (
     <button
       className="bg-orange-500 p-2 rounded-xl text-white"

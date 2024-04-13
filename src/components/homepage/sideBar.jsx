@@ -1,8 +1,8 @@
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useList } from "../../hooks/stateProvider";
-import { TaskList } from "./tasks/taskList";
-import { SideBarNewTaskButton } from "./tasks/newTaskButton";
+import { TaskList } from "./project/projectList";
+import { SideBarNewTaskButton } from "./project/newProjectButton";
 import { LogoutButton } from "./logoutButton";
 import { PiUserSquareFill } from "react-icons/pi";
 

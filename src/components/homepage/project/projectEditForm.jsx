@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
-import DateTimePicker from "react-datetime-picker";
-import "react-datetime-picker/dist/DateTimePicker.css";
-import "react-calendar/dist/Calendar.css";
-import "react-clock/dist/Clock.css";
 
-export const TaskEditForm = () => {
-  const { tasks, activeTask, setEditTask, setTasks } = useList();
-  const [date, setDate] = useState(tasks[activeTask].dueDate);
-  const [title, setTitle] = useState(tasks[activeTask].title);
+export const ProjectEditForm = () => {
+  const { projects, activeProject, setEditProject, setProjects } = useList();
+  const [title, setTitle] = useState(projects[activeProject].title);
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -25,11 +20,11 @@ export const TaskEditForm = () => {
     const data2submit = {
       title: form.get("title"),
       dueDate: form.get("date"),
-      taskId: tasks[activeTask]._id
+      projectId: tasks[activeTask]._id
     };
 
     try {
-      const res = await fetch("/api/task/update?_method=PUT", {
+      const res = await fetch("/api/project/update?_method=PUT", {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }
@@ -39,8 +34,8 @@ export const TaskEditForm = () => {
       console.log(response);
 
       if (response.success) {
-        setTasks(response.user.tasks);
-        setEditTask(false);
+        setProjects(response.user.tasks);
+        setEditProject(false);
       }
     } catch (err) {
       console.error(err);
@@ -61,20 +56,7 @@ export const TaskEditForm = () => {
         required
         autoFocus
       />
-      <span className="">
-        <label
-          className="mr-3"
-          htmlFor="datePicker">
-          Due date:
-        </label>
-        <DateTimePicker
-          value={date}
-          onChange={setDate}
-          id="datePicker"
-          minDate={new Date()}
-          name="date"
-        />
-      </span>
+      
 
       <div className="w-fit mx-auto mt-3 gap-x-2 flex">
         <button

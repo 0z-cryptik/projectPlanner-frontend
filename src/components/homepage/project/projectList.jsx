@@ -3,14 +3,12 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import { IoCheckbox } from "react-icons/io5";
 import { LiaProjectDiagramSolid } from "react-icons/lia";
 
-export const TaskList = () => {
-  const { tasks, activeTask, setActiveTask } = useList();
+export const ProjectList = () => {
+  const { projects, activeProject, setActiveProject } = useList();
 
   return (
     <>
-      
-
-      {tasks.map((task, i) => {
+      {projects.map((project, i) => {
         return (
           <div
             key={i}
@@ -20,8 +18,8 @@ export const TaskList = () => {
             onClick={() => {
               setActiveTask(i);
             }}>
-            <LiaProjectDiagramSolid className="mt-1 mr-3"/>
-            <p className="w-1/2">{task.title}</p>
+            <LiaProjectDiagramSolid className="mt-1 mr-3" />
+            <p className="w-1/2">{project.title}</p>
           </div>
         );
       })}
