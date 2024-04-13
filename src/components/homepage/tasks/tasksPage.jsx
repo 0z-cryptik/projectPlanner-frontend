@@ -2,43 +2,18 @@ import { useList } from "../../../hooks/stateProvider";
 import { SubtaskForm } from "./subtasks/subtaskForm";
 import { CreateSubTaskButton } from "./subtasks/createSubTaskButton";
 import { SubTaskList } from "./subtasks/subTaskList";
-import { dueDateHandler } from "../../../functions/dueDateHandler";
-import { IoCheckbox } from "react-icons/io5";
-import { RiDeleteBin7Fill } from "react-icons/ri";
 import { MdEdit } from "react-icons/md";
 import { TaskEditForm } from "./taskEditForm";
+import { AddSectionButton } from "../section/addSectionButton";
 
 export const TaskPage = () => {
   const {
     tasks,
     activeTask,
-    setCreateNewSubTask,
     createNewSubTask,
-    setTasks,
-    setActiveTask,
-    setCreatingNewTask,
     setEditTask,
     editTask
   } = useList();
-
-  const completed = async (id) => {
-    const res = await fetch("/api/task/delete?_method=DELETE", {
-      method: "POST",
-      body: JSON.stringify({ taskId: id }),
-      headers: { "Content-Type": "application/json" }
-    });
-    const response = await res.json();
-    console.log(response);
-
-    if (response.success) {
-      setTasks(response.user.tasks);
-      if (tasks.length > 0) {
-        setActiveTask(0);
-      } else {
-        setCreatingNewTask(true);
-      }
-    }
-  };
 
   return (
     <section className="w-full h-full pt-5 px-[4rem]">
@@ -66,6 +41,7 @@ export const TaskPage = () => {
       {tasks[activeTask].subTasks.length > 0 && <SubTaskList />}
       {!createNewSubTask && <CreateSubTaskButton />}
       {createNewSubTask && <SubtaskForm />}
+      <AddSectionButton />
     </section>
   );
 };
