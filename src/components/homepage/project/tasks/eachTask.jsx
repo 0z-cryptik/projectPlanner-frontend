@@ -38,7 +38,7 @@ export const EachTask = ({ task, i, clickHandler }) => {
             <SlOptions />
           </button>
         </div>
-        <p className="text-xs">{dueDateHandler(subTask.dueDate)}</p>
+        <p className="text-xs">{dueDateHandler(task.dueDate)}</p>
         <div
           className={`border rounded-xl w-fit p-3 absolute bg-white z-20 left-[63%] mt-6 ${
             !showOptions && "hidden"
@@ -79,7 +79,7 @@ export const EachTask = ({ task, i, clickHandler }) => {
               setShowDeleteWarning(false);
             }}
             deleteHandler={() => {
-              clickHandler(subTask._id);
+              clickHandler(task._id);
               setShowDeleteWarning(false);
             }}
           />

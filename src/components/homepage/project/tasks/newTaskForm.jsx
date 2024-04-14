@@ -43,7 +43,7 @@ export const TaskForm = () => {
       console.log(response);
 
       if (response.success) {
-        setProjects(response.user.tasks);
+        setProjects(response.user.projects);
         setTitle("");
         setDate(null)
       }
@@ -79,7 +79,6 @@ export const TaskForm = () => {
           onChange={setDate}
           id="datePicker"
           minDate={new Date()}
-          maxDate={new Date(projects[activeProject].dueDate)}
           name="date"
         />
       </span>

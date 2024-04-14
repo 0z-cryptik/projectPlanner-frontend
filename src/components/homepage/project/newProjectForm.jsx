@@ -11,7 +11,7 @@ export const CreateNewProjectForm = () => {
   };
 
   const hideForm = () => {
-    setCreatingNewtask(false);
+    setCreatingNewProject(false);
   };
 
   const submitHandler = async (e) => {
@@ -28,7 +28,7 @@ export const CreateNewProjectForm = () => {
       });
       const response = await res.json();
       console.log(response);
-      setProjects(response.data.tasks);
+      setProjects(response.user.projects);
       setCreatingNewProject(false);
     } catch (err) {
       console.error(err);
@@ -45,7 +45,7 @@ export const CreateNewProjectForm = () => {
           className="w-full outline-none border-b mb-3"
           type="text"
           name="title"
-          placeholder="Task name"
+          placeholder="Enter project name"
           value={projectName}
           onChange={projectNameHandler}
           required

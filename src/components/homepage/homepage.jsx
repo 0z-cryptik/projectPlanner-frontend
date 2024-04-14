@@ -1,14 +1,20 @@
 import { useList } from "../../hooks/stateProvider";
-import { CreateNewTaskForm } from "./project/newProjectForm";
-import { CreateNewTaskButton } from "./project/newProjectButton";
+import { CreateNewProjectForm } from "./project/newProjectForm";
+import { CreateNewProjectButton } from "./project/newProjectButton";
 import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import { TaskPage } from "./project/projectPage";
+import { ProjectPage } from "./project/projectPage";
 import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {
-  const { user, tasks, setTasks, creatingNewTask, activeTask } = useList();
+  const {
+    user,
+    projects,
+    setProjects,
+    creatingNewProject,
+    activeProject
+  } = useList();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,9 +27,11 @@ export const Homepage = () => {
     return (
       <main className="w-screen h-screen flex flex-row">
         <SideBar />
-        {!creatingNewTask && tasks.length === 0 && <CreateNewTaskButton />}
-        {creatingNewTask && <CreateNewTaskForm />}
-        {!creatingNewTask && tasks.length > 0 && <TaskPage />}
+        {!creatingNewProject && projects.length === 0 && (
+          <CreateNewProjectButton />
+        )}
+        {creatingNewProject && <CreateNewProjectForm />}
+        {!creatingNewProject && projects.length > 0 && <ProjectPage />}
       </main>
     );
   }

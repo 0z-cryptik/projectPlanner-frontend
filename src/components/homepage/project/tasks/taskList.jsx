@@ -4,7 +4,7 @@ import { EachTask } from "./eachTask";
 import { TaskEditForm } from "./taskEditForm";
 
 export const TaskList = () => {
-  const { projects, activeProjects, setProjects, taskToEdit, setTaskToEdit } =
+  const { projects, activeProject, setProjects, taskToEdit, setTaskToEdit } =
     useList();
 
   const completeOrDelete = async (id) => {
@@ -17,13 +17,13 @@ export const TaskList = () => {
     console.log(response);
 
     if (response.success) {
-      setProjects(response.user.tasks);
+      setProjects(response.user.projects);
     }
   };
 
   return (
     <section className="ml-[4rem]">
-      {projects[activeProjects].tasks.map((task, i) =>
+      {projects[activeProject].tasks.map((task, i) =>
         taskToEdit === i ? (
           <TaskEditForm task={task} />
         ) : (

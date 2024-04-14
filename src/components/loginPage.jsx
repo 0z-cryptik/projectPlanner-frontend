@@ -9,7 +9,7 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [loggingInUser, setLoggingInUser] = useState(false);
   const [error, setError] = useState(false);
-  const { setUser, setTasks } = useList();
+  const { setUser, setProjects } = useList();
 
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export const LoginPage = () => {
 
       if (loginResponse.user) {
         setUser(loginResponse.user);
-        setTasks(loginResponse.user.tasks);
+        setProjects(loginResponse.user.projects);
         setLoggingInUser(false);
         navigate("/homepage");
       } else {

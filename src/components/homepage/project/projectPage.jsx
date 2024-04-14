@@ -1,9 +1,9 @@
 import { useList } from "../../../hooks/stateProvider";
-import { SubtaskForm } from "./tasks/newTaskForm";
-import { CreateSubTaskButton } from "./tasks/createTaskButton";
-import { SubTaskList } from "./tasks/taskList";
+import { TaskForm } from "./tasks/newTaskForm";
+import { CreateTaskButton } from "./tasks/createTaskButton";
+import { TaskList } from "./tasks/taskList";
 import { MdEdit } from "react-icons/md";
-import { TaskEditForm } from "./projectEditForm";
+import { ProjectEditForm } from "./projectEditForm";
 import { AddSectionButton } from "../section/addSectionButton";
 
 export const ProjectPage = () => {
@@ -19,7 +19,7 @@ export const ProjectPage = () => {
     <section className="w-full h-full pt-5 px-[4rem]">
       <div className="flex flex-row border-b pb-5">
         {editProject ? (
-          <TaskEditForm />
+          <ProjectEditForm />
         ) : (
           <h1 className="text-3xl w-fit ml-[4rem]">
             {projects[activeProject].title}
@@ -38,9 +38,9 @@ export const ProjectPage = () => {
           </>
         )}
       </div>
-      {projects[activeProject].tasks.length > 0 && <SubTaskList />}
-      {!createNewTask && <CreateSubTaskButton />}
-      {createNewTask && <SubtaskForm />}
+      {projects[activeProject].tasks.length > 0 && <TaskList />}
+      {!createNewTask && <CreateTaskButton />}
+      {createNewTask && <TaskForm />}
       <AddSectionButton />
     </section>
   );

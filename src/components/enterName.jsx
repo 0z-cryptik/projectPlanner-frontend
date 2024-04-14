@@ -40,7 +40,7 @@ export const EnterName = () => {
         const loginResponse = await loginRes.json();
         console.log(loginResponse);
 
-        if (loginResponse.loggedIn) {
+        if (loginResponse.success) {
           setUser(loginResponse.user);
           setProcessingUser(false);
           navigate("/homepage");

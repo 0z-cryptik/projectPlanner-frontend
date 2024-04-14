@@ -25,7 +25,7 @@ export const TaskEditForm = ({ task }) => {
     };
 
     try {
-      const res = await fetch("/api/subTask/update?_method=PUT", {
+      const res = await fetch("/api/task/update?_method=PUT", {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }
@@ -35,7 +35,7 @@ export const TaskEditForm = ({ task }) => {
       console.log(response);
 
       if (response.success) {
-        setProjects(response.user.tasks);
+        setProjects(response.user.projects);
         setTaskToEdit(null);
       }
     } catch (err) {
