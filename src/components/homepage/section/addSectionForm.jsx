@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
 
-export const AddSectionForm = () => {
+export const AddSectionForm = ({hideForm}) => {
   const [title, setTitle] = useState("");
   const { setProjects, projects, activeProject } = useList();
-
-  const hideForm = () => {
-    setShowForm(false);
-  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -28,7 +24,9 @@ export const AddSectionForm = () => {
       const response = await res.json();
 
       console.log(response);
-     
+      if (response.success) {
+        setProjects(response.user.projects);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +54,12 @@ export const AddSectionForm = () => {
           className="bg-red-600 mr-2 p-2 rounded-xl">
           cancel
         </button>
-        <button className="bg-green-500 p-2 rounded-xl">Submit</button>
+        <button
+          className="bg-green-500 p-2 rounded-xl"
+          type="submit"
+          value="submit">
+          Submit
+        </button>
       </div>
     </form>
   );

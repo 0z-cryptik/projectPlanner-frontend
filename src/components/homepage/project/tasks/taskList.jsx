@@ -2,10 +2,18 @@ import { useList } from "../../../../hooks/stateProvider";
 import { useState } from "react";
 import { EachTask } from "./eachTask";
 import { TaskEditForm } from "./taskEditForm";
+import { CreateTaskButton } from "./createTaskButton";
+import { TaskForm } from "./newTaskForm";
 
-export const TaskList = () => {
-  const { projects, activeProject, setProjects, taskToEdit, setTaskToEdit } =
-    useList();
+export const TaskList = ({ tasks }) => {
+  const {
+    projects,
+    activeProject,
+    setProjects,
+    taskToEdit,
+    setTaskToEdit,
+    createNewTask
+  } = useList();
 
   const completeOrDelete = async (id) => {
     const res = await fetch("/api/task/delete?_method=DELETE", {
@@ -23,7 +31,7 @@ export const TaskList = () => {
 
   return (
     <section className="ml-[4rem]">
-      {projects[activeProject].tasks.map((task, i) =>
+      {tasks.map((task, i) =>
         taskToEdit === i ? (
           <TaskEditForm task={task} />
         ) : (

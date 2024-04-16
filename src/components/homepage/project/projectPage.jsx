@@ -5,6 +5,7 @@ import { TaskList } from "./tasks/taskList";
 import { MdEdit } from "react-icons/md";
 import { ProjectEditForm } from "./projectEditForm";
 import { AddSectionButton } from "../section/addSectionButton";
+import { SectionList } from "../section/sectionList";
 
 export const ProjectPage = () => {
   const {
@@ -12,8 +13,38 @@ export const ProjectPage = () => {
     activeProject,
     createNewTask,
     setEditProject,
-    editProject
+    editProject,
+    setProjects,
+    setCreateNewTask
   } = useList();
+
+  const submitFunc = async (e) => {
+    
+    const form = new FormData(e.target);
+
+    const data2submit = {
+      title: form.get("title"),
+      parentProject: projects[activeProject]._id,
+      dueDate: form.get("date")
+    };
+
+    try {
+      const res = await fetch("/api/task/create", {
+        method: "POST",
+        body: JSON.stringify(data2submit),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const response = await res.json();
+      console.log(response);
+
+      if (response.success) {
+        setProjects(response.user.projects);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <section className="w-full h-full pt-5 px-[4rem]">
@@ -38,9 +69,30 @@ export const ProjectPage = () => {
           </>
         )}
       </div>
-      {projects[activeProject].tasks.length > 0 && <TaskList />}
-      {!createNewTask && <CreateTaskButton />}
-      {createNewTask && <TaskForm />}
+      {projects[activeProject].tasks.length > 0 && (
+        <>
+          <TaskList tasks={projects[activeProject].tasks} />
+          {!createNewTask && (
+            <CreateTaskButton
+              clickHandler={() => {
+                setCreateNewTask(true);
+              }}
+            />
+          )}
+          {createNewTask && (
+            <TaskForm
+              submitHandler={submitFunc}
+              hideForm={() => {
+                setCreateNewTask(false);
+              }}
+            />
+          )}
+        </>
+      )}
+      {projects[activeProject].sections.length > 0 && (
+        <SectionList sections={projects[activeProject].sections} />
+      )}
+
       <AddSectionButton />
     </section>
   );
