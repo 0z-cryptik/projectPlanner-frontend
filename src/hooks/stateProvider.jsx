@@ -13,7 +13,6 @@ export const StateProvider = ({ children }) => {
   const [creatingNewProject, setCreatingNewProject] = useState(false);
   const [createNewTask, setCreateNewTask] = useState(false);
   const [activeProject, setActiveProject] = useState(0);
-  const [taskToEdit, setTaskToEdit] = useState(null);
   const [editProject, setEditProject] = useState(false);
 
   const stateObj = {
@@ -33,8 +32,6 @@ export const StateProvider = ({ children }) => {
     setActiveProject,
     createNewTask,
     setCreateNewTask,
-    taskToEdit,
-    setTaskToEdit,
     editProject,
     setEditProject
   };

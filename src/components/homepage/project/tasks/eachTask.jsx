@@ -10,16 +10,37 @@ import { SlOptions } from "react-icons/sl";
 import { useState } from "react";
 import { Overlay } from "../../../overlay/overlay";
 import { DeleteWarning } from "./deleteWarning";
+import { TaskEditForm } from "./taskEditForm";
 
 export const EachTask = ({ task, i, clickHandler }) => {
-  const { taskToEdit, setTaskToEdit } = useList();
   const [showOptions, setShowOptions] = useState(false);
+  const [showOptionsButton, setShowOptionsButton] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [editTask, setEditTask] = useState(false);
+
+  if (editTask) {
+    return (
+      <TaskEditForm
+        task={task}
+        hideForm={() => {
+          setEditTask(false);
+        }}
+      />
+    );
+  }
 
   return (
     <>
       <div
         key={i}
+        onMouseOver={() => {
+          setShowOptionsButton(true);
+        }}
+        onMouseLeave={() => {
+          if (!showOptions) {
+            setShowOptionsButton(false);
+          }
+        }}
         className="w-[60%] flex flex-col gap-y-5 mt-7">
         <div className="flex flex-row border-b">
           <div>
@@ -30,13 +51,15 @@ export const EachTask = ({ task, i, clickHandler }) => {
             />
           </div>
           <p className="text-lg flex-grow">{task.title}</p>
-          <button
-            onClick={() => setShowOptions(!showOptions)}
-            className={`w-fit h-fit px-2 ${
-              showOptions && "border rounded-xl bg-gray-200"
-            }`}>
-            <SlOptions />
-          </button>
+          {showOptionsButton && (
+            <button
+              onClick={() => setShowOptions(!showOptions)}
+              className={`w-fit h-fit px-2 ${
+                showOptions && "border rounded-xl bg-gray-200"
+              }`}>
+              <SlOptions />
+            </button>
+          )}
         </div>
         <p className="text-xs">{dueDateHandler(task.dueDate)}</p>
         <div
@@ -45,7 +68,8 @@ export const EachTask = ({ task, i, clickHandler }) => {
           }`}>
           <button
             onClick={() => {
-              setTaskToEdit(i);
+              setEditTask(true);
+              setShowOptions(false);
             }}
             className="border-b flex flex-row gap-x-1">
             Edit

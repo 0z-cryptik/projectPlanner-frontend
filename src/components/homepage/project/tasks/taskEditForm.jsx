@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useState } from "react";
 
-export const TaskEditForm = ({ task }) => {
+export const TaskEditForm = ({ task, hideForm }) => {
   const { projects, activeProject, setTaskToEdit, setProjects } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(new Date(task.dueDate));
@@ -36,15 +36,11 @@ export const TaskEditForm = ({ task }) => {
 
       if (response.success) {
         setProjects(response.user.projects);
-        setTaskToEdit(null);
+        hideForm()
       }
     } catch (err) {
       console.error(err);
     }
-  };
-
-  const hideForm = () => {
-    setTaskToEdit(null);
   };
 
   return (
@@ -74,7 +70,6 @@ export const TaskEditForm = ({ task }) => {
           onChange={setDate}
           id="datePicker"
           minDate={new Date()}
-          maxDate={new Date(projects[activeProject].dueDate)}
           name="date"
         />
       </span>
