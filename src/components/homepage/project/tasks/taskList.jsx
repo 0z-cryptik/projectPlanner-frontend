@@ -1,19 +1,9 @@
 import { useList } from "../../../../hooks/stateProvider";
-import { useState } from "react";
 import { EachTask } from "./eachTask";
 import { TaskEditForm } from "./taskEditForm";
-import { CreateTaskButton } from "./createTaskButton";
-import { TaskForm } from "./newTaskForm";
 
 export const TaskList = ({ tasks }) => {
-  const {
-    projects,
-    activeProject,
-    setProjects,
-    taskToEdit,
-    setTaskToEdit,
-    createNewTask
-  } = useList();
+  const { setProjects, taskToEdit } = useList();
 
   const completeOrDelete = async (id) => {
     const res = await fetch("/api/task/delete?_method=DELETE", {
