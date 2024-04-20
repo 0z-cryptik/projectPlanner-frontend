@@ -6,7 +6,7 @@ import "react-clock/dist/Clock.css";
 import { useState } from "react";
 
 export const TaskEditForm = ({ task, hideForm }) => {
-  const { projects, activeProject, setTaskToEdit, setProjects } = useList();
+  const { fetchFunc, setProjects } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(new Date(task.dueDate));
 
@@ -14,7 +14,7 @@ export const TaskEditForm = ({ task, hideForm }) => {
     setTitle(e.target.value);
   };
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
 
@@ -25,19 +25,7 @@ export const TaskEditForm = ({ task, hideForm }) => {
     };
 
     try {
-      const res = await fetch("/api/task/update?_method=PUT", {
-        method: "POST",
-        body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" }
-      });
-
-      const response = await res.json();
-      console.log(response);
-
-      if (response.success) {
-        setProjects(response.user.projects);
-        hideForm()
-      }
+      fetchFunc("/api/task/update?_method=PUT", data2submit);
     } catch (err) {
       console.error(err);
     }

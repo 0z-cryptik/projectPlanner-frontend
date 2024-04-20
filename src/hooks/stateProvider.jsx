@@ -15,6 +15,18 @@ export const StateProvider = ({ children }) => {
   const [activeProject, setActiveProject] = useState(0);
   const [editProject, setEditProject] = useState(false);
 
+  const fetchFunc = async (url, data2submit) => {
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data2submit),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const response = await res.json();
+    console.log(response);
+    setProjects(response.user.projects.reverse());
+  };
+
   const stateObj = {
     user,
     setUser,
@@ -33,7 +45,8 @@ export const StateProvider = ({ children }) => {
     createNewTask,
     setCreateNewTask,
     editProject,
-    setEditProject
+    setEditProject,
+    fetchFunc
   };
 
   return (

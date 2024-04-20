@@ -5,16 +5,10 @@ import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { ProjectPage } from "./project/projectPage";
-import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {
-  const {
-    user,
-    projects,
-    setProjects,
-    creatingNewProject,
-    activeProject
-  } = useList();
+  const { user, projects, creatingNewProject } = useList();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,11 +21,13 @@ export const Homepage = () => {
     return (
       <main className="w-screen h-screen flex flex-row">
         <SideBar />
-        {!creatingNewProject && projects.length === 0 && (
-          <CreateNewProjectButton />
-        )}
-        {creatingNewProject && <CreateNewProjectForm />}
-        {!creatingNewProject && projects.length > 0 && <ProjectPage />}
+        <section className="ml-[20%] w-full">
+          {!creatingNewProject && projects.length === 0 && (
+            <CreateNewProjectButton />
+          )}
+          {creatingNewProject && <CreateNewProjectForm />}
+          {!creatingNewProject && projects.length > 0 && <ProjectPage />}
+        </section>
       </main>
     );
   }

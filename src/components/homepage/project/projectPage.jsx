@@ -13,13 +13,12 @@ export const ProjectPage = () => {
     activeProject,
     createNewTask,
     setEditProject,
-    editProject,
-    setProjects,
-    setCreateNewTask
+    editProject, 
+    setCreateNewTask,
+    fetchFunc
   } = useList();
 
-  const submitFunc = async (e) => {
-    
+  const submitFunc = (e) => {
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -29,18 +28,7 @@ export const ProjectPage = () => {
     };
 
     try {
-      const res = await fetch("/api/task/create", {
-        method: "POST",
-        body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" }
-      });
-
-      const response = await res.json();
-      console.log(response);
-
-      if (response.success) {
-        setProjects(response.user.projects);
-      }
+      fetchFunc("/api/task/create", data2submit);
     } catch (err) {
       console.error(err);
     }
@@ -69,7 +57,7 @@ export const ProjectPage = () => {
           </>
         )}
       </div>
-      {projects[activeProject].tasks.length > 0 && (
+      
         <>
           <TaskList tasks={projects[activeProject].tasks} />
           {!createNewTask && (
@@ -88,7 +76,7 @@ export const ProjectPage = () => {
             />
           )}
         </>
-      )}
+      
       {projects[activeProject].sections.length > 0 && (
         <SectionList sections={projects[activeProject].sections} />
       )}

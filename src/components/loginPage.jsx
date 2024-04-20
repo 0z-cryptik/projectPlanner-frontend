@@ -43,7 +43,7 @@ export const LoginPage = () => {
 
       if (loginResponse.user) {
         setUser(loginResponse.user);
-        setProjects(loginResponse.user.projects);
+        setProjects(loginResponse.user.projects.reverse());
         setLoggingInUser(false);
         navigate("/homepage");
       } else {

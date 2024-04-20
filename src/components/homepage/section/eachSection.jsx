@@ -14,29 +14,19 @@ export const EachSection = ({ section, key }) => {
   const [editSection, setEditSection] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-  const { setProjects } = useList();
+  const { fetchFunc } = useList();
 
-  const deleteFunc = async () => {
+  const deleteFunc = () => {
     try {
-      const res = await fetch("/api/section/delete?_method=DELETE", {
-        method: "POST",
-        body: JSON.stringify({ sectionId: section._id }),
-        headers: { "Content-Type": "application/json" }
+      fetchFunc("/api/section/delete?_method=DELETE", {
+        sectionId: section._id
       });
-
-      const response = await res.json();
-
-      console.log(response);
-
-      if (response.success) {
-        setProjects(response.user.projects);
-      }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const submitFunc = async (e) => {
+  const submitFunc = (e) => {
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -46,18 +36,7 @@ export const EachSection = ({ section, key }) => {
     };
 
     try {
-      const res = await fetch("/api/task/create", {
-        method: "POST",
-        body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" }
-      });
-
-      const response = await res.json();
-      console.log(response);
-
-      if (response.success) {
-        setProjects(response.user.projects);
-      }
+      fetchFunc("/api/task/create", data2submit);
     } catch (err) {
       console.error(err);
     }

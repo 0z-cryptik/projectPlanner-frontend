@@ -1,5 +1,3 @@
-import { FaRegCircleUser } from "react-icons/fa6";
-import { IoAddCircleOutline } from "react-icons/io5";
 import { useList } from "../../hooks/stateProvider";
 import { ProjectList } from "./project/projectList";
 import { SideBarNewProjectButton } from "./project/newProjectButton";
@@ -10,7 +8,7 @@ export const SideBar = () => {
   const { user, projects } = useList();
 
   return (
-    <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#605770] text-white">
+    <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#605770] text-white fixed overflow-y-scroll">
       <div className="">
         <PiUserSquareFill
           className="mx-auto"

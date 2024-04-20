@@ -4,7 +4,13 @@ import { useState } from "react";
 
 export const CreateNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
-  const { setCreatingNewProject, projects, setProjects } = useList();
+  const {
+    setCreatingNewProject,
+    fetchFunc,
+    setActiveProject,
+    projects,
+    setProjects
+  } = useList();
 
   const projectNameHandler = (e) => {
     setProjectName(e.target.value);
@@ -19,17 +25,12 @@ export const CreateNewProjectForm = () => {
     const form = new FormData(e.target);
 
     try {
-      const res = await fetch("/api/project/create", {
-        method: "POST",
-        body: JSON.stringify({
-          title: form.get("title")
-        }),
-        headers: { "Content-Type": "application/json" }
+      fetchFunc("/api/project/create", {
+        title: form.get("title")
       });
-      const response = await res.json();
-      console.log(response);
-      setProjects(response.user.projects);
+
       setCreatingNewProject(false);
+      setActiveProject(0)
     } catch (err) {
       console.error(err);
       setCreatingNewProject(false);
