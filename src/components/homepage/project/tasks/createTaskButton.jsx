@@ -1,4 +1,3 @@
-import { useList } from "../../../../hooks/stateProvider";
 import { CiSquarePlus } from "react-icons/ci";
 
 export const CreateTaskButton = ({ clickHandler }) => {

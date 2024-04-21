@@ -6,7 +6,7 @@ import "react-clock/dist/Clock.css";
 import { useState } from "react";
 
 export const TaskEditForm = ({ task, hideForm }) => {
-  const { fetchFunc, setProjects } = useList();
+  const { fetchFunc } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(new Date(task.dueDate));
 

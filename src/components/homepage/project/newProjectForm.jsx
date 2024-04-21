@@ -1,5 +1,4 @@
 import { useList } from "../../../hooks/stateProvider";
-import { ProjectFormButton } from "./projectFormButtons";
 import { useState } from "react";
 
 export const CreateNewProjectForm = () => {
@@ -8,8 +7,6 @@ export const CreateNewProjectForm = () => {
     setCreatingNewProject,
     fetchFunc,
     setActiveProject,
-    projects,
-    setProjects
   } = useList();
 
   const projectNameHandler = (e) => {

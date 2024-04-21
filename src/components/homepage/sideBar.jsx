@@ -5,7 +5,7 @@ import { LogoutButton } from "./logoutButton";
 import { PiUserSquareFill } from "react-icons/pi";
 
 export const SideBar = () => {
-  const { user, projects } = useList();
+  const { user } = useList();
 
   return (
     <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#605770] text-white fixed overflow-y-scroll">

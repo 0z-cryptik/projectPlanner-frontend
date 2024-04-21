@@ -1,6 +1,4 @@
 import { useList } from "../../../hooks/stateProvider";
-import { RiDeleteBin7Fill } from "react-icons/ri";
-import { IoCheckbox } from "react-icons/io5";
 import { LiaProjectDiagramSolid } from "react-icons/lia";
 
 export const ProjectList = () => {

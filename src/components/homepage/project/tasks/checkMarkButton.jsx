@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useList } from "../../../../hooks/stateProvider";
 import { IoIosCheckmark } from "react-icons/io";
 
 export const CheckMarkButton = ({ clickFunc }) => {

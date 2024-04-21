@@ -1,9 +1,6 @@
-import { useList } from "../../../../hooks/stateProvider";
 import { EachTask } from "./eachTask";
 
-export const TaskList = ({ tasks=[] }) => {
-  const { setProjects, fetchFunc } = useList();
-
+export const TaskList = ({ tasks = [] }) => {
   return (
     <section className="ml-[4rem]">
       {tasks.map((task, i) => (

@@ -1,31 +1,27 @@
 import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
 
-export const AddSectionForm = ({hideForm}) => {
+export const AddSectionForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
-  const { setProjects, projects, activeProject } = useList();
+  const { projects, activeProject, fetchFunc } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     const form = new FormData(e.target);
+
     const data2submit = {
       title: form.get("section"),
       parentProject: projects[activeProject]._id
     };
 
     try {
-      const res = await fetch("/api/section/create", {
-        method: "POST",
-        body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" }
-      });
+      const { success } = await fetchFunc(
+        "/api/section/create",
+        data2submit
+      );
 
-      const response = await res.json();
-
-      console.log(response);
-      if (response.success) {
-        setProjects(response.user.projects);
+      if (success) {
+        hideForm();
       }
     } catch (err) {
       console.error(err);
