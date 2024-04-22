@@ -41,8 +41,8 @@ export const EachTask = ({ task, i }) => {
       onMouseLeave={() => {
         setShowOptions(false);
       }}
-      className="w-[60%] flex flex-col gap-y-5 mt-7">
-      <div className="flex flex-row border-b">
+      className="w-[60%] flex flex-col mt-7 border-b">
+      <div className="flex flex-row">
         <div>
           <CheckMarkButton clickFunc={completeOrDelete} />
         </div>

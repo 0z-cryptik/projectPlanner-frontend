@@ -5,29 +5,24 @@ import { useList } from "../../../hooks/stateProvider";
 
 export const EditSectionForm = ({ section, hideForm }) => {
   const [title, setTitle] = useState(section.title);
-  const { setProjects } = useList();
+  const { fetchFunc } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    
+
     const data2submit = {
       title: form.get("title"),
       sectionId: section._id
     };
+
     try {
-      const res = await fetch("/api/section/update?_method=PUT", {
-        method: "POST",
-        body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" }
-      });
+      const { success } = await fetchFunc(
+        "/api/section/update?_method=PUT",
+        data2submit
+      );
 
-      const response = await res.json();
-
-      console.log(response);
-
-      if (response.success) {
-        setProjects(response.user.projects);
+      if (success) {
         hideForm();
       }
     } catch (err) {

@@ -1,5 +1,11 @@
 import { dueDateHandler } from "../../../../functions/dueDateHandler";
+import { GiSandsOfTime } from "react-icons/gi";
 
 export const DueDate = ({ task }) => {
-  return <p className="text-xs">{dueDateHandler(task.dueDate)}</p>;
+  return (
+    <div className="flex flex-row text-xs gap-x-1">
+      <GiSandsOfTime />
+      <p>{dueDateHandler(task.dueDate)}</p>
+    </div>
+  );
 };

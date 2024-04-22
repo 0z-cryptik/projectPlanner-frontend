@@ -13,14 +13,14 @@ export const dueDateHandler = (date) => {
   const diffDays = Math.floor(diffHours / 24);
 
   if (diffDays >= 2) {
-    return `Due in ${diffDays} days`;
+    return `${diffDays} days`;
   } else if (diffDays === 1) {
-    return "Due in a day";
+    return "1 day";
   } else if (diffHours === 1) {
-    return `Due in ${diffHours} hour`;
+    return `${diffHours} hour`;
   } else if (diffHours > 1) {
-    return `Due in ${diffHours} hours`;
+    return `${diffHours} hours`;
   } else {
-    return `Due in ${diffMinutes} minutes`;
+    return `${diffMinutes} minutes`;
   }
 };

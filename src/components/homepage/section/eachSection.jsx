@@ -8,12 +8,14 @@ import { DeleteWarning } from "./deleteWarning";
 import { Overlay } from "../../overlay/overlay";
 import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
+import { IoIosArrowForward } from "react-icons/io";
 
 export const EachSection = ({ section, key }) => {
   const [createTask, setCreateTask] = useState(false);
   const [editSection, setEditSection] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [hide, setHide] = useState(section.hide);
   const { fetchFunc } = useList();
 
   const deleteFunc = () => {
@@ -47,14 +49,36 @@ export const EachSection = ({ section, key }) => {
       key={key}
       className="mt-7">
       <div className="text-xl ml-[4rem]">
-        {!editSection && (
-          <SectionHeader
-            section={section}
-            clickHandler={() => {
-              setShowOptions(!showOptions);
-            }}
-          />
-        )}
+        <div className="flex flex-row">
+          {!editSection && (
+            <>
+              <button
+                onClick={() => {
+                  setHide((prevHide) => {
+                    const updatedHide = !prevHide;
+                    fetch("/api/section/update?_method=PUT", {
+                      method: "POST",
+                      body: JSON.stringify({
+                        sectionId: section._id,
+                        hide: updatedHide
+                      }),
+                      headers: { "Content-Type": "application/json" }
+                    });
+                    console.log("fetched");
+                    return updatedHide;
+                  });
+                }}>
+                <IoIosArrowForward className={`${!hide && "rotate-90"}`} />
+              </button>
+              <SectionHeader
+                section={section}
+                clickHandler={() => {
+                  setShowOptions(!showOptions);
+                }}
+              />
+            </>
+          )}
+        </div>
 
         {showOptions && (
           <>
@@ -99,22 +123,24 @@ export const EachSection = ({ section, key }) => {
           />
         )}
       </div>
-      <TaskList tasks={section.tasks} />
-      {!createTask && (
-        <CreateTaskButton
-          clickHandler={() => {
-            setCreateTask(true);
-          }}
-        />
-      )}
-      {createTask && (
-        <TaskForm
-          hideForm={() => {
-            setCreateTask(false);
-          }}
-          submitHandler={submitFunc}
-        />
-      )}
+      <div className={`${hide && "hidden"}`}>
+        <TaskList tasks={section.tasks} />
+        {!createTask && (
+          <CreateTaskButton
+            clickHandler={() => {
+              setCreateTask(true);
+            }}
+          />
+        )}
+        {createTask && (
+          <TaskForm
+            hideForm={() => {
+              setCreateTask(false);
+            }}
+            submitHandler={submitFunc}
+          />
+        )}
+      </div>
     </section>
   );
 };
