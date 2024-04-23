@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskList } from "../project/tasks/taskList";
 import { TaskForm } from "../project/tasks/newTaskForm";
 import { CreateTaskButton } from "../project/tasks/createTaskButton";
@@ -10,12 +10,12 @@ import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
 import { IoIosArrowForward } from "react-icons/io";
 
-export const EachSection = ({ section, key }) => {
+export const EachSection = ({ section }) => {
   const [createTask, setCreateTask] = useState(false);
   const [editSection, setEditSection] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-  const [hide, setHide] = useState(section.hide);
+  const [hide, setHide] = useState(false);
   const { fetchFunc } = useList();
 
   const deleteFunc = () => {
@@ -45,16 +45,15 @@ export const EachSection = ({ section, key }) => {
   };
 
   return (
-    <section
-      key={key}
-      className="mt-7">
+    <section className="mt-7">
       <div className="text-xl ml-[4rem]">
         <div className="flex flex-row">
           {!editSection && (
             <>
               <button
                 onClick={() => {
-                  setHide((prevHide) => {
+                  setHide(!hide);
+                  /*setHide((prevHide) => {
                     const updatedHide = !prevHide;
                     fetch("/api/section/update?_method=PUT", {
                       method: "POST",
@@ -66,7 +65,7 @@ export const EachSection = ({ section, key }) => {
                     });
                     console.log("fetched");
                     return updatedHide;
-                  });
+                  })*/
                 }}>
                 <IoIosArrowForward className={`${!hide && "rotate-90"}`} />
               </button>

@@ -6,7 +6,7 @@ export const TaskList = ({ tasks = [] }) => {
       {tasks.map((task, i) => (
         <EachTask
           task={task}
-          i={i}
+          key={i}
         />
       ))}
     </section>

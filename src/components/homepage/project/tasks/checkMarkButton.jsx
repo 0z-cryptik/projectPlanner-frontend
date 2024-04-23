@@ -6,7 +6,7 @@ export const CheckMarkButton = ({ clickFunc }) => {
 
   return (
     <button
-      className="mr-4 border rounded-full"
+      className="mr-4 border rounded-full h-[1.5rem] mt-2"
       onClick={clickFunc}
       onMouseOver={() => {
         setHover(true);

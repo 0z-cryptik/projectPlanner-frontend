@@ -7,6 +7,7 @@ export const AddSectionForm = ({ hideForm }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("trying to add section");
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -22,6 +23,8 @@ export const AddSectionForm = ({ hideForm }) => {
 
       if (success) {
         hideForm();
+      } else {
+        console.log("no success");
       }
     } catch (err) {
       console.error(err);

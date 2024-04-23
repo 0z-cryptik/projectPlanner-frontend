@@ -4,7 +4,7 @@ export const CreateTaskButton = ({ clickHandler }) => {
   return (
     <button
       onClick={clickHandler}
-      className="flex flex-row border-b w-[57%] pb-1 mt-5 gap-x-2 hover:text-orange-500 hover:border-b-orange-500 text-sm ml-[4rem]">
+      className="flex flex-row border-b w-[57%] pb-1 mt-7 gap-x-2 hover:text-orange-500 hover:border-b-orange-500 text-sm ml-[4rem]">
       <CiSquarePlus size={"1.5rem"} />
       Add task
     </button>

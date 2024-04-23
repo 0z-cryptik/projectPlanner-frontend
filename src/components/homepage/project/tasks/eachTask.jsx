@@ -7,7 +7,7 @@ import { Options } from "./options";
 import { DueDate } from "./dueDate";
 import { useList } from "../../../../hooks/stateProvider";
 
-export const EachTask = ({ task, i }) => {
+export const EachTask = ({ task }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [editTask, setEditTask] = useState(false);
@@ -34,34 +34,30 @@ export const EachTask = ({ task, i }) => {
 
   return (
     <div
-      key={i}
       onMouseOver={() => {
         setShowOptions(true);
       }}
       onMouseLeave={() => {
         setShowOptions(false);
       }}
-      className="w-[60%] flex flex-col mt-7 border-b">
-      <div className="flex flex-row">
-        <div>
-          <CheckMarkButton clickFunc={completeOrDelete} />
-        </div>
+      className="w-[60%] flex flex-row mt-7 border-b">
+      <CheckMarkButton clickFunc={completeOrDelete} />
 
-        <p className="text-lg flex-grow">{task.title}</p>
-
-        {showOptions && (
-          <Options
-            editButtonHandler={() => {
-              setEditTask(true);
-              setShowOptions(false);
-            }}
-            deleteButtonHandler={() => {
-              setShowDeleteWarning(true);
-            }}
-          />
-        )}
+      <div className="flex-grow">
+        <p className="flex-grow">{task.title}</p>
+        <DueDate task={task} />
       </div>
-      <DueDate task={task} />
+      {showOptions && (
+        <Options
+          editButtonHandler={() => {
+            setEditTask(true);
+            setShowOptions(false);
+          }}
+          deleteButtonHandler={() => {
+            setShowDeleteWarning(true);
+          }}
+        />
+      )}
 
       {showDeleteWarning && (
         <>
