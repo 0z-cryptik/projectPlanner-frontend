@@ -9,6 +9,7 @@ import { Overlay } from "../../overlay/overlay";
 import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
 import { IoIosArrowForward } from "react-icons/io";
+import { TaskLoader } from "../../loaders/taskLoader";
 
 export const EachSection = ({ section }) => {
   const [createTask, setCreateTask] = useState(false);
@@ -16,6 +17,7 @@ export const EachSection = ({ section }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [hide, setHide] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const { fetchFunc } = useList();
 
   const deleteFunc = () => {
@@ -28,7 +30,8 @@ export const EachSection = ({ section }) => {
     }
   };
 
-  const submitFunc = (e) => {
+  const submitFunc = async (e) => {
+    setSubmitting(true);
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -38,7 +41,11 @@ export const EachSection = ({ section }) => {
     };
 
     try {
-      fetchFunc("/api/task/create", data2submit);
+      const { success } = await fetchFunc("/api/task/create", data2submit);
+
+      if (success) {
+        setSubmitting(false);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -131,7 +138,7 @@ export const EachSection = ({ section }) => {
             }}
           />
         )}
-        {createTask && (
+        {createTask && !submitting && (
           <TaskForm
             hideForm={() => {
               setCreateTask(false);
@@ -139,6 +146,8 @@ export const EachSection = ({ section }) => {
             submitHandler={submitFunc}
           />
         )}
+
+        {submitting && <TaskLoader />}
       </div>
     </section>
   );

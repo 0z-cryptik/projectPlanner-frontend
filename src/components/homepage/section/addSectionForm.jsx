@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
+import { SectionLoader } from "../../loaders/sectionLoader";
 
 export const AddSectionForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { projects, activeProject, fetchFunc } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
     console.log("trying to add section");
     const form = new FormData(e.target);
 
@@ -22,6 +25,7 @@ export const AddSectionForm = ({ hideForm }) => {
       );
 
       if (success) {
+        setSubmitting(false);
         hideForm();
       } else {
         console.log("no success");
@@ -30,6 +34,10 @@ export const AddSectionForm = ({ hideForm }) => {
       console.error(err);
     }
   };
+
+  if (submitting) {
+    return <SectionLoader />;
+  }
 
   return (
     <form

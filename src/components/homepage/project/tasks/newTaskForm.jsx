@@ -8,8 +8,6 @@ import "react-clock/dist/Clock.css";
 export const TaskForm = ({ submitHandler, hideForm }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
-  const { projects, setProjects, activeProject, setCreateNewTask } =
-    useList();
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);

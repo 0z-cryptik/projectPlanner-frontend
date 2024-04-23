@@ -4,18 +4,22 @@ import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useState } from "react";
+import { TaskLoader } from "../../../loaders/taskLoader";
 
 export const TaskEditForm = ({ task, hideForm }) => {
   const { fetchFunc } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(new Date(task.dueDate));
+  const [showLoader, setShowLoader] = useState(false);
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    setShowLoader(true);
+
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -25,11 +29,22 @@ export const TaskEditForm = ({ task, hideForm }) => {
     };
 
     try {
-      fetchFunc("/api/task/update?_method=PUT", data2submit);
+      const { success } = await fetchFunc(
+        "/api/task/update?_method=PUT",
+        data2submit
+      );
+      if (success) {
+        setShowLoader(false);
+      }
     } catch (err) {
       console.error(err);
+      setShowLoader(false)
     }
   };
+
+  if (showLoader) {
+    return <TaskLoader />;
+  }
 
   return (
     <form

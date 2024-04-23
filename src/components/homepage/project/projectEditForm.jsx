@@ -2,17 +2,21 @@ import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
 import { FaCircleCheck } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
+import { ThreeDots } from "react-loader-spinner";
+import { ProjectEditLoader } from "../../loaders/projectEditLoader";
 
 export const ProjectEditForm = ({ project, cancelHandler }) => {
   const { fetchFunc } = useList();
   const [title, setTitle] = useState(project.title);
+  const [showLoader, setShowLoader] = useState(false);
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    setShowLoader(true);
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -21,12 +25,23 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
     };
 
     try {
-      fetchFunc("/api/project/update?_method=PUT", data2submit);
+      const { success } = await fetchFunc(
+        "/api/project/update?_method=PUT",
+        data2submit
+      );
+      if (success) {
+        setShowLoader(false);
+      }
       cancelHandler();
     } catch (err) {
       console.error(err);
+      setShowLoader(false);
     }
   };
+
+  if (showLoader) {
+    return <ProjectEditLoader />;
+  }
 
   return (
     <form

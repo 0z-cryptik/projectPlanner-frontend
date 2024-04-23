@@ -1,13 +1,11 @@
 import { useList } from "../../../hooks/stateProvider";
 import { useState } from "react";
+import { ProjectLoader } from "../../loaders/projectLoader";
 
 export const CreateNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
-  const {
-    setCreatingNewProject,
-    fetchFunc,
-    setActiveProject,
-  } = useList();
+  const [showLoader, setShowLoader] = useState(false);
+  const { setCreatingNewProject, fetchFunc, setActiveProject } = useList();
 
   const projectNameHandler = (e) => {
     setProjectName(e.target.value);
@@ -19,20 +17,29 @@ export const CreateNewProjectForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setShowLoader(true);
     const form = new FormData(e.target);
 
     try {
-      fetchFunc("/api/project/create", {
+      const { success } = await fetchFunc("/api/project/create", {
         title: form.get("title")
       });
 
-      setCreatingNewProject(false);
-      setActiveProject(0)
+      if (success) {
+        setShowLoader(false);
+        setCreatingNewProject(false);
+        setActiveProject(0);
+      }
     } catch (err) {
       console.error(err);
+      setShowLoader(false)
       setCreatingNewProject(false);
     }
   };
+
+  if (showLoader) {
+    return <ProjectLoader />;
+  }
 
   return (
     <section className="w-full h-full flex items-center justify-center">

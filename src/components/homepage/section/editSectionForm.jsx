@@ -2,13 +2,16 @@ import { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { FaCircleCheck } from "react-icons/fa6";
 import { useList } from "../../../hooks/stateProvider";
+import { SectionLoader } from "../../loaders/sectionLoader";
 
 export const EditSectionForm = ({ section, hideForm }) => {
   const [title, setTitle] = useState(section.title);
+  const [showLoader, setShowLoader] = useState(false);
   const { fetchFunc } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setShowLoader(true);
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -23,12 +26,18 @@ export const EditSectionForm = ({ section, hideForm }) => {
       );
 
       if (success) {
+        setShowLoader(false);
         hideForm();
       }
     } catch (err) {
       console.error(err);
+      setShowLoader(false);
     }
   };
+
+  if (showLoader) {
+    return <SectionLoader />;
+  }
 
   return (
     <form

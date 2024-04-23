@@ -9,6 +9,7 @@ import { AddSectionButton } from "../section/addSectionButton";
 import { SectionList } from "../section/sectionList";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { useState } from "react";
+import { TaskLoader } from "../../loaders/taskLoader";
 
 export const ProjectPage = () => {
   const {
@@ -21,8 +22,10 @@ export const ProjectPage = () => {
 
   const [editProject, setEditProject] = useState(false);
   const [showAbandonWarning, setShowAbandonWarning] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
-  const submitFunc = (e) => {
+  const submitFunc = async (e) => {
+    setShowLoader(true);
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -32,9 +35,13 @@ export const ProjectPage = () => {
     };
 
     try {
-      fetchFunc("/api/task/create", data2submit);
+      const { success } = await fetchFunc("/api/task/create", data2submit);
+      if (success) {
+        setShowLoader(false);
+      }
     } catch (err) {
       console.error(err);
+      setShowLoader(false);
     }
   };
 
@@ -84,7 +91,8 @@ export const ProjectPage = () => {
 
       <>
         <TaskList tasks={projects[activeProject].tasks} />
-        {!createNewTask && (
+        {showLoader && <TaskLoader />}
+        {!createNewTask && !showLoader && (
           <CreateTaskButton
             clickHandler={() => {
               setCreateNewTask(true);
