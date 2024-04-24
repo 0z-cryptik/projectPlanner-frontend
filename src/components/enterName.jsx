@@ -16,14 +16,19 @@ export const EnterName = () => {
     e.preventDefault();
     const form = new FormData(e.target);
 
+    const data2submit = {
+      name: form.get("name"),
+      userID: signUpUser._id,
+      avatar: `https://api.dicebear.com/8.x/initials/svg?seed=${form.get(
+        "name"
+      )}`
+    };
+
     try {
       setProcessingUser(true);
       const res = await fetch("/api/user/signup/submitName", {
         method: "POST",
-        body: JSON.stringify({
-          name: form.get("name"),
-          userID: signUpUser._id
-        }),
+        body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }
       });
       const response = await res.json();

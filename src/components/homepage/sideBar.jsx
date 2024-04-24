@@ -10,11 +10,18 @@ export const SideBar = () => {
   return (
     <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#605770] text-white fixed overflow-y-scroll">
       <div className="">
-        <PiUserSquareFill
-          className="mx-auto"
-          size={"7rem"}
-        />
-        <p className="mx-auto w-fit">{user ? user.name : "User"}</p>
+        {user.avatar ? (
+          <img
+            className="w-[7rem] h-[7rem] mx-auto border rounded-xl mb-3"
+            src={user.avatar}
+          />
+        ) : (
+          <PiUserSquareFill
+            className="mx-auto"
+            size={"7rem"}
+          />
+        )}
+        <p className="mx-auto w-fit">{user.name ? user.name : "User"}</p>
         <p className="mx-auto w-fit text-sm">{user.email}</p>
         <LogoutButton />
       </div>
