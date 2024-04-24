@@ -13,9 +13,7 @@ export const StateProvider = ({ children }) => {
   const [creatingNewProject, setCreatingNewProject] = useState(false);
   const [createNewTask, setCreateNewTask] = useState(false);
   const [activeProject, setActiveProject] = useState(0);
-  const [error, setError] = useState(
-    "There was an error creating the task, try again"
-  );
+  const [error, setError] = useState("");
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {

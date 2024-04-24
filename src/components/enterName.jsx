@@ -43,7 +43,7 @@ export const EnterName = () => {
         if (loginResponse.success) {
           setUser(loginResponse.user);
           setProcessingUser(false);
-          navigate("/homepage");
+          navigate("/");
         } else {
           setError(true);
           setProcessingUser(false);

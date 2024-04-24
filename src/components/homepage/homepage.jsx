@@ -8,13 +8,29 @@ import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
 
 export const Homepage = () => {
-  const { user, projects, creatingNewProject, error, setError } = useList();
+  const { user, projects, creatingNewProject, error, setError, setUser, setProjects } =
+    useList();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      const checkLoggedInUser = async () => {
+        try {
+          const res = await fetch("/api/user/check");
+          const response = await res.json();
+          if (response.success) {
+            setUser(response.user);
+            setProjects(response.user.projects)
+          } else {
+            navigate("/login");
+          }
+        } catch (err) {
+          navigate("/login");
+        }
+      };
+
+      checkLoggedInUser();
     }
   }, []);
 
@@ -29,7 +45,7 @@ export const Homepage = () => {
           {creatingNewProject && <CreateNewProjectForm />}
           {!creatingNewProject && projects.length > 0 && <ProjectPage />}
         </section>
-        {error && <ErrorFlashMessage message={error}/>}
+        {error && <ErrorFlashMessage message={error} />}
       </main>
     );
   }

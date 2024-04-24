@@ -10,7 +10,7 @@ export const RoutedApp = () => {
     <Routes>
       <Route
         path="/"
-        element={<App />}
+        element={<Homepage />}
       />
       <Route
         path="/signup"
@@ -23,10 +23,6 @@ export const RoutedApp = () => {
       <Route
         path="/enterName"
         element={<EnterName />}
-      />
-      <Route
-        path="/homepage"
-        element={<Homepage />}
       />
     </Routes>
   );
