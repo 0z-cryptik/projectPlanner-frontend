@@ -7,7 +7,7 @@ import { SectionLoader } from "../../loaders/sectionLoader";
 export const EditSectionForm = ({ section, hideForm }) => {
   const [title, setTitle] = useState(section.title);
   const [showLoader, setShowLoader] = useState(false);
-  const { fetchFunc } = useList();
+  const { fetchFunc, setError } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -28,9 +28,16 @@ export const EditSectionForm = ({ section, hideForm }) => {
       if (success) {
         setShowLoader(false);
         hideForm();
+      } else {
+        setError(
+          "An error occured while editing your section, please try again"
+        );
+        setShowLoader(false);
       }
     } catch (err) {
-      console.error(err);
+      setError(
+        "An error occured while editing your section, please try again"
+      );
       setShowLoader(false);
     }
   };

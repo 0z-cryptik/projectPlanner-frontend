@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { IoIosCheckmark } from "react-icons/io";
 
-export const CheckMarkButton = ({ clickFunc }) => {
+export const CheckMarkButton = ({ clickFunc, additionalStyling = "" }) => {
   const [hover, setHover] = useState(false);
 
   return (
     <button
-      className="mr-4 border rounded-full h-[1.5rem] mt-2"
+      className={`mr-4 border rounded-full h-[1.5rem] ${
+        additionalStyling === "mb-2" ? "mb-2" : "mt-2"
+      }`}
       onClick={clickFunc}
       onMouseOver={() => {
         setHover(true);

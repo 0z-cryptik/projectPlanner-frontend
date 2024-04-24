@@ -4,13 +4,13 @@ import { SectionLoader } from "../../loaders/sectionLoader";
 
 export const AddSectionForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const { projects, activeProject, fetchFunc } = useList();
+  const [showLoader, setShowLoader] = useState(false);
+  const { projects, activeProject, fetchFunc, setError } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
-    console.log("trying to add section");
+    setShowLoader(true);
+
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -25,17 +25,22 @@ export const AddSectionForm = ({ hideForm }) => {
       );
 
       if (success) {
-        setSubmitting(false);
+        setShowLoader(false);
         hideForm();
       } else {
-        console.log("no success");
+        setError(
+          "An error occured while creating your section, please try again"
+        );
       }
     } catch (err) {
-      console.error(err);
+      setError(
+        "An error occured while creating your section, please try again"
+      );
+      setShowLoader(false);
     }
   };
 
-  if (submitting) {
+  if (showLoader) {
     return <SectionLoader />;
   }
 

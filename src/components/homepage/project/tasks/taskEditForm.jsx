@@ -7,7 +7,7 @@ import { useState } from "react";
 import { TaskLoader } from "../../../loaders/taskLoader";
 
 export const TaskEditForm = ({ task, hideForm }) => {
-  const { fetchFunc } = useList();
+  const { fetchFunc, setError } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(new Date(task.dueDate));
   const [showLoader, setShowLoader] = useState(false);
@@ -35,10 +35,13 @@ export const TaskEditForm = ({ task, hideForm }) => {
       );
       if (success) {
         setShowLoader(false);
+      } else {
+        setError("there was an error editing the task, please try again");
+        setShowLoader(false);
       }
     } catch (err) {
-      console.error(err);
-      setShowLoader(false)
+      setError("there was an error editing the task, please try again");
+      setShowLoader(false);
     }
   };
 

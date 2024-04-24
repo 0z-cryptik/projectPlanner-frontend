@@ -2,18 +2,26 @@ import { IoIosWarning } from "react-icons/io";
 import { useList } from "../../../hooks/stateProvider";
 
 export const AbandonProjectWarning = ({ projectId, cancelHandler }) => {
-  const { fetchFunc } = useList();
+  const { fetchFunc, setError } = useList();
 
-  const abandonProject = async() => {
+  const abandonProject = async () => {
     try {
-      const { success } = await fetchFunc("/api/project/delete?_method=DELETE", {
-        projectId
-      });
+      const { success } = await fetchFunc(
+        "/api/project/delete?_method=DELETE",
+        {
+          projectId
+        }
+      );
       if (success) {
+        setError(
+          "There was an error deleting this project, please try again"
+        );
         cancelHandler();
       }
     } catch (err) {
-      console.error(err);
+      setError(
+        "There was an error deleting this project, please try again"
+      );
     }
   };
 

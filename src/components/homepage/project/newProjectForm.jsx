@@ -5,7 +5,8 @@ import { ProjectLoader } from "../../loaders/projectLoader";
 export const CreateNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
   const [showLoader, setShowLoader] = useState(false);
-  const { setCreatingNewProject, fetchFunc, setActiveProject } = useList();
+  const { setCreatingNewProject, fetchFunc, setActiveProject, setError } =
+    useList();
 
   const projectNameHandler = (e) => {
     setProjectName(e.target.value);
@@ -29,10 +30,16 @@ export const CreateNewProjectForm = () => {
         setShowLoader(false);
         setCreatingNewProject(false);
         setActiveProject(0);
+      } else {
+        setError(
+          "There was an error creating the project, please try again"
+        );
       }
     } catch (err) {
-      console.error(err);
-      setShowLoader(false)
+      setError(
+        "There was an error creating the project, please try again"
+      );
+      setShowLoader(false);
       setCreatingNewProject(false);
     }
   };

@@ -6,7 +6,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { ProjectEditLoader } from "../../loaders/projectEditLoader";
 
 export const ProjectEditForm = ({ project, cancelHandler }) => {
-  const { fetchFunc } = useList();
+  const { fetchFunc, setError } = useList();
   const [title, setTitle] = useState(project.title);
   const [showLoader, setShowLoader] = useState(false);
 
@@ -31,10 +31,17 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
       );
       if (success) {
         setShowLoader(false);
+      } else {
+        setError(
+          "There was an error editing this project, please try again"
+        );
+        setShowLoader(false);
       }
       cancelHandler();
     } catch (err) {
-      console.error(err);
+      setError(
+        "There was an error editing this project, please try again"
+      );
       setShowLoader(false);
     }
   };

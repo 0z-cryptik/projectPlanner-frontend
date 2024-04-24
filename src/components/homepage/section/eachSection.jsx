@@ -8,7 +8,6 @@ import { DeleteWarning } from "./deleteWarning";
 import { Overlay } from "../../overlay/overlay";
 import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
-import { IoIosArrowForward } from "react-icons/io";
 import { TaskLoader } from "../../loaders/taskLoader";
 
 export const EachSection = ({ section }) => {
@@ -16,9 +15,8 @@ export const EachSection = ({ section }) => {
   const [editSection, setEditSection] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-  const [hide, setHide] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const { fetchFunc } = useList();
+  const [showLoader, setShowLoader] = useState(false);
+  const { fetchFunc, setError } = useList();
 
   const deleteFunc = () => {
     try {
@@ -26,12 +24,14 @@ export const EachSection = ({ section }) => {
         sectionId: section._id
       });
     } catch (err) {
-      console.error(err);
+      setError(
+        "An error occured while deleting your section, please try again"
+      );
     }
   };
 
   const submitFunc = async (e) => {
-    setSubmitting(true);
+    setShowLoader(true);
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -44,10 +44,17 @@ export const EachSection = ({ section }) => {
       const { success } = await fetchFunc("/api/task/create", data2submit);
 
       if (success) {
-        setSubmitting(false);
+        setShowLoader(false);
+      } else {
+        setError(
+          "An error occured while creating your task, please try again"
+        );
       }
     } catch (err) {
-      console.error(err);
+      setError(
+        "An error occured while creating your task, please try again"
+      );
+      setShowLoader(false);
     }
   };
 
@@ -56,33 +63,12 @@ export const EachSection = ({ section }) => {
       <div className="text-xl ml-[4rem]">
         <div className="flex flex-row">
           {!editSection && (
-            <>
-              <button
-                onClick={() => {
-                  setHide(!hide);
-                  /*setHide((prevHide) => {
-                    const updatedHide = !prevHide;
-                    fetch("/api/section/update?_method=PUT", {
-                      method: "POST",
-                      body: JSON.stringify({
-                        sectionId: section._id,
-                        hide: updatedHide
-                      }),
-                      headers: { "Content-Type": "application/json" }
-                    });
-                    console.log("fetched");
-                    return updatedHide;
-                  })*/
-                }}>
-                <IoIosArrowForward className={`${!hide && "rotate-90"}`} />
-              </button>
-              <SectionHeader
-                section={section}
-                clickHandler={() => {
-                  setShowOptions(!showOptions);
-                }}
-              />
-            </>
+            <SectionHeader
+              section={section}
+              clickHandler={() => {
+                setShowOptions(!showOptions);
+              }}
+            />
           )}
         </div>
 
@@ -129,7 +115,7 @@ export const EachSection = ({ section }) => {
           />
         )}
       </div>
-      <div className={`${hide && "hidden"}`}>
+      <div>
         <TaskList tasks={section.tasks} />
         {!createTask && (
           <CreateTaskButton
@@ -138,7 +124,7 @@ export const EachSection = ({ section }) => {
             }}
           />
         )}
-        {createTask && !submitting && (
+        {createTask && !showLoader && (
           <TaskForm
             hideForm={() => {
               setCreateTask(false);
@@ -147,7 +133,7 @@ export const EachSection = ({ section }) => {
           />
         )}
 
-        {submitting && <TaskLoader />}
+        {showLoader && <TaskLoader />}
       </div>
     </section>
   );

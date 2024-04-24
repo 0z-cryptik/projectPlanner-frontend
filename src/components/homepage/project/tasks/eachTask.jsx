@@ -11,12 +11,13 @@ export const EachTask = ({ task }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [editTask, setEditTask] = useState(false);
-  const { fetchFunc } = useList();
+  const { fetchFunc, setError } = useList();
 
   const completeOrDelete = () => {
     try {
       fetchFunc("/api/task/delete?_method=DELETE", { taskId: task._id });
     } catch (err) {
+      setError('There was an error, please try again')
       console.error(err);
     }
   };
@@ -41,11 +42,14 @@ export const EachTask = ({ task }) => {
         setShowOptions(false);
       }}
       className="w-[60%] flex flex-row mt-7 border-b">
-      <CheckMarkButton clickFunc={completeOrDelete} />
+      <CheckMarkButton
+        clickFunc={completeOrDelete}
+        additionalStyling={`${!task.dueDate && "mb-2"}`}
+      />
 
       <div className="flex-grow">
         <p className="flex-grow">{task.title}</p>
-        <DueDate task={task} />
+        {task.dueDate && <DueDate task={task} />}
       </div>
       {showOptions && (
         <Options
@@ -74,6 +78,9 @@ export const EachTask = ({ task }) => {
           <Overlay deem={true} />
         </>
       )}
+
+      
+      
     </div>
   );
 };

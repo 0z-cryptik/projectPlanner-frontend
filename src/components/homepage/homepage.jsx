@@ -5,9 +5,10 @@ import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { ProjectPage } from "./project/projectPage";
+import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
 
 export const Homepage = () => {
-  const { user, projects, creatingNewProject } = useList();
+  const { user, projects, creatingNewProject, error, setError } = useList();
 
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ export const Homepage = () => {
           {creatingNewProject && <CreateNewProjectForm />}
           {!creatingNewProject && projects.length > 0 && <ProjectPage />}
         </section>
+        {error && <ErrorFlashMessage message={error}/>}
       </main>
     );
   }

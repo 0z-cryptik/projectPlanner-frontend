@@ -17,7 +17,8 @@ export const ProjectPage = () => {
     activeProject,
     createNewTask,
     setCreateNewTask,
-    fetchFunc
+    fetchFunc,
+    setError
   } = useList();
 
   const [editProject, setEditProject] = useState(false);
@@ -38,9 +39,12 @@ export const ProjectPage = () => {
       const { success } = await fetchFunc("/api/task/create", data2submit);
       if (success) {
         setShowLoader(false);
+      } else {
+        setError("there was an error creating the task, please try again");
+        setShowLoader(false);
       }
     } catch (err) {
-      console.error(err);
+      setError("there was an error creating the task, please try again");
       setShowLoader(false);
     }
   };
