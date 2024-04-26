@@ -1,7 +1,7 @@
 import { CheckMarkButton } from "./checkMarkButton";
 import { useState } from "react";
 import { Overlay } from "../../../overlay/overlay";
-import { DeleteWarning } from "./deleteWarning";
+import { DeleteWarning } from "../../../warnings/taskDeleteWarning";
 import { TaskEditForm } from "./taskEditForm";
 import { Options } from "./options";
 import { DueDate } from "./dueDate";
@@ -41,7 +41,7 @@ export const EachTask = ({ task }) => {
       onMouseLeave={() => {
         setShowOptions(false);
       }}
-      className="w-[60%] flex flex-row mt-7 border-b">
+      className="w-[90%] flex flex-row mt-7 border-b">
       <CheckMarkButton
         clickFunc={completeOrDelete}
         additionalStyling={`${!task.dueDate && "mb-2"}`}

@@ -14,6 +14,7 @@ export const StateProvider = ({ children }) => {
   const [createNewTask, setCreateNewTask] = useState(false);
   const [activeProject, setActiveProject] = useState(0);
   const [error, setError] = useState("");
+  const [fixPage, setFixPage] = useState(false);
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {
@@ -50,7 +51,9 @@ export const StateProvider = ({ children }) => {
     setCreateNewTask,
     fetchFunc,
     error,
-    setError
+    setError,
+    fixPage,
+    setFixPage
   };
 
   return (

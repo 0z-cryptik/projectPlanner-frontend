@@ -1,5 +1,6 @@
 import { useList } from "../../../hooks/stateProvider";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { HiMiniSquaresPlus } from "react-icons/hi2";
 
 export const CreateNewProjectButton = () => {
   const { setCreatingNewProject } = useList();
@@ -27,12 +28,14 @@ export const SideBarNewProjectButton = () => {
       onClick={() => {
         setCreatingNewProject(true);
       }}
-      className="flex flex-row mt-5 text-[#ECA400]">
-      <IoAddCircleOutline
-        size={"1.4rem"}
-        className="mr-2"
-      />
-      Add Project
+      className="flex flex-row mt-5 text-green-600 text-sm pl-2">
+      <HiMiniSquaresPlus className="mr-2 mt-[0.1rem]" />
+      Add new project
     </button>
   );
 };
+
+/*<IoAddCircleOutline
+        size={"1.4rem"}
+        className="mr-2"
+      /> */

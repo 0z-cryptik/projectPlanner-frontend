@@ -8,7 +8,7 @@ export const SideBar = () => {
   const { user } = useList();
 
   return (
-    <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#605770] text-white fixed overflow-y-scroll">
+    <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#f4f4f6] text-black fixed overflow-y-scroll">
       <div className="">
         <Avatar user={user} />
         <p className="mx-auto w-fit">{user.name ? user.name : "User"}</p>
@@ -21,3 +21,5 @@ export const SideBar = () => {
     </nav>
   );
 };
+
+//#605770

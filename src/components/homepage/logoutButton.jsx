@@ -21,8 +21,8 @@ export const LogoutButton = () => {
     <center>
       <button
         onClick={clickHandler}
-        className="mt-2 text-sm text-orange-500">
-        logout
+        className="mt-2 text-sm text-red-500">
+        Logout
       </button>
     </center>
   );

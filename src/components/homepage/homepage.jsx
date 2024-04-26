@@ -8,35 +8,22 @@ import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
 
 export const Homepage = () => {
-  const { user, projects, creatingNewProject, error, setError, setUser, setProjects } =
-    useList();
+  const { user, projects, creatingNewProject, error, fixPage } = useList();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
-      const checkLoggedInUser = async () => {
-        try {
-          const res = await fetch("/api/user/check");
-          const response = await res.json();
-          if (response.success) {
-            setUser(response.user);
-            setProjects(response.user.projects)
-          } else {
-            navigate("/login");
-          }
-        } catch (err) {
-          navigate("/login");
-        }
-      };
-
-      checkLoggedInUser();
+      navigate("/login");
     }
   }, []);
 
   if (user) {
     return (
-      <main className="w-screen h-screen flex flex-row">
+      <main
+        className={`w-screen h-screen flex flex-row ${
+          fixPage && "fixed"
+        }`}>
         <SideBar />
         <section className="ml-[20%] w-full">
           {!creatingNewProject && projects.length === 0 && (
@@ -50,5 +37,3 @@ export const Homepage = () => {
     );
   }
 };
-
-//find a technology that generates random avatars and use those for dp

@@ -2,7 +2,7 @@ import { useList } from "../../../hooks/stateProvider";
 import { TaskForm } from "./tasks/newTaskForm";
 import { CreateTaskButton } from "./tasks/createTaskButton";
 import { TaskList } from "./tasks/taskList";
-import { AbandonProjectWarning } from "./abandonProjectWarning";
+import { AbandonProjectWarning } from "../../warnings/abandonProjectWarning";
 import { Overlay } from "../../overlay/overlay";
 import { ProjectEditForm } from "./projectEditForm";
 import { AddSectionButton } from "../section/addSectionButton";
@@ -50,10 +50,7 @@ export const ProjectPage = () => {
   };
 
   return (
-    <section
-      className={`w-full h-full pt-5 px-[4rem] ${
-        showAbandonWarning && "fixed"
-      }`}>
+    <section className={`w-full h-full pt-5 px-[4rem] `}>
       {editProject ? (
         <ProjectEditForm
           project={projects[activeProject]}
@@ -67,7 +64,7 @@ export const ProjectPage = () => {
             onClick={() => {
               setEditProject(true);
             }}
-            className="text-3xl ml-[4rem] flex-grow">
+            className="text-3xl ml-[4rem] flex-grow cursor-text">
             {projects[activeProject].title}
           </h1>
 

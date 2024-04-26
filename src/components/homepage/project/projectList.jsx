@@ -10,14 +10,16 @@ export const ProjectList = () => {
         return (
           <div
             key={i}
-            className={`mt-3 cursor-pointer flex flex-row text-sm p-2 ${
-              activeProject === i ? "bg-[#B2B1CF] text-black rounded-xl" : ""
+            className={`mt-3 cursor-pointer flex flex-row text-sm p-2 whitespace-nowrap ${
+              activeProject === i && "bg-[#cbcbd4] text-black rounded-xl"
             }`}
             onClick={() => {
               setActiveProject(i);
             }}>
             <LiaProjectDiagramSolid className="mt-1 mr-3" />
-            <p className="w-1/2">{project.title}</p>
+            <p className="w-[80%] text-ellipsis overflow-clip">
+              {project.title}
+            </p>
           </div>
         );
       })}

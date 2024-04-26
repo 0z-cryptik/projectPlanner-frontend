@@ -49,7 +49,7 @@ export const EditSectionForm = ({ section, hideForm }) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="border w-[62%] p-2 flex flex-row gap-x-2">
+      className="border w-[90%] p-2 flex flex-row gap-x-2">
       <input
         className="flex-grow border-r outline-none"
         type="text"

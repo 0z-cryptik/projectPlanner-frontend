@@ -1,8 +1,14 @@
 import { IoIosWarning } from "react-icons/io";
-import { useList } from "../../../hooks/stateProvider";
+import { useList } from "../../hooks/stateProvider";
+import { useEffect } from "react";
 
 export const AbandonProjectWarning = ({ projectId, cancelHandler }) => {
-  const { fetchFunc, setError } = useList();
+  const { fetchFunc, setError, setFixPage } = useList();
+
+  useEffect(() => {
+    setFixPage(true);
+    return () => setFixPage(false);
+  }, []);
 
   const abandonProject = async () => {
     try {
@@ -26,13 +32,13 @@ export const AbandonProjectWarning = ({ projectId, cancelHandler }) => {
   };
 
   return (
-    <div className="w-[27%] absolute z-20 bg-white border right-[53.5%] p-5 rounded-xl top-[40%]">
+    <div className="w-[27%] absolute z-20 bg-white border right-[35.5%] p-5 rounded-xl top-[40%]">
       <IoIosWarning
         color="#FFBF00"
         size={"2rem"}
         className="mx-auto"
       />
-      <p className="mt-5">
+      <p className="mt-5 text-center">
         Are you sure you want to abandon this project?
       </p>
       <div className="w-fit mx-auto mt-5">

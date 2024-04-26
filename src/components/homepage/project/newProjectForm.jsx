@@ -74,7 +74,7 @@ export const CreateNewProjectForm = () => {
             className="bg-green-500 p-2 rounded-xl text-white"
             type="submit"
             value="submit">
-            Add task
+            Add project
           </button>
         </div>
       </form>

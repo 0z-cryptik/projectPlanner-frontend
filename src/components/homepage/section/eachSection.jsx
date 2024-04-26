@@ -4,7 +4,7 @@ import { TaskForm } from "../project/tasks/newTaskForm";
 import { CreateTaskButton } from "../project/tasks/createTaskButton";
 import { useList } from "../../../hooks/stateProvider";
 import { EditSectionForm } from "./editSectionForm";
-import { DeleteWarning } from "./deleteWarning";
+import { DeleteWarning } from "../../warnings/sectionDeleteWarning";
 import { Overlay } from "../../overlay/overlay";
 import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
@@ -68,6 +68,7 @@ export const EachSection = ({ section }) => {
               clickHandler={() => {
                 setShowOptions(!showOptions);
               }}
+              optionsOpen={showOptions}
             />
           )}
         </div>

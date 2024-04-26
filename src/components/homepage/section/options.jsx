@@ -1,10 +1,14 @@
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 
-export const Options = ({ editButtonHandler, deleteButtonHandler, showOptions }) => {
+export const Options = ({
+  editButtonHandler,
+  deleteButtonHandler,
+  showOptions
+}) => {
   return (
     <div
-      className={`border rounded-xl w-fit p-3 absolute bg-white z-20 left-[63%] ${
+      className={`border rounded-xl w-fit p-3 absolute bg-gray-100 z-20 left-[83.5%] mt-5 ${
         !showOptions && "hidden"
       }`}>
       <button
