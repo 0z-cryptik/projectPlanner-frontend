@@ -48,7 +48,7 @@ export const EachTask = ({ task }) => {
       />
 
       <div className="flex-grow">
-        <p className="flex-grow">{task.title}</p>
+        <p className="flex-grow text-sm lg:text-base">{task.title}</p>
         {task.dueDate && <DueDate task={task} />}
       </div>
       {showOptions && (

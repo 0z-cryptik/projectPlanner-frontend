@@ -60,7 +60,7 @@ export const EachSection = ({ section }) => {
 
   return (
     <section className="mt-7">
-      <div className="text-xl ml-[4rem]">
+      <div className="text-xl lg:ml-[4rem] ml-6">
         <div className="flex flex-row">
           {!editSection && (
             <SectionHeader

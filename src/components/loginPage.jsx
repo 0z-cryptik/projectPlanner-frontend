@@ -62,9 +62,9 @@ export const LoginPage = () => {
 
   return (
     <main className="w-screen h-screen flex flex-col items-center justify-center">
-      <h1 className="text-xl font-bold">Login</h1>
+      <h1 className="text-xl font-bold mb-4">Sign In</h1>
       <form
-        className="flex flex-col border w-[25%] p-5"
+        className="flex flex-col border lg:w-[25%] p-5"
         onSubmit={submitHandler}>
         <label htmlFor="email">email:</label>
         <input
@@ -92,10 +92,10 @@ export const LoginPage = () => {
           id="submit"
           type="submit"
           value="submit">
-          login
+          sign in
         </button>
       </form>
-      <p>
+      <p className="mt-3">
         Don't have an account yet?{" "}
         <a
           href="/signup"

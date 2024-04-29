@@ -6,9 +6,17 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
+import { GoSidebarCollapse } from "react-icons/go";
 
 export const Homepage = () => {
-  const { user, projects, creatingNewProject, error, fixPage } = useList();
+  const {
+    user,
+    projects,
+    activeProject,
+    creatingNewProject,
+    error,
+    fixPage
+  } = useList();
 
   const navigate = useNavigate();
 
@@ -20,20 +28,22 @@ export const Homepage = () => {
 
   if (user) {
     return (
-      <main
-        className={`w-screen h-screen flex flex-row ${
-          fixPage && "fixed"
-        }`}>
-        <SideBar />
-        <section className="ml-[20%] w-full">
-          {!creatingNewProject && projects.length === 0 && (
-            <CreateNewProjectButton />
-          )}
-          {creatingNewProject && <CreateNewProjectForm />}
-          {!creatingNewProject && projects.length > 0 && <ProjectPage />}
-        </section>
-        {error && <ErrorFlashMessage message={error} />}
-      </main>
+      <>
+        <main
+          className={`w-screen h-screen flex flex-row ${
+            fixPage && "fixed"
+          }`}>
+          <SideBar />
+          <section className="lg:ml-[20%] w-full">
+            {!creatingNewProject && projects.length === 0 && (
+              <CreateNewProjectButton />
+            )}
+            {creatingNewProject && <CreateNewProjectForm />}
+            {!creatingNewProject && projects.length > 0 && <ProjectPage />}
+          </section>
+          {error && <ErrorFlashMessage message={error} />}
+        </main>
+      </>
     );
   }
 };
