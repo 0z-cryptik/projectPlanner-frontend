@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
 import { FaCircleCheck } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
-import { ThreeDots } from "react-loader-spinner";
 import { ProjectEditLoader } from "../../loaders/projectEditLoader";
 
 export const ProjectEditForm = ({ project, cancelHandler }) => {
@@ -55,7 +54,7 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
       className="border-b flex flex-row pb-5"
       onSubmit={submitHandler}>
       <input
-        className="w-full outline-none text-3xl ml-[4rem]"
+        className="w-full outline-none lg:text-3xl ml-[4rem]"
         type="text"
         name="title"
         placeholder="Task name"

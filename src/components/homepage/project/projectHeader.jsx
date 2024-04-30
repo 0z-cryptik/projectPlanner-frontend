@@ -4,7 +4,7 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import { GoSidebarCollapse } from "react-icons/go";
 
 export const ProjectHeader = ({ editHandler, deleteHandler }) => {
-  const { projects, activeProject } = useList();
+  const { projects, activeProject, setShowMenu } = useList();
 
   return (
     <>
@@ -23,12 +23,16 @@ export const ProjectHeader = ({ editHandler, deleteHandler }) => {
       </div>
 
       <div className="flex flex-row mt-2 lg:hidden text-gray-600">
-        <GoSidebarCollapse
-          className="mx-3"
-          size={"1.5rem"}
-        />
-
-        <p className="text-sm mt-1">My Projects /</p>
+        <button className="flex flex-row"
+          onClick={() => {
+            setShowMenu(true);
+          }}>
+          <GoSidebarCollapse
+            className="mx-3"
+            size={"1.5rem"}
+          />
+          <p className="text-sm mt-1">My Projects /</p>
+        </button>
 
         <p className="text-center flex-grow text-black font-bold text-lg">
           {projects[activeProject].title}

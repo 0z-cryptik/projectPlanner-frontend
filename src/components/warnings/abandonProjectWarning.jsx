@@ -32,7 +32,7 @@ export const AbandonProjectWarning = ({ projectId, cancelHandler }) => {
   };
 
   return (
-    <div className="w-[27%] absolute z-20 bg-white border right-[35.5%] p-5 rounded-xl top-[40%]">
+    <div className="lg:w-[27%] absolute z-20 text-xs lg:text-base bg-white border max-md:left-[13%] lg:right-[35.5%] p-5 rounded-xl top-[40%]">
       <IoIosWarning
         color="#FFBF00"
         size={"2rem"}

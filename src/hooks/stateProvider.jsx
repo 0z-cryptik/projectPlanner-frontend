@@ -15,6 +15,7 @@ export const StateProvider = ({ children }) => {
   const [activeProject, setActiveProject] = useState(0);
   const [error, setError] = useState("");
   const [fixPage, setFixPage] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {
@@ -53,7 +54,9 @@ export const StateProvider = ({ children }) => {
     error,
     setError,
     fixPage,
-    setFixPage
+    setFixPage,
+    showMenu,
+    setShowMenu
   };
 
   return (
