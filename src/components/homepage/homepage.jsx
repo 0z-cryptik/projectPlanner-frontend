@@ -7,16 +7,11 @@ import { useEffect } from "react";
 import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
 import { GoSidebarCollapse } from "react-icons/go";
+import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {
-  const {
-    user,
-    projects,
-    activeProject,
-    creatingNewProject,
-    error,
-    fixPage
-  } = useList();
+  const { user, projects, showMenu, creatingNewProject, error, fixPage } =
+    useList();
 
   const navigate = useNavigate();
 
@@ -42,6 +37,7 @@ export const Homepage = () => {
             {!creatingNewProject && projects.length > 0 && <ProjectPage />}
           </section>
           {error && <ErrorFlashMessage message={error} />}
+          {showMenu && <Overlay deem />}
         </main>
       </>
     );

@@ -23,9 +23,16 @@ export const SideBar = () => {
       </nav>
 
       <nav
-        className={`w-3/5 h-full border-r px-3 py-4 bg-[#f4f4f6] text-black fixed overflow-y-scroll lg:hidden ${
-          !showMenu && "hidden"
-        }`}>
+        style={{
+          transform: `${
+            showMenu
+              ? `translate3d(0vw, 0, 0)`
+              : "translate3d(-60vw, 0, 0)"
+          }`,
+          zIndex: "30",
+          transition: `transform .15s linear`
+        }}
+        className={`w-3/5 h-full border-r px-3 py-4 bg-[#f4f4f6] text-black fixed overflow-y-scroll lg:hidden `}>
         <div className="flex items-end justify-end mb-3">
           <button
             onClick={() => {

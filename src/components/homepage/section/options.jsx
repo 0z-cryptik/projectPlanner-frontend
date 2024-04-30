@@ -8,7 +8,7 @@ export const Options = ({
 }) => {
   return (
     <div
-      className={`border rounded-xl w-fit p-3 absolute bg-gray-100 z-20 left-[83.5%] mt-5 ${
+      className={`border rounded-xl w-fit p-3 absolute bg-gray-100 z-20 text-sm lg:text-base left-[75%] lg:left-[83.5%] mt-5 ${
         !showOptions && "hidden"
       }`}>
       <button
