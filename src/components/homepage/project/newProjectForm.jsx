@@ -4,7 +4,7 @@ import { ProjectLoader } from "../../loaders/projectLoader";
 
 export const CreateNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
   const {
     creatingNewProject,
     setCreatingNewProject,

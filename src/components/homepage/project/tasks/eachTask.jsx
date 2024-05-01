@@ -17,7 +17,7 @@ export const EachTask = ({ task }) => {
     try {
       fetchFunc("/api/task/delete?_method=DELETE", { taskId: task._id });
     } catch (err) {
-      setError('There was an error, please try again')
+      setError("There was an error, please try again");
       console.error(err);
     }
   };
@@ -78,9 +78,6 @@ export const EachTask = ({ task }) => {
           <Overlay deem={true} />
         </>
       )}
-
-      
-      
     </div>
   );
 };

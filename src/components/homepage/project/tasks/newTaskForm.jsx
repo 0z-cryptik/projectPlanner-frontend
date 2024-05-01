@@ -16,12 +16,12 @@ export const TaskForm = ({ submitHandler, hideForm }) => {
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault()
+        e.preventDefault();
         submitHandler(e);
         setTitle("");
         setDate(null);
       }}
-      className="mt-4 ml-[4rem] w-[58%] border rounded-xl p-3">
+      className="mt-4 ml-6 lg:ml-[4rem] w-[86%] lg:w-[58%] text-sm lg:text-base border rounded-xl p-3">
       <span className="flex flex-row border-b mb-3">
         <input
           className="outline-none w-3/4 h-[2rem]"

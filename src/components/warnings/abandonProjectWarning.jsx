@@ -2,7 +2,7 @@ import { IoIosWarning } from "react-icons/io";
 import { useList } from "../../hooks/stateProvider";
 import { useEffect } from "react";
 
-export const AbandonProjectWarning = ({ projectId, cancelHandler }) => {
+export const AbandonProjectWarning = ({ projectId, cancelHandler = f => f }) => {
   const { fetchFunc, setError, setFixPage } = useList();
 
   useEffect(() => {
@@ -18,12 +18,12 @@ export const AbandonProjectWarning = ({ projectId, cancelHandler }) => {
           projectId
         }
       );
-      if (success) {
+      if (!success) {
         setError(
           "There was an error deleting this project, please try again"
         );
-        cancelHandler();
       }
+      cancelHandler();
     } catch (err) {
       setError(
         "There was an error deleting this project, please try again"
