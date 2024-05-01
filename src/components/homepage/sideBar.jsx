@@ -1,6 +1,9 @@
 import { useList } from "../../hooks/stateProvider";
 import { ProjectList } from "./project/projectList";
-import { SideBarNewProjectButton } from "./project/newProjectButton";
+import {
+  SideBarNewProjectButton,
+  PhoneSideBarNewProjectButton
+} from "./project/newProjectButton";
 import { LogoutButton } from "./logoutButton";
 import { Avatar } from "../avatar/avatar";
 import { GoSidebarExpand } from "react-icons/go";
@@ -50,7 +53,7 @@ export const SideBar = () => {
         </div>
         <p className="font-bold mt-5">My Projects</p>
         <ProjectList />
-        <SideBarNewProjectButton />
+        <PhoneSideBarNewProjectButton />
       </nav>
     </>
   );

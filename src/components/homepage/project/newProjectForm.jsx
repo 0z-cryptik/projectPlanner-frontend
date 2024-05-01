@@ -4,16 +4,30 @@ import { ProjectLoader } from "../../loaders/projectLoader";
 
 export const CreateNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
-  const [showLoader, setShowLoader] = useState(false);
-  const { setCreatingNewProject, fetchFunc, setActiveProject, setError } =
-    useList();
+  const [showLoader, setShowLoader] = useState(true);
+  const {
+    creatingNewProject,
+    setCreatingNewProject,
+    fetchFunc,
+    setActiveProject,
+    setError,
+    showPhoneForm,
+    setShowPhoneForm,
+    setShowMenu
+  } = useList();
 
   const projectNameHandler = (e) => {
     setProjectName(e.target.value);
   };
 
   const hideForm = () => {
-    setCreatingNewProject(false);
+    if (creatingNewProject) {
+      setCreatingNewProject(false);
+    }
+
+    if (showPhoneForm) {
+      setShowPhoneForm(false);
+    }
   };
 
   const submitHandler = async (e) => {
@@ -28,7 +42,15 @@ export const CreateNewProjectForm = () => {
 
       if (success) {
         setShowLoader(false);
-        setCreatingNewProject(false);
+        if (creatingNewProject) {
+          setCreatingNewProject(false);
+        }
+
+        if (showPhoneForm) {
+          setShowPhoneForm(false);
+          setShowMenu(false);
+        }
+
         setActiveProject(0);
       } else {
         setError(
@@ -49,9 +71,9 @@ export const CreateNewProjectForm = () => {
   }
 
   return (
-    <section className="w-full h-full flex items-center justify-center">
+    <section className="w-full lg:h-full lg:flex lg:items-center lg:justify-center mt-5 lg:mt-0">
       <form
-        className="border w-1/2 p-4 rounded-xl"
+        className="border lg:w-1/2 p-4 rounded-xl text-sm lg:text-base"
         onSubmit={submitHandler}>
         <input
           className="w-full outline-none border-b mb-3"

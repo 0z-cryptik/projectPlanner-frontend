@@ -26,7 +26,7 @@ export const TaskForm = ({ submitHandler, hideForm }) => {
         <input
           className="outline-none w-3/4 h-[2rem]"
           type="text"
-          placeholder="enter subtask title"
+          placeholder="enter task title"
           name="title"
           value={title}
           onChange={titleChangeHandler}
