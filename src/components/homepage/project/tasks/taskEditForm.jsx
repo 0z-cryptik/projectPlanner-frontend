@@ -52,7 +52,7 @@ export const TaskEditForm = ({ task, hideForm }) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="mt-4 w-[58%] border rounded-xl p-3">
+      className="mt-4 w-[90%] lg:w-[58%] text-xs lg:text-base border rounded-xl p-3">
       <span className="flex flex-row border-b mb-3">
         <input
           className="outline-none w-3/4 h-[2rem]"

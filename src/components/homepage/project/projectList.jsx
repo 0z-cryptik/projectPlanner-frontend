@@ -2,7 +2,13 @@ import { useList } from "../../../hooks/stateProvider";
 import { LiaProjectDiagramSolid } from "react-icons/lia";
 
 export const ProjectList = () => {
-  const { projects, activeProject, setActiveProject } = useList();
+  const {
+    projects,
+    activeProject,
+    setActiveProject,
+    showMenu,
+    setShowMenu
+  } = useList();
 
   return (
     <>
@@ -14,6 +20,9 @@ export const ProjectList = () => {
               activeProject === i && "bg-[#cbcbd4] text-black rounded-xl"
             }`}
             onClick={() => {
+              if (showMenu) {
+                setShowMenu(false);
+              }
               setActiveProject(i);
             }}>
             <LiaProjectDiagramSolid className="mt-1 mr-3" />

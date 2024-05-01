@@ -23,7 +23,8 @@ export const ProjectHeader = ({ editHandler, deleteHandler }) => {
       </div>
 
       <div className="flex flex-row mt-2 lg:hidden text-gray-600">
-        <button className="flex flex-row"
+        <button
+          className="flex flex-row"
           onClick={() => {
             setShowMenu(true);
           }}>
@@ -31,10 +32,10 @@ export const ProjectHeader = ({ editHandler, deleteHandler }) => {
             className="mx-3"
             size={"1.5rem"}
           />
-          <p className="text-sm mt-1">My Projects /</p>
+          <p className="text-sm mt-1 whitespace-nowrap">My Projects /</p>
         </button>
 
-        <p className="text-center flex-grow text-black font-bold text-lg">
+        <p className="text-center flex-grow text-black font-bold text-lg whitespace-nowrap text-ellipsis overflow-clip">
           {projects[activeProject].title}
         </p>
 
