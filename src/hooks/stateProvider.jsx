@@ -17,6 +17,7 @@ export const StateProvider = ({ children }) => {
   const [fixPage, setFixPage] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showPhoneForm, setShowPhoneForm] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {
@@ -59,7 +60,9 @@ export const StateProvider = ({ children }) => {
     showMenu,
     setShowMenu,
     showPhoneForm,
-    setShowPhoneForm
+    setShowPhoneForm,
+    darkMode,
+    setDarkMode
   };
 
   return (

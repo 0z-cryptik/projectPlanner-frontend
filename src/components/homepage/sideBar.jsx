@@ -7,6 +7,7 @@ import {
 import { LogoutButton } from "./logoutButton";
 import { Avatar } from "../avatar/avatar";
 import { GoSidebarExpand } from "react-icons/go";
+import { ChangeThemeButton } from "./changeThemeButton";
 
 export const SideBar = () => {
   const { user, showMenu, setShowMenu } = useList();
@@ -18,6 +19,7 @@ export const SideBar = () => {
           <Avatar user={user} />
           <p className="mx-auto w-fit">{user.name ? user.name : "User"}</p>
           <p className="mx-auto w-fit text-sm">{user.email}</p>
+          <ChangeThemeButton />
           <LogoutButton />
         </div>
         <p className="font-bold mt-5">My Projects</p>
