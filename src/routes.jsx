@@ -4,6 +4,7 @@ import { SignUpPage } from "./components/signUpPage";
 import { LoginPage } from "./components/loginPage";
 import { EnterName } from "./components/enterName";
 import { Homepage } from "./components/homepage/homepage";
+import { LandingPage } from "./components/landingPage/landingPage";
 
 export const RoutedApp = () => {
   return (
@@ -23,6 +24,10 @@ export const RoutedApp = () => {
       <Route
         path="/enterName"
         element={<EnterName />}
+      />
+      <Route
+        path="/landingPage"
+        element={<LandingPage />}
       />
     </Routes>
   );

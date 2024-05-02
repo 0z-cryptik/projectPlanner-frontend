@@ -19,7 +19,7 @@ export const EachTask = ({ task }) => {
     new Audio(soundEffect).play();
   };
 
-  const completeOrDelete = () => {
+  const completeTask = () => {
     setPopAndFade(true);
     setTimeout(() => {
       try {
@@ -31,6 +31,15 @@ export const EachTask = ({ task }) => {
         console.error(err);
       }
     }, 200);
+  };
+
+  const deleteTask = () => {
+    try {
+      fetchFunc("/api/task/delete?_method=DELETE", { taskId: task._id });
+    } catch (err) {
+      setError("There was an error, please try again");
+      console.error(err);
+    }
   };
 
   if (editTask) {
@@ -56,7 +65,7 @@ export const EachTask = ({ task }) => {
         popAndFade && "growAndFade"
       }`}>
       <CheckMarkButton
-        clickFunc={completeOrDelete}
+        clickFunc={completeTask}
         additionalStyling={`${!task.dueDate && "mb-2"}`}
       />
 
@@ -84,7 +93,7 @@ export const EachTask = ({ task }) => {
               setShowOptions(false);
             }}
             deleteHandler={() => {
-              completeOrDelete();
+              deleteTask();
               setShowDeleteWarning(false);
             }}
           />
