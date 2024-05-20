@@ -17,7 +17,7 @@ export const LandingPage = () => {
         </motion.button>
       </nav>
 
-      <section className="flex flex-col mt-[5rem] lg:mt-[3rem] lg:order-3">
+      <section className="flex flex-col mt-[5rem] md:mt-[3rem] lg:order-3">
         <div className="text-center flex flex-col items-center max-md:order-2 justify-center">
           <h1 className="text-4xl md:text-6xl md:w-[70%] font-bold mt-[4rem] lg:mt-[1rem] max-md:px-3">
             Organize your work and projects today
