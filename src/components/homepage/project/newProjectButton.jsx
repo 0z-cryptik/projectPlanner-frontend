@@ -22,11 +22,12 @@ export const CreateNewProjectButton = () => {
 };
 
 export const SideBarNewProjectButton = () => {
-  const { setCreatingNewProject } = useList();
+  const { setCreatingNewProject, creatingNewProject } = useList();
 
   return (
     <>
       <button
+        disabled={creatingNewProject ? true : false}
         onClick={() => {
           setCreatingNewProject(true);
         }}

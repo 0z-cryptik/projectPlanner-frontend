@@ -1,6 +1,6 @@
 import { useList } from "../../hooks/stateProvider";
 
-export const Overlay = ({ clickHandler = f => f, deem = false }) => {
+export const Overlay = ({ clickHandler = (f) => f, deem = false }) => {
   const { showMenu, setShowMenu } = useList();
 
   return (

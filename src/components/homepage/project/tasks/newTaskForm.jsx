@@ -24,7 +24,7 @@ export const TaskForm = ({ submitHandler, hideForm }) => {
       className="mt-4 ml-6 lg:ml-[4rem] w-[86%] lg:w-[58%] text-sm lg:text-base border rounded-xl p-3">
       <span className="flex flex-row border-b mb-3">
         <input
-          className="outline-none w-3/4 h-[2rem]"
+          className="outline-none w-3/4 h-[2rem] bg-transparent"
           type="text"
           placeholder="enter task title"
           name="title"

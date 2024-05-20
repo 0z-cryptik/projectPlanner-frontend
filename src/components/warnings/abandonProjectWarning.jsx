@@ -1,9 +1,31 @@
 import { IoIosWarning } from "react-icons/io";
 import { useList } from "../../hooks/stateProvider";
-import { useEffect } from "react";
+import { useEffect, useState, createRef } from "react";
+import { motion } from "framer-motion";
 
-export const AbandonProjectWarning = ({ projectId, cancelHandler = f => f }) => {
+
+export const AbandonProjectWarning = ({
+  projectId,
+  cancelHandler = (f) => f
+}) => {
   const { fetchFunc, setError, setFixPage } = useList();
+
+  const [topPosition, setTopPosition] = useState(0);
+  const fixedElementRef = createRef();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowHeight = window.innerHeight;
+      const fixedElementHeight = fixedElementRef.current.clientHeight;
+      const newTopPosition = (windowHeight - fixedElementHeight) / 2;
+      setTopPosition(newTopPosition);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     setFixPage(true);
@@ -32,7 +54,12 @@ export const AbandonProjectWarning = ({ projectId, cancelHandler = f => f }) => 
   };
 
   return (
-    <div className="max-md:w-[70%] md:w-[40%] lg:w-[27%] absolute z-20 text-xs lg:text-base bg-white border max-md:left-[15%] max-lg:left-[30%] lg:right-[36.5%] top-[40%] p-5 rounded-xl text-black">
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      ref={fixedElementRef}
+      style={{ top: `${topPosition}px` }}
+      className="max-md:w-[70%] md:w-[40%] lg:w-[27%] absolute z-20 text-xs lg:text-base bg-white border max-md:left-[15%] max-lg:left-[30%] lg:right-[36.5%] p-5 rounded-xl text-black">
       <IoIosWarning
         color="#FFBF00"
         size={"2rem"}
@@ -53,6 +80,6 @@ export const AbandonProjectWarning = ({ projectId, cancelHandler = f => f }) => 
           Yes
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
