@@ -7,10 +7,8 @@ import { Overlay } from "../../overlay/overlay";
 import { ProjectEditForm } from "./projectEditForm";
 import { AddSectionButton } from "../section/addSectionButton";
 import { SectionList } from "../section/sectionList";
-import { RiDeleteBin7Fill } from "react-icons/ri";
 import { useState } from "react";
 import { TaskLoader } from "../../loaders/taskLoader";
-import { CiEdit } from "react-icons/ci";
 import { ProjectHeader } from "./projectHeader";
 
 export const ProjectPage = () => {

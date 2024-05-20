@@ -1,18 +1,21 @@
 import { PiYinYangFill } from "react-icons/pi";
 import { useList } from "../../hooks/stateProvider";
+import { motion } from "framer-motion";
 
 export const ChangeThemeButton = () => {
-  const { darkMode, setDarkMode } = useList();
+  const { darkMode, setDarkMode, creatingNewProject } = useList();
 
   return (
     <center>
-      <button
+      <motion.button
         onClick={() => {
           setDarkMode(!darkMode);
         }}
-        className="mt-2">
+        whileTap={{ rotate: 180 }}
+        className="mt-2"
+        disabled={creatingNewProject ? true : false}>
         <PiYinYangFill size={"1.5rem"} />
-      </button>
+      </motion.button>
     </center>
   );
 };

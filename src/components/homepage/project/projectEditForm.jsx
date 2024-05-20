@@ -54,7 +54,7 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
       className="border-b flex flex-row pb-5"
       onSubmit={submitHandler}>
       <input
-        className="w-full outline-none lg:text-3xl ml-[4rem]"
+        className="w-full outline-none lg:text-3xl ml-[4rem] bg-transparent"
         type="text"
         name="title"
         placeholder="Task name"

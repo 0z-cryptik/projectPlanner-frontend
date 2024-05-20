@@ -25,7 +25,7 @@ export const Homepage = () => {
     return (
       <>
         <main
-          className={`w-screen h-screen flex flex-row ${darkMode && 'bg-black text-white'} ${
+          className={`w-screen min-h-screen flex flex-row ${darkMode && 'bg-black text-white'} ${
             fixPage && "fixed"
           }`}>
           <SideBar />

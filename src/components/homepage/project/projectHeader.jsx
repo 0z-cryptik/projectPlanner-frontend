@@ -4,7 +4,7 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import { GoSidebarCollapse } from "react-icons/go";
 
 export const ProjectHeader = ({ editHandler, deleteHandler }) => {
-  const { projects, activeProject, setShowMenu } = useList();
+  const { projects, activeProject, setShowMenu, darkMode } = useList();
 
   return (
     <>
@@ -35,18 +35,21 @@ export const ProjectHeader = ({ editHandler, deleteHandler }) => {
           <p className="text-sm mt-1 whitespace-nowrap">My Projects /</p>
         </button>
 
-        <p className="text-center flex-grow text-black font-bold text-lg whitespace-nowrap text-ellipsis overflow-clip">
+        <p
+          className={`text-center flex-grow ${
+            darkMode ? "text-white" : "text-black"
+          } font-bold text-lg whitespace-nowrap text-ellipsis overflow-clip`}>
           {projects[activeProject].title}
         </p>
 
         <button
           onClick={editHandler}
-          className="text-black mr-2">
+          className={`${darkMode ? 'text-white' : 'text-black'} mr-2`}>
           <CiEdit />
         </button>
         <button
           onClick={deleteHandler}
-          className="text-black mr-3">
+          className={`${darkMode ? 'text-white' : 'text-black'} mr-3`}>
           <RiDeleteBin7Fill />
         </button>
       </div>

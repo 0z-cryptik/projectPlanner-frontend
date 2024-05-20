@@ -7,7 +7,8 @@ export const ProjectList = () => {
     activeProject,
     setActiveProject,
     showMenu,
-    setShowMenu
+    setShowMenu,
+    creatingNewProject
   } = useList();
 
   return (
@@ -16,14 +17,18 @@ export const ProjectList = () => {
         return (
           <div
             key={i}
-            className={`mt-3 cursor-pointer flex flex-row text-sm p-2 whitespace-nowrap ${
+            className={`mt-3 ${
+              !creatingNewProject && "cursor-pointer"
+            } flex flex-row text-sm p-2 whitespace-nowrap ${
               activeProject === i && "bg-[#cbcbd4] text-black rounded-xl"
             }`}
             onClick={() => {
-              if (showMenu) {
-                setShowMenu(false);
+              if (!creatingNewProject) {
+                if (showMenu) {
+                  setShowMenu(false);
+                }
+                setActiveProject(i);
               }
-              setActiveProject(i);
             }}>
             <LiaProjectDiagramSolid className="mt-1 mr-3" />
             <p className="w-[80%] text-ellipsis overflow-clip">

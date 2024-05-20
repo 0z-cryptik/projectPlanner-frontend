@@ -11,7 +11,7 @@ export const DeleteWarning = ({ cancelHandler, deleteHandler }) => {
   }, []);
 
   return (
-    <div className="max-md:w-[70%] md:w-[40%] lg:w-[27%] absolute z-20 text-xs lg:text-base bg-white border max-md:left-[15%] max-lg:left-[30%] lg:right-[36.5%] top-[40%] p-5 rounded-xl">
+    <div className="max-md:w-[70%] md:w-[40%] lg:w-[27%] absolute z-20 text-xs lg:text-base bg-white text-black border max-md:left-[15%] max-lg:left-[30%] lg:right-[36.5%] top-[40%] p-5 rounded-xl">
       <IoIosWarning
         color="#FFBF00"
         size={"2rem"}
