@@ -42,7 +42,3 @@ export const LandingPage = () => {
     </main>
   );
 };
-
-/*<center className="mt-[5rem] lg:order-2">
-        
-      </center>*/
