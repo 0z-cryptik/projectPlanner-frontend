@@ -10,7 +10,7 @@ import { GoSidebarCollapse } from "react-icons/go";
 import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {
-  const { user, projects, showMenu, creatingNewProject, error, fixPage } =
+  const { user, projects, showMenu, creatingNewProject, error, fixPage, darkMode } =
     useList();
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export const Homepage = () => {
     return (
       <>
         <main
-          className={`w-screen h-screen flex flex-row ${
+          className={`w-screen h-screen flex flex-row ${darkMode && 'bg-black text-white'} ${
             fixPage && "fixed"
           }`}>
           <SideBar />

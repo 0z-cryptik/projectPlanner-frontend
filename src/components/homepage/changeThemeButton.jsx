@@ -10,9 +10,8 @@ export const ChangeThemeButton = () => {
         onClick={() => {
           setDarkMode(!darkMode);
         }}
-        className="p-1 border rounded-xl mt-3 text-sm flex flex-row hover:text-white hover:bg-black">
-        Change theme
-        <PiYinYangFill className="mt-[0.15rem] ml-1" />
+        className="mt-2">
+        <PiYinYangFill size={"1.5rem"} />
       </button>
     </center>
   );

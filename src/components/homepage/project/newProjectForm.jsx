@@ -76,7 +76,7 @@ export const CreateNewProjectForm = () => {
         className="border lg:w-1/2 p-4 rounded-xl text-sm lg:text-base"
         onSubmit={submitHandler}>
         <input
-          className="w-full outline-none border-b mb-3"
+          className="w-full outline-none border-b mb-3 bg-transparent"
           type="text"
           name="title"
           placeholder="Enter project name"

@@ -10,11 +10,14 @@ import { GoSidebarExpand } from "react-icons/go";
 import { ChangeThemeButton } from "./changeThemeButton";
 
 export const SideBar = () => {
-  const { user, showMenu, setShowMenu } = useList();
+  const { user, showMenu, setShowMenu, darkMode } = useList();
 
   return (
     <>
-      <nav className="w-1/5 h-full border-r px-3 py-4 bg-[#f4f4f6] text-black fixed overflow-y-scroll hidden lg:block">
+      <nav
+        className={`w-1/5 h-full border-r px-3 py-4 fixed overflow-y-scroll hidden lg:block ${
+          darkMode ? "bg-black text-white" : "bg-[#f4f4f6] text-black"
+        }`}>
         <div>
           <Avatar user={user} />
           <p className="mx-auto w-fit">{user.name ? user.name : "User"}</p>
@@ -37,7 +40,9 @@ export const SideBar = () => {
           zIndex: "30",
           transition: `transform .15s linear`
         }}
-        className={`w-3/5 h-full border-r px-3 py-4 bg-[#f4f4f6] text-black fixed overflow-y-scroll lg:hidden `}>
+        className={`w-3/5 h-full border-r px-3 py-4 ${
+          darkMode ? "bg-black text-white" : "bg-[#f4f4f6] text-black"
+        } fixed overflow-y-scroll lg:hidden `}>
         <div className="flex items-end justify-end mb-3">
           <button
             onClick={() => {
@@ -51,6 +56,7 @@ export const SideBar = () => {
           <Avatar user={user} />
           <p className="mx-auto w-fit">{user.name ? user.name : "User"}</p>
           <p className="mx-auto w-fit text-sm">{user.email}</p>
+          <ChangeThemeButton />
           <LogoutButton />
         </div>
         <p className="font-bold mt-5">My Projects</p>
