@@ -5,6 +5,7 @@ import { LoginPage } from "./components/loginPage";
 import { EnterName } from "./components/enterName";
 import { Homepage } from "./components/homepage/homepage";
 import { LandingPage } from "./components/landingPage/landingPage";
+import { ShadCNPage } from "./components/shadCNTest/shadCN";
 
 export const RoutedApp = () => {
   return (
@@ -28,6 +29,10 @@ export const RoutedApp = () => {
       <Route
         path="/landingPage"
         element={<LandingPage />}
+      />
+      <Route
+        path="/shadcn"
+        element={<ShadCNPage />}
       />
     </Routes>
   );
