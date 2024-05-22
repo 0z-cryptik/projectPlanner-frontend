@@ -12,42 +12,11 @@ import { TaskLoader } from "../../loaders/taskLoader";
 import { ProjectHeader } from "./projectHeader";
 
 export const ProjectPage = () => {
-  const {
-    projects,
-    activeProject,
-    createNewTask,
-    setCreateNewTask,
-    fetchFunc,
-    setError
-  } = useList();
+  const { projects, activeProject, createNewTask, setCreateNewTask } =
+    useList();
 
   const [editProject, setEditProject] = useState(false);
   const [showAbandonWarning, setShowAbandonWarning] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
-
-  const submitFunc = async (e) => {
-    setShowLoader(true);
-    const form = new FormData(e.target);
-
-    const data2submit = {
-      title: form.get("title"),
-      parentProject: projects[activeProject]._id,
-      dueDate: form.get("date")
-    };
-
-    try {
-      const { success } = await fetchFunc("/api/task/create", data2submit);
-      if (success) {
-        setShowLoader(false);
-      } else {
-        setError("there was an error creating the task, please try again");
-        setShowLoader(false);
-      }
-    } catch (err) {
-      setError("there was an error creating the task, please try again");
-      setShowLoader(false);
-    }
-  };
 
   return (
     <section className={`w-full h-full pt-5 lg:px-[4rem]`}>
@@ -83,8 +52,8 @@ export const ProjectPage = () => {
 
       <>
         <TaskList tasks={projects[activeProject].tasks} />
-        {showLoader && <TaskLoader />}
-        {!createNewTask && !showLoader && (
+
+        {!createNewTask && (
           <CreateTaskButton
             clickHandler={() => {
               setCreateNewTask(true);
@@ -93,7 +62,6 @@ export const ProjectPage = () => {
         )}
         {createNewTask && (
           <TaskForm
-            submitHandler={submitFunc}
             hideForm={() => {
               setCreateNewTask(false);
             }}

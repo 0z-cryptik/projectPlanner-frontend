@@ -1,26 +1,53 @@
 import { useState } from "react";
 import { useList } from "../../../../hooks/stateProvider";
-import DateTimePicker from "react-datetime-picker";
-import "react-datetime-picker/dist/DateTimePicker.css";
-import "react-calendar/dist/Calendar.css";
-import "react-clock/dist/Clock.css";
+import { DatePicker } from "@/src/components/shadCNTest/datePicker";
+import { TaskLoader } from "@/src/components/loaders/taskLoader";
 
-export const TaskForm = ({ submitHandler, hideForm }) => {
+export const TaskForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
+  const [showLoader, setShowLoader] = useState(false);
+  const { projects, activeProject, setError, fetchFunc } = useList();
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
   };
 
+  const submitFunc = async (e) => {
+    e.preventDefault();
+    setShowLoader(true);
+    const form = new FormData(e.target);
+
+    const data2submit = {
+      title: form.get("title"),
+      parentProject: projects[activeProject]._id,
+      dueDate: date
+    };
+
+    try {
+      const { success } = await fetchFunc("/api/task/create", data2submit);
+      if (success) {
+        setShowLoader(false);
+      } else {
+        setError("there was an error creating the task, please try again");
+        setShowLoader(false);
+      }
+    } catch (err) {
+      setError("there was an error creating the task, please try again");
+      setShowLoader(false);
+    }
+
+    setTitle("");
+    setDate(null);
+  };
+
+  if (showLoader) {
+    return <TaskLoader />;
+  }
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        submitHandler(e);
-        setTitle("");
-        setDate(null);
-      }}
+      onSubmit={submitFunc}
       className="mt-4 ml-6 lg:ml-[4rem] w-[86%] lg:w-[58%] text-sm lg:text-base border rounded-xl p-3">
       <span className="flex flex-row border-b mb-3">
         <input
@@ -40,12 +67,9 @@ export const TaskForm = ({ submitHandler, hideForm }) => {
           htmlFor="datePicker">
           Due date:
         </label>
-        <DateTimePicker
-          value={date}
-          onChange={setDate}
-          id="datePicker"
-          minDate={new Date()}
-          name="date"
+        <DatePicker
+          date={date}
+          setDate={setDate}
         />
       </span>
       <div className="w-fit mx-auto mt-5">

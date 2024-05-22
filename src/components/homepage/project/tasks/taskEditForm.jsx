@@ -1,12 +1,9 @@
 import { useList } from "../../../../hooks/stateProvider";
-import DateTimePicker from "react-datetime-picker";
-import "react-datetime-picker/dist/DateTimePicker.css";
-import "react-calendar/dist/Calendar.css";
-import "react-clock/dist/Clock.css";
+import { DatePicker } from "@/src/components/shadCNTest/datePicker";
 import { useState } from "react";
 import { TaskLoader } from "../../../loaders/taskLoader";
 
-export const TaskEditForm = ({ task, hideForm }) => {
+export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
   const { fetchFunc, setError } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(new Date(task.dueDate));
@@ -24,7 +21,7 @@ export const TaskEditForm = ({ task, hideForm }) => {
 
     const data2submit = {
       title: form.get("title"),
-      dueDate: form.get("date"),
+      dueDate: date,
       Id: task._id
     };
 
@@ -35,6 +32,7 @@ export const TaskEditForm = ({ task, hideForm }) => {
       );
       if (success) {
         setShowLoader(false);
+        hideForm();
       } else {
         setError("there was an error editing the task, please try again");
         setShowLoader(false);
@@ -71,12 +69,9 @@ export const TaskEditForm = ({ task, hideForm }) => {
           htmlFor="datePicker">
           Due date/time:
         </label>
-        <DateTimePicker
-          value={date}
-          onChange={setDate}
-          id="datePicker"
-          minDate={new Date()}
-          name="date"
+        <DatePicker
+          date={date}
+          setDate={setDate}
         />
       </span>
       <div className="w-fit mx-auto mt-5">
