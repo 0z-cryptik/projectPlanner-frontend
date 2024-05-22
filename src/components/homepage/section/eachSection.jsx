@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TaskList } from "../project/tasks/taskList";
-import { TaskForm } from "../project/tasks/newTaskForm";
+import { TaskForm } from "./newTaskFormForSections";
 import { CreateTaskButton } from "../project/tasks/createTaskButton";
 import { useList } from "../../../hooks/stateProvider";
 import { EditSectionForm } from "./editSectionForm";
@@ -15,7 +15,6 @@ export const EachSection = ({ section }) => {
   const [editSection, setEditSection] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
   const { fetchFunc, setError } = useList();
 
   const deleteFunc = () => {
@@ -27,34 +26,6 @@ export const EachSection = ({ section }) => {
       setError(
         "An error occured while deleting your section, please try again"
       );
-    }
-  };
-
-  const submitFunc = async (e) => {
-    setShowLoader(true);
-    const form = new FormData(e.target);
-
-    const data2submit = {
-      title: form.get("title"),
-      parentSection: section._id,
-      dueDate: form.get("date")
-    };
-
-    try {
-      const { success } = await fetchFunc("/api/task/create", data2submit);
-
-      if (success) {
-        setShowLoader(false);
-      } else {
-        setError(
-          "An error occured while creating your task, please try again"
-        );
-      }
-    } catch (err) {
-      setError(
-        "An error occured while creating your task, please try again"
-      );
-      setShowLoader(false);
     }
   };
 
@@ -125,16 +96,14 @@ export const EachSection = ({ section }) => {
             }}
           />
         )}
-        {createTask && !showLoader && (
+        {createTask && (
           <TaskForm
             hideForm={() => {
               setCreateTask(false);
             }}
-            submitHandler={submitFunc}
+            parentSection={section._id}
           />
         )}
-
-        {showLoader && <TaskLoader />}
       </div>
     </section>
   );
