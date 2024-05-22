@@ -31,6 +31,7 @@ export const DatePicker = ({ date, setDate }) => {
           mode="single"
           selected={date}
           onSelect={setDate}
+          disabled={{ before: new Date() }}
           initialFocus
         />
       </PopoverContent>
