@@ -8,7 +8,7 @@ import { DeleteWarning } from "../../warnings/sectionDeleteWarning";
 import { Overlay } from "../../overlay/overlay";
 import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
-import { TaskLoader } from "../../loaders/taskLoader";
+import { motion } from "framer-motion";
 
 export const EachSection = ({ section }) => {
   const [createTask, setCreateTask] = useState(false);
@@ -30,7 +30,7 @@ export const EachSection = ({ section }) => {
   };
 
   return (
-    <section className="mt-7">
+    <motion.section layout className="mt-7">
       <div className="text-xl lg:ml-[4rem] ml-6">
         <div className="flex flex-row">
           {!editSection && (
@@ -105,6 +105,6 @@ export const EachSection = ({ section }) => {
           />
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };

@@ -7,6 +7,7 @@ import { Options } from "./options";
 import { DueDate } from "./dueDate";
 import { useList } from "../../../../hooks/stateProvider";
 import soundEffect from "../../../../soundEffects/tap-notification-180637.mp3";
+import { motion } from "framer-motion";
 
 export const EachTask = ({ task }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -54,7 +55,7 @@ export const EachTask = ({ task }) => {
   }
 
   return (
-    <div
+    <motion.div layout
       onMouseOver={() => {
         setShowOptions(true);
       }}
@@ -100,6 +101,6 @@ export const EachTask = ({ task }) => {
           <Overlay deem={true} />
         </>
       )}
-    </div>
+    </motion.div>
   );
 };

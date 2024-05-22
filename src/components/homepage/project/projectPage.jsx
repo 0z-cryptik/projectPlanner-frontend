@@ -8,8 +8,8 @@ import { ProjectEditForm } from "./projectEditForm";
 import { AddSectionButton } from "../section/addSectionButton";
 import { SectionList } from "../section/sectionList";
 import { useState } from "react";
-import { TaskLoader } from "../../loaders/taskLoader";
 import { ProjectHeader } from "./projectHeader";
+import { motion } from "framer-motion";
 
 export const ProjectPage = () => {
   const { projects, activeProject, createNewTask, setCreateNewTask } =

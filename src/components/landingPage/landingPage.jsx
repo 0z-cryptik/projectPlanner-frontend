@@ -7,7 +7,7 @@ export const LandingPage = () => {
     <main className="flex flex-col">
       <nav className="w-full flex flex-row p-3 lg:order-1">
         <p className="flex-grow text-2xl">Logo</p>
-        <button className="mr-3 hover:bg-gray-200 px-3 max-md:text-xs rounded-xl">
+        <button className="mr-3 hover:bg-gray-200 px-3 max-md:text-xs md:font-bold rounded-xl">
           Login
         </button>
         <motion.button
