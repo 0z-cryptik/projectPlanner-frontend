@@ -126,6 +126,16 @@ export const SignUpForm = () => {
           Sign Up
         </button>
       </form>
+      <p className="text-sm mt-5">
+        Already have an account?{" "}
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+          className="text-[#7a82e0]">
+          Login
+        </button>
+      </p>
       {error && errorMsg && <p>{errorMsg}</p>}
       {error && (
         <p>unexpected error, please refresh the page and try again</p>

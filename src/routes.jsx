@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import App from "./App";
 import { SignUpPage } from "./components/signup/signUpPage";
-import { LoginPage } from "./components/loginPage";
+import { LoginPage } from "./components/login/loginPage";
 import { Homepage } from "./components/homepage/homepage";
 import { LandingPage } from "./components/landingPage/landingPage";
 import { ShadCNPage } from "./components/shadCNTest/shadCN";
