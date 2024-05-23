@@ -65,10 +65,12 @@ export const SignUpForm = () => {
   };
 
   return (
-    <main className="h-screen w-1/2 flex flex-col items-center justify-center">
-      <h1 className="text-xl font-bold">Sign Up</h1>
+    <section className="lg:h-screen lg:w-1/2 flex flex-col items-center justify-center py-2 my-auto">
+      <h1 className="text-4xl max-lg:w-[60%] lg:text-xl font-semibold lg:font-bold">
+        Create your account
+      </h1>
       <form
-        className="flex flex-col w-[65%]"
+        className="flex flex-col w-[65%] max-lg:mt-[2.5rem]"
         onSubmit={submitHandler}>
         <label
           htmlFor="name"
@@ -76,7 +78,7 @@ export const SignUpForm = () => {
           Your name
         </label>
         <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#cdd6fe]"
+          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
           name="name"
           type="text"
           placeholder="Enter your name or nickname"
@@ -89,7 +91,7 @@ export const SignUpForm = () => {
           Email Address
         </label>
         <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#cdd6fe]"
+          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
           name="email"
           type="email"
           value={email}
@@ -102,7 +104,7 @@ export const SignUpForm = () => {
           Password
         </label>
         <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#cdd6fe]"
+          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
           name="password"
           type="password"
           value={password}
@@ -115,12 +117,12 @@ export const SignUpForm = () => {
           Confirm password
         </label>
         <input
-          className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#cdd6fe]"
+          className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
           type="password"
           required
         />
         <button
-          className="bg-[#7a82e0] hover:bg-[#cdd6fe] text-white hover:text-black h-[2.8rem] rounded"
+          className="bg-[#3c2048] lg:bg-[#7a82e0] lg:hover:bg-[#cdd6fe] text-white hover:text-black h-[2.8rem] rounded"
           type="submit"
           value="submit">
           Sign Up
@@ -132,7 +134,7 @@ export const SignUpForm = () => {
           onClick={() => {
             navigate("/login");
           }}
-          className="text-[#7a82e0]">
+          className="text-[#483ec3] lg:text-[#7a82e0]">
           Login
         </button>
       </p>
@@ -140,6 +142,6 @@ export const SignUpForm = () => {
       {error && (
         <p>unexpected error, please refresh the page and try again</p>
       )}
-    </main>
+    </section>
   );
 };

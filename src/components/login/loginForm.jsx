@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useList } from "../../hooks/stateProvider";
 import { useNavigate } from "react-router";
 import { LoginError } from "../errorPages/loginError";
-import { LoggingInUser } from "../loaders/loggingInUser";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const { setUser, setProjects, loggingInUser, setLoggingInUser } =
+  const { setUser, setProjects, setLoggingInUser } =
     useList();
 
   const navigate = useNavigate();
@@ -57,10 +56,10 @@ export const LoginForm = () => {
   };
 
   return (
-    <main className="h-screen w-1/2 flex flex-col items-center justify-center">
-      <h1 className="text-xl font-bold mb-4">Sign In</h1>
+    <main className="lg:h-screen lg:w-1/2 flex flex-col items-center justify-center py-2 my-auto order-2 lg:order-1">
+      <h1 className="text-4xl max-lg:w-[60%] lg:text-xl font-semibold lg:font-bold">Sign In</h1>
       <form
-        className="flex flex-col w-[65%]"
+        className="flex flex-col w-[65%] max-lg:mt-[2.5rem]"
         onSubmit={submitHandler}>
         <label
           className="mb-2 font-extralight"
@@ -68,7 +67,7 @@ export const LoginForm = () => {
           Email Address
         </label>
         <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#a6a6ff]"
+          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#f7c2dc] lg:outline-[#a6a6ff]"
           name="email"
           type="email"
           value={email}
@@ -82,7 +81,7 @@ export const LoginForm = () => {
           Password
         </label>
         <input
-          className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#a6a6ff]"
+          className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#f7c2dc] lg:outline-[#a6a6ff]"
           name="password"
           type="password"
           value={password}
@@ -90,7 +89,7 @@ export const LoginForm = () => {
           required
         />
         <button
-          className="bg-[#a6a6ff] hover:bg-[#b8b8fe] text-white hover:text-black h-[2.8rem] rounded"
+          className="bg-[#df5569] lg:bg-[#a6a6ff] lg:hover:bg-[#b8b8fe] text-white hover:text-black h-[2.8rem] rounded"
           id="submit"
           type="submit"
           value="submit">
@@ -103,7 +102,7 @@ export const LoginForm = () => {
           onClick={() => {
             navigate("/signup");
           }}
-          className="text-[#7a82e0]">
+          className="text-[#df5569] lg:text-[#7a82e0]">
           Sign up
         </button>
       </p>

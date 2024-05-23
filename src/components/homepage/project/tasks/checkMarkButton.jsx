@@ -10,7 +10,8 @@ export const CheckMarkButton = ({ clickFunc, additionalStyling = "" }) => {
         additionalStyling === "mb-2" ? "mb-2" : "mt-2"
       }`}
       onClick={clickFunc}
-      onMouseOver={() => {
+      onMouseOver={(e) => {
+        e.stopPropagation();
         setHover(true);
       }}
       onMouseLeave={() => {
