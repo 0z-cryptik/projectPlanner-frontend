@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
-import { GoSidebarCollapse } from "react-icons/go";
 import { Overlay } from "../overlay/overlay";
 
 export const Homepage = () => {

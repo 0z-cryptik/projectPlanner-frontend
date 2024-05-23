@@ -3,14 +3,23 @@ import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 
 export const LandingPage = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="flex flex-col">
       <nav className="w-full flex flex-row p-3 lg:order-1">
         <p className="flex-grow text-2xl">Logo</p>
-        <button className="mr-3 hover:bg-gray-200 px-3 max-md:text-xs md:font-bold rounded-xl">
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+          className="mr-3 hover:bg-gray-200 px-3 max-md:text-xs md:font-bold rounded-xl">
           Login
         </button>
         <motion.button
+          onClick={() => {
+            navigate("/signup");
+          }}
           whileHover={{ scale: 1.1 }}
           className="border rounded-xl bg-[#514ff1] text-white p-3 max-md:text-xs">
           Get started
@@ -28,6 +37,9 @@ export const LandingPage = () => {
           </p>
 
           <motion.button
+            onClick={() => {
+              navigate("/signup");
+            }}
             whileHover={{ scale: 1.1 }}
             className="border rounded-xl bg-[#514ff1] text-white p-3 text-lg mb-3 mt-6">
             Get started

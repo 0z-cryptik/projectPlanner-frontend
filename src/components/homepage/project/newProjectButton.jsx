@@ -2,12 +2,23 @@ import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
 import { HiMiniSquaresPlus } from "react-icons/hi2";
 import { CreateNewProjectForm } from "./newProjectForm";
+import { GoSidebarCollapse } from "react-icons/go";
 
 export const CreateNewProjectButton = () => {
-  const { setCreatingNewProject } = useList();
+  const { setCreatingNewProject, setShowMenu } = useList();
 
   return (
     <section className={`w-full h-full flex items-center justify-center`}>
+      <button
+        className="absolute left-0 top-2 lg:hidden"
+        onClick={() => {
+          setShowMenu(true);
+        }}>
+        <GoSidebarCollapse
+          className="mx-3"
+          size={"1.5rem"}
+        />
+      </button>
       <div>
         <button
           className="bg-orange-400 text-white px-3 rounded-xl"

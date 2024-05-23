@@ -18,6 +18,7 @@ export const StateProvider = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [processingUser, setProcessingUser] = useState(false);
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {
@@ -62,7 +63,9 @@ export const StateProvider = ({ children }) => {
     showPhoneForm,
     setShowPhoneForm,
     darkMode,
-    setDarkMode
+    setDarkMode,
+    processingUser,
+    setProcessingUser
   };
 
   return (

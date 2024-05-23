@@ -45,7 +45,7 @@ export const LoginPage = () => {
         setUser(loginResponse.user);
         setProjects(loginResponse.user.projects.reverse());
         setLoggingInUser(false);
-        navigate("/");
+        navigate("/workspace");
       } else {
         setError(true);
         setLoggingInUser(false);

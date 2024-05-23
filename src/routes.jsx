@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router";
 import App from "./App";
-import { SignUpPage } from "./components/signUpPage";
+import { SignUpPage } from "./components/signup/signUpPage";
 import { LoginPage } from "./components/loginPage";
-import { EnterName } from "./components/enterName";
 import { Homepage } from "./components/homepage/homepage";
 import { LandingPage } from "./components/landingPage/landingPage";
 import { ShadCNPage } from "./components/shadCNTest/shadCN";
@@ -12,7 +11,7 @@ export const RoutedApp = () => {
     <Routes>
       <Route
         path="/"
-        element={<Homepage />}
+        element={<LandingPage />}
       />
       <Route
         path="/signup"
@@ -23,12 +22,8 @@ export const RoutedApp = () => {
         element={<LoginPage />}
       />
       <Route
-        path="/enterName"
-        element={<EnterName />}
-      />
-      <Route
-        path="/landingPage"
-        element={<LandingPage />}
+        path="/workspace"
+        element={<Homepage />}
       />
       <Route
         path="/shadcn"
