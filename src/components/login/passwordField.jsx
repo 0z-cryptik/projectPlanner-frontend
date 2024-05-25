@@ -9,33 +9,30 @@ export const PasswordField = () => {
     setPassword(e.target.value);
   };
 
-  const showPasswordHandler = () => {
+  const showPasswordHandler = (e) => {
+    e.preventDefault();
     setShowPassword(!showPassword);
   };
 
   return (
-    <div className="flex flex-row border h-[2.8rem] mb-6 rounded active:outline">
+    <div className="flex flex-row border h-[2.8rem] mb-6 rounded max-lg:outline-[#f7c2dc] lg:border-[#73bfd9] lg:outline-none pl-1">
       <input
         className="h-full px-2 text-sm flex-grow outline-none"
         name="password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         value={password}
         onChange={passwordChangeHandler}
         required
       />
       {showPassword ? (
         <button
-          onClick={() => {
-            setShowPassword(!showPassword);
-          }}
+          onClick={showPasswordHandler}
           className="px-2">
           <IoMdEyeOff />
         </button>
       ) : (
         <button
-          onClick={() => {
-            setShowPassword(!showPassword);
-          }}
+          onClick={showPasswordHandler}
           className="px-2">
           <IoMdEye />
         </button>

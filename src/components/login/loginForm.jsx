@@ -65,7 +65,7 @@ export const LoginForm = () => {
           Email Address
         </label>
         <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#f7c2dc] lg:outline-[#73bfd9]"
+          className="border mb-3 rounded h-[2.8rem] px-2 text-sm max-lg:outline-[#f7c2dc] lg:border-[#73bfd9] lg:outline-none"
           name="email"
           type="email"
           value={email}
