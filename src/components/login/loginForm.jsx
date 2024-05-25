@@ -2,22 +2,18 @@ import { useState } from "react";
 import { useList } from "../../hooks/stateProvider";
 import { useNavigate } from "react-router";
 import { LoginError } from "../errorPages/loginError";
+import { PasswordField } from "./passwordField";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const { setUser, setProjects, setLoggingInUser } =
-    useList();
+
+  const { setUser, setProjects, setLoggingInUser } = useList();
 
   const navigate = useNavigate();
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
-  };
-
-  const passwordChangeHandler = (e) => {
-    setPassword(e.target.value);
   };
 
   const submitHandler = async (e) => {
@@ -57,7 +53,9 @@ export const LoginForm = () => {
 
   return (
     <main className="lg:h-screen lg:w-1/2 flex flex-col items-center justify-center py-2 my-auto order-2 lg:order-1">
-      <h1 className="text-4xl max-lg:w-[60%] lg:text-xl font-semibold lg:font-bold">Sign In</h1>
+      <h1 className="text-4xl max-lg:w-[60%] lg:text-xl font-semibold lg:font-bold">
+        Sign In
+      </h1>
       <form
         className="flex flex-col w-[65%] max-lg:mt-[2.5rem]"
         onSubmit={submitHandler}>
@@ -67,7 +65,7 @@ export const LoginForm = () => {
           Email Address
         </label>
         <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#f7c2dc] lg:outline-[#a6a6ff]"
+          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#f7c2dc] lg:outline-[#73bfd9]"
           name="email"
           type="email"
           value={email}
@@ -80,16 +78,9 @@ export const LoginForm = () => {
           htmlFor="password">
           Password
         </label>
-        <input
-          className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#f7c2dc] lg:outline-[#a6a6ff]"
-          name="password"
-          type="password"
-          value={password}
-          onChange={passwordChangeHandler}
-          required
-        />
+        <PasswordField />
         <button
-          className="bg-[#df5569] lg:bg-[#a6a6ff] lg:hover:bg-[#b8b8fe] text-white hover:text-black h-[2.8rem] rounded"
+          className="bg-[#df5569] lg:hover:bg-[#73bfd9] lg:bg-[#23446f] text-white h-[2.8rem] rounded"
           id="submit"
           type="submit"
           value="submit">
@@ -102,7 +93,7 @@ export const LoginForm = () => {
           onClick={() => {
             navigate("/signup");
           }}
-          className="text-[#df5569] lg:text-[#7a82e0]">
+          className="text-[#df5569] lg:text-[#1a8fc4]">
           Sign up
         </button>
       </p>

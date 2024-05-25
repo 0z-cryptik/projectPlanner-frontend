@@ -1,7 +1,7 @@
 import { LoginForm } from "./loginForm";
 import { LoggingInUser } from "../loaders/loggingInUser";
 import { useList } from "@/src/hooks/stateProvider";
-import Pic from "@/src/assets/4888301.jpg";
+import Pic from "@/src/assets/6376174.jpg";
 import PhonePic from "@/src/assets/6262501.jpg";
 
 export const LoginPage = () => {
