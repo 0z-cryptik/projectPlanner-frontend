@@ -2,40 +2,63 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useList } from "../../hooks/stateProvider";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
 
 export const SignUpForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
   const { setUser, setProcessingUser } = useList();
 
+  const formSchema = z
+    .object({
+      name: z
+        .string()
+        .min(2, { message: "must have at least 2 characters" }),
+      email: z.string().email(),
+      password: z
+        .string()
+        .min(5, { message: "password must be at least 5 characters" }),
+      confirmPassword: z.string()
+    })
+    .superRefine(({ confirmPassword, password }, ctx) => {
+      if (confirmPassword !== password) {
+        ctx.addIssue({
+          code: "custom",
+          message: "The passwords did not match",
+          path: ["confirmPassword"]
+        });
+      }
+    });
 
-  const emailChangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const passwordChangeHandler = (e) => {
-    setPassword(e.target.value);
-  };
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    }
+  });
 
   const navigate = useNavigate();
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async (values) => {
     setProcessingUser(true);
 
-    const form = new FormData(e.target);
-
     const data2submit = {
-      email: form.get("email"),
-      password: form.get("password"),
-      name: form.get("name"),
-      avatar: `https://api.dicebear.com/8.x/initials/svg?seed=${form.get(
-        "name"
-      )}`
+      email: values.email,
+      password: values.password,
+      name: values.name,
+      avatar: `https://api.dicebear.com/8.x/initials/svg?seed=${values.name}`
     };
 
     try {
@@ -68,65 +91,104 @@ export const SignUpForm = () => {
       <h1 className="text-4xl max-lg:w-[60%] lg:text-xl font-semibold lg:font-bold">
         Create your account
       </h1>
-      <form
-        className="flex flex-col w-[65%] max-lg:mt-[2.5rem]"
-        onSubmit={submitHandler}>
-        <label
-          htmlFor="name"
-          className="mb-2 font-extralight">
-          Your name
-        </label>
-        <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
-          name="name"
-          type="text"
-          placeholder="Enter your name or nickname"
-          required
-          autoFocus
-        />
-        <label
-          htmlFor="email"
-          className="mb-2 font-extralight">
-          Email Address
-        </label>
-        <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
-          name="email"
-          type="email"
-          value={email}
-          onChange={emailChangeHandler}
-          required
-        />
-        <label
-          htmlFor="password"
-          className="mb-2 font-extralight">
-          Password
-        </label>
-        <input
-          className="border mb-3 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
-          name="password"
-          type="password"
-          value={password}
-          onChange={passwordChangeHandler}
-          required
-        />
-        <label
-          htmlFor="confirmPassword"
-          className="mb-2 font-extralight">
-          Confirm password
-        </label>
-        <input
-          className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
-          type="password"
-          
-        />
-        <button
-          className="bg-[#3c2048] lg:bg-[#7a82e0] lg:hover:bg-[#cdd6fe] text-white hover:text-black h-[2.8rem] rounded"
-          type="submit"
-          value="submit">
-          Sign Up
-        </button>
-      </form>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-y-3 w-[65%] max-lg:mt-[2.5rem]"
+          onSubmit={form.handleSubmit(submitHandler)}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel className="mb-2 font-extralight">
+                  Your name
+                </FormLabel>
+                <FormControl>
+                  <input
+                    {...field}
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    type="text"
+                    placeholder="Enter your name or nickname"
+                    required
+                    autoFocus
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel className="mb-2 font-extralight">
+                  Email Address
+                </FormLabel>
+                <FormControl>
+                  <input
+                    {...field}
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    type="email"
+                    required
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel className="mb-2 font-extralight">
+                  Password
+                </FormLabel>
+                <FormControl>
+                  <input
+                    {...field}
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    type="password"
+                    required
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel className="mb-2 font-extralight">
+                  Confirm password
+                </FormLabel>
+                <FormControl>
+                  <input
+                    {...field}
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    type="password"
+                    required
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <button
+            className="bg-[#3c2048] lg:bg-[#7a82e0] lg:hover:bg-[#cdd6fe] text-white hover:text-black h-[2.8rem] mt-3 rounded"
+            type="submit"
+            value="submit">
+            Sign Up
+          </button>
+        </form>
+      </Form>
+
       <p className="text-sm mt-5">
         Already have an account?{" "}
         <button
