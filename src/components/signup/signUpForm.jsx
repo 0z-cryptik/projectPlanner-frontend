@@ -13,17 +13,22 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { PasswordField } from "./passwordField";
+import { SignUpButton } from "./signUpButton";
+import { Footer } from "./footer";
 
 export const SignUpForm = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const { setUser, setProcessingUser } = useList();
 
   const formSchema = z
     .object({
       name: z
         .string()
+        .regex(
+          /^[a-zA-Z0-9]*$/,
+          "Password can only contain letters and numbers"
+        )
         .min(2, { message: "must have at least 2 characters" }),
       email: z.string().email(),
       password: z
@@ -115,6 +120,7 @@ export const SignUpForm = () => {
                     autoFocus
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -177,29 +183,14 @@ export const SignUpForm = () => {
             )}
           />
 
-          <button
-            className="bg-[#3c2048] lg:bg-[#7a82e0] lg:hover:bg-[#cdd6fe] text-white hover:text-black h-[2.8rem] mt-3 rounded"
-            type="submit"
-            value="submit">
-            Sign Up
-          </button>
+          <SignUpButton />
         </form>
       </Form>
 
-      <p className="text-sm mt-5">
-        Already have an account?{" "}
-        <button
-          onClick={() => {
-            navigate("/login");
-          }}
-          className="text-[#483ec3] lg:text-[#7a82e0]">
-          Login
-        </button>
-      </p>
-      {error && errorMsg && <p>{errorMsg}</p>}
-      {error && (
-        <p>unexpected error, please refresh the page and try again</p>
-      )}
+      <Footer
+        error={error}
+        errorMsg={errorMsg}
+      />
     </section>
   );
 };
