@@ -12,10 +12,12 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import { PasswordField } from "./passwordField";
 
 export const SignUpForm = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { setUser, setProcessingUser } = useList();
 
   const formSchema = z
@@ -106,7 +108,7 @@ export const SignUpForm = () => {
                 <FormControl>
                   <input
                     {...field}
-                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:border-[#cdd6fe] lg:outline-none lg:border-2"
                     type="text"
                     placeholder="Enter your name or nickname"
                     required
@@ -128,7 +130,7 @@ export const SignUpForm = () => {
                 <FormControl>
                   <input
                     {...field}
-                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:border-[#cdd6fe] lg:outline-none lg:border-2"
                     type="email"
                     required
                   />
@@ -147,12 +149,7 @@ export const SignUpForm = () => {
                   Password
                 </FormLabel>
                 <FormControl>
-                  <input
-                    {...field}
-                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
-                    type="password"
-                    required
-                  />
+                  <PasswordField field={field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -170,7 +167,7 @@ export const SignUpForm = () => {
                 <FormControl>
                   <input
                     {...field}
-                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
+                    className="border rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:border-[#cdd6fe] lg:border-2 lg:outline-none"
                     type="password"
                     required
                   />
