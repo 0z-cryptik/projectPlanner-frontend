@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useList } from "../../hooks/stateProvider";
+import { z } from "zod";
 
 export const SignUpForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const {
-    setUser,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    setProcessingUser
-  } = useList();
+
+  const { setUser, setProcessingUser } = useList();
+
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -119,7 +118,7 @@ export const SignUpForm = () => {
         <input
           className="border mb-6 rounded h-[2.8rem] px-2 text-sm outline-[#afafef] lg:outline-[#cdd6fe]"
           type="password"
-          required
+          
         />
         <button
           className="bg-[#3c2048] lg:bg-[#7a82e0] lg:hover:bg-[#cdd6fe] text-white hover:text-black h-[2.8rem] rounded"

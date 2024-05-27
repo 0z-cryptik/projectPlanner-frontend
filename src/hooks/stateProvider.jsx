@@ -6,9 +6,9 @@ export const useList = () => useContext(stateContext);
 
 export const StateProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [signUpUser, setSignUpUser] = useState(null);
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  
+  
+  
   const [projects, setProjects] = useState([]);
   const [creatingNewProject, setCreatingNewProject] = useState(false);
   const [createNewTask, setCreateNewTask] = useState(false);
@@ -40,12 +40,8 @@ export const StateProvider = ({ children }) => {
   const stateObj = {
     user,
     setUser,
-    signUpUser,
-    setSignUpUser,
-    password,
-    setPassword,
-    email,
-    setEmail,
+    
+    
     projects,
     setProjects,
     creatingNewProject,

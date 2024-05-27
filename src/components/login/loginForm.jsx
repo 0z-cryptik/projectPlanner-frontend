@@ -81,7 +81,6 @@ export const LoginForm = () => {
         <PasswordField />
         <button
           className="bg-[#df5569] lg:hover:bg-[#73bfd9] lg:bg-[#23446f] text-white h-[2.8rem] rounded"
-          id="submit"
           type="submit"
           value="submit">
           Login
