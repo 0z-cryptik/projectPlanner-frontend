@@ -5,7 +5,7 @@ import { MdCancel } from "react-icons/md";
 import { ProjectEditLoader } from "../../loaders/projectEditLoader";
 
 export const ProjectEditForm = ({ project, cancelHandler }) => {
-  const { fetchFunc, setError } = useList();
+  const { fetchFunc, setError, user } = useList();
   const [title, setTitle] = useState(project.title);
   const [showLoader, setShowLoader] = useState(false);
 
@@ -25,7 +25,7 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
 
     try {
       const { success } = await fetchFunc(
-        "/api/project/update?_method=PUT",
+        `/api/project/update?_method=PUT&apiToken=${user.apiToken}`,
         data2submit
       );
       if (success) {

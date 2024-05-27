@@ -7,7 +7,7 @@ import { SectionLoader } from "../../loaders/sectionLoader";
 export const EditSectionForm = ({ section, hideForm }) => {
   const [title, setTitle] = useState(section.title);
   const [showLoader, setShowLoader] = useState(false);
-  const { fetchFunc, setError } = useList();
+  const { fetchFunc, setError, user } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export const EditSectionForm = ({ section, hideForm }) => {
 
     try {
       const { success } = await fetchFunc(
-        "/api/section/update?_method=PUT",
+        `/api/section/update?_method=PUT&apiToken=${user.apiToken}`,
         data2submit
       );
 

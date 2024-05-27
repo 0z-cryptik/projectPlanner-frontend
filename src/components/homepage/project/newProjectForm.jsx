@@ -13,7 +13,7 @@ export const CreateNewProjectForm = () => {
     setError,
     showPhoneForm,
     setShowPhoneForm,
-    setShowMenu,
+    setShowMenu, user
   } = useList();
 
   const projectNameHandler = (e) => {
@@ -36,7 +36,7 @@ export const CreateNewProjectForm = () => {
     const form = new FormData(e.target);
 
     try {
-      const { success } = await fetchFunc("/api/project/create", {
+      const { success } = await fetchFunc(`/api/project/create?apiToken=${user.apiToken}`, {
         title: form.get("title")
       });
 

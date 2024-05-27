@@ -5,7 +5,7 @@ import { SectionLoader } from "../../loaders/sectionLoader";
 export const AddSectionForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
   const [showLoader, setShowLoader] = useState(false);
-  const { projects, activeProject, fetchFunc, setError } = useList();
+  const { projects, activeProject, fetchFunc, setError, user } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export const AddSectionForm = ({ hideForm }) => {
 
     try {
       const { success } = await fetchFunc(
-        "/api/section/create",
+        `/api/section/create?apiToken=${user.apiToken}`,
         data2submit
       );
 

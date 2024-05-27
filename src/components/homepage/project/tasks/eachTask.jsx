@@ -14,7 +14,7 @@ export const EachTask = ({ task }) => {
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [editTask, setEditTask] = useState(false);
   const [popAndFade, setPopAndFade] = useState(false);
-  const { fetchFunc, setError } = useList();
+  const { fetchFunc, setError, user } = useList();
 
   const playAudio = () => {
     new Audio(soundEffect).play();
@@ -24,7 +24,10 @@ export const EachTask = ({ task }) => {
     setPopAndFade(true);
     setTimeout(() => {
       try {
-        fetchFunc("/api/task/delete?_method=DELETE", { taskId: task._id });
+        fetchFunc(
+          `/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
+          { taskId: task._id }
+        );
         playAudio();
         setPopAndFade(false);
       } catch (err) {
@@ -36,7 +39,10 @@ export const EachTask = ({ task }) => {
 
   const deleteTask = () => {
     try {
-      fetchFunc("/api/task/delete?_method=DELETE", { taskId: task._id });
+      fetchFunc(
+        `/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
+        { taskId: task._id }
+      );
     } catch (err) {
       setError("There was an error, please try again");
       console.error(err);
@@ -55,7 +61,8 @@ export const EachTask = ({ task }) => {
   }
 
   return (
-    <motion.div layout
+    <motion.div
+      layout
       onMouseOver={() => {
         setShowOptions(true);
       }}

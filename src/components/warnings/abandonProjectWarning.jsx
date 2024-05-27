@@ -3,12 +3,11 @@ import { useList } from "../../hooks/stateProvider";
 import { useEffect, useState, createRef } from "react";
 import { motion } from "framer-motion";
 
-
 export const AbandonProjectWarning = ({
   projectId,
   cancelHandler = (f) => f
 }) => {
-  const { fetchFunc, setError, setFixPage } = useList();
+  const { fetchFunc, setError, setFixPage, user } = useList();
 
   const [topPosition, setTopPosition] = useState(0);
   const fixedElementRef = createRef();
@@ -35,7 +34,7 @@ export const AbandonProjectWarning = ({
   const abandonProject = async () => {
     try {
       const { success } = await fetchFunc(
-        "/api/project/delete?_method=DELETE",
+        `/api/project/delete?_method=DELETE&apiToken=${user.apiToken}`,
         {
           projectId
         }
