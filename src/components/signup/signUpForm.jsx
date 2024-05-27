@@ -60,38 +60,47 @@ export const SignUpForm = () => {
 
   const submitHandler = async (values) => {
     setProcessingUser(true);
-
+  
     const data2submit = {
       email: values.email,
       password: values.password,
       name: values.name,
       avatar: `https://api.dicebear.com/8.x/initials/svg?seed=${values.name}`
     };
-
+  
     try {
-      const res = await fetch("/api/user/signup", {
-        method: "POST",
-        body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" }
-      });
-
-      const response = await res.json();
-      console.log(response);
-      if (response.success) {
-        setUser(response.data);
-        setProcessingUser(false);
-        navigate("/workspace");
-      } else if (!response.success) {
-        setProcessingUser(false);
+      const signupResponse = await fetchData("/api/user/signup", data2submit);
+      if (signupResponse.success) {
+        const loginResponse = await fetchData("/api/user/login", {
+          email: values.email,
+          password: values.password
+        });
+  
+        if (loginResponse.user) {
+          setUser(signupResponse.data);
+          navigate("/workspace");
+        }
+      } else {
         setError(true);
-        setErrorMsg(response.reason);
+        setErrorMsg(signupResponse.reason);
       }
     } catch (err) {
       console.error(err);
       setError(true);
+    } finally {
       setProcessingUser(false);
     }
   };
+  
+  const fetchData = async (url, data) => {
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    });
+    return res.json();
+  };
+  
 
   return (
     <section className="lg:h-screen lg:w-1/2 flex flex-col items-center justify-center py-2 my-auto">
