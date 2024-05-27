@@ -1,4 +1,5 @@
 import heroImage from "./images/3682888.jpg";
+import logo from "./images/logo/task-list-2.png";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 
@@ -8,7 +9,12 @@ export const LandingPage = () => {
   return (
     <main className="flex flex-col">
       <nav className="w-full flex flex-row p-3 lg:order-1">
-        <p className="flex-grow text-2xl">Logo</p>
+        <p className="flex-grow">
+          <img
+            className="w-[3.5rem] ml-5"
+            src={logo}
+          />
+        </p>
         <button
           onClick={() => {
             navigate("/login");
@@ -21,7 +27,7 @@ export const LandingPage = () => {
             navigate("/signup");
           }}
           whileHover={{ scale: 1.1 }}
-          className="border rounded-xl bg-[#514ff1] text-white p-3 max-md:text-xs">
+          className="border rounded-xl bg-gradient-to-b hover:bg-gradient-to-t from-[#0cb2ff] to-[#4e61ff] text-white p-3 max-md:text-xs">
           Get started
         </motion.button>
       </nav>
