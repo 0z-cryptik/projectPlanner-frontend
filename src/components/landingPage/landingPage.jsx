@@ -7,7 +7,7 @@ export const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col h-screen overflow-hidden">
       <nav className="w-full flex flex-row p-3 lg:order-1">
         <p className="flex-grow">
           <img

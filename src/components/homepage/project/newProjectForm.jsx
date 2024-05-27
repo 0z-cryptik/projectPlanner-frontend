@@ -13,7 +13,7 @@ export const CreateNewProjectForm = () => {
     setError,
     showPhoneForm,
     setShowPhoneForm,
-    setShowMenu
+    setShowMenu,
   } = useList();
 
   const projectNameHandler = (e) => {
