@@ -58,6 +58,8 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
         type="text"
         name="title"
         placeholder="Task name"
+        pattern="[a-zA-Z0-9 ]*"
+        title="Only letters and numbers are allowed"
         value={title}
         onChange={titleChangeHandler}
         required

@@ -13,7 +13,8 @@ export const CreateNewProjectForm = () => {
     setError,
     showPhoneForm,
     setShowPhoneForm,
-    setShowMenu, user
+    setShowMenu,
+    user
   } = useList();
 
   const projectNameHandler = (e) => {
@@ -36,9 +37,12 @@ export const CreateNewProjectForm = () => {
     const form = new FormData(e.target);
 
     try {
-      const { success } = await fetchFunc(`/api/project/create?apiToken=${user.apiToken}`, {
-        title: form.get("title")
-      });
+      const { success } = await fetchFunc(
+        `/api/project/create?apiToken=${user.apiToken}`,
+        {
+          title: form.get("title")
+        }
+      );
 
       if (success) {
         setShowLoader(false);
@@ -80,6 +84,8 @@ export const CreateNewProjectForm = () => {
           type="text"
           name="title"
           placeholder="Enter project name"
+          pattern="[a-zA-Z0-9 ]*"
+          title="Only letters and numbers are allowed"
           value={projectName}
           onChange={projectNameHandler}
           required

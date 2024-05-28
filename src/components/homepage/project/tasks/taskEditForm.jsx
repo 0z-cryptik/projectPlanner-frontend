@@ -57,6 +57,8 @@ export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
           type="text"
           placeholder="enter subtask title"
           name="title"
+          pattern="[a-zA-Z0-9 ]*"
+          title="Only letters and numbers are allowed"
           value={title}
           onChange={titleChangeHandler}
           required

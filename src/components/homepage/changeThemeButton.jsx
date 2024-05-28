@@ -13,7 +13,7 @@ export const ChangeThemeButton = () => {
         }}
         whileTap={{ rotate: 180 }}
         className="mt-2"
-        disabled={creatingNewProject ? true : false}>
+        >
         <PiYinYangFill size={"1.5rem"} />
       </motion.button>
     </center>

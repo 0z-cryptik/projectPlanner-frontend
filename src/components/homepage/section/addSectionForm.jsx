@@ -49,8 +49,10 @@ export const AddSectionForm = ({ hideForm }) => {
       onSubmit={submitHandler}
       className="ml-[4rem] w-[57%] border mt-5 p-4 rounded-xl">
       <input
-        className="outline-none"
+        className="outline-none bg-transparent w-full mb-2"
         type="text"
+        pattern="[a-zA-Z0-9 ]*" 
+    title="Only letters and numbers are allowed"
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);

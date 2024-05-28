@@ -25,7 +25,10 @@ export const TaskForm = ({ hideForm }) => {
     };
 
     try {
-      const { success } = await fetchFunc(`/api/task/create?apiToken=${user.apiToken}`, data2submit);
+      const { success } = await fetchFunc(
+        `/api/task/create?apiToken=${user.apiToken}`,
+        data2submit
+      );
       if (success) {
         setShowLoader(false);
       } else {
@@ -55,6 +58,8 @@ export const TaskForm = ({ hideForm }) => {
           type="text"
           placeholder="enter task title"
           name="title"
+          pattern="[a-zA-Z0-9 ]*"
+          title="Only letters and numbers are allowed"
           value={title}
           onChange={titleChangeHandler}
           required

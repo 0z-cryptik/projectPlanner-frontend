@@ -54,6 +54,8 @@ export const EditSectionForm = ({ section, hideForm }) => {
         className="flex-grow border-r outline-none"
         type="text"
         name="title"
+        pattern="[a-zA-Z0-9 ]*"
+        title="Only letters and numbers are allowed"
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);

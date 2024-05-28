@@ -26,7 +26,7 @@ export const SignUpForm = () => {
       name: z
         .string()
         .regex(
-          /^[a-zA-Z0-9]*$/,
+          /^[a-zA-Z0-9 ]*$/,
           "Password can only contain letters and numbers"
         )
         .min(2, { message: "must have at least 2 characters" }),
@@ -60,22 +60,25 @@ export const SignUpForm = () => {
 
   const submitHandler = async (values) => {
     setProcessingUser(true);
-  
+
     const data2submit = {
       email: values.email,
       password: values.password,
       name: values.name,
       avatar: `https://api.dicebear.com/8.x/initials/svg?seed=${values.name}`
     };
-  
+
     try {
-      const signupResponse = await fetchData("/api/user/signup", data2submit);
+      const signupResponse = await fetchData(
+        "/api/user/signup",
+        data2submit
+      );
       if (signupResponse.success) {
         const loginResponse = await fetchData("/api/user/login", {
           email: values.email,
           password: values.password
         });
-  
+
         if (loginResponse.user) {
           setUser(signupResponse.data);
           navigate("/workspace");
@@ -91,7 +94,7 @@ export const SignUpForm = () => {
       setProcessingUser(false);
     }
   };
-  
+
   const fetchData = async (url, data) => {
     const res = await fetch(url, {
       method: "POST",
@@ -100,7 +103,6 @@ export const SignUpForm = () => {
     });
     return res.json();
   };
-  
 
   return (
     <section className="lg:h-screen lg:w-1/2 flex flex-col items-center justify-center py-2 my-auto">

@@ -1,14 +1,19 @@
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin7Fill } from "react-icons/ri";
+import { useList } from "@/src/hooks/stateProvider";
 
 export const Options = ({
   editButtonHandler,
   deleteButtonHandler,
   showOptions
 }) => {
+  const { darkMode } = useList();
+
   return (
     <div
-      className={`border rounded-xl w-fit p-3 absolute bg-gray-100 z-20 text-sm lg:text-base left-[75%] lg:left-[83.5%] mt-5 ${
+      className={`border rounded-xl w-fit p-3 absolute ${
+        darkMode ? "bg-black" : "bg-gray-100"
+      } z-20 text-sm lg:text-base left-[75%] lg:left-[83.5%] mt-5 ${
         !showOptions && "hidden"
       }`}>
       <button
