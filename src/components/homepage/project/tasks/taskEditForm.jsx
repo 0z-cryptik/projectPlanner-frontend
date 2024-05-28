@@ -80,15 +80,15 @@ export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
       </span>
       <div className="w-fit mx-auto mt-5">
         <button
-          onClick={hideForm}
-          className="bg-red-500 text-white p-2 rounded-xl mr-3">
-          Cancel
-        </button>
-        <button
-          className="bg-green-500 text-white p-2 rounded-xl"
+          className="bg-green-500 text-white p-2 mr-3 rounded-xl"
           type="submit"
           value="submit">
           Submit
+        </button>
+        <button
+          onClick={hideForm}
+          className="bg-red-500 text-white p-2 rounded-xl">
+          Cancel
         </button>
       </div>
     </form>

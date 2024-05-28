@@ -63,15 +63,15 @@ export const EditSectionForm = ({ section, hideForm }) => {
         autoFocus
       />
       <button
-        onClick={hideForm}
-        className="hover:text-red-600">
-        <MdCancel size={"1.5rem"} />
-      </button>
-      <button
         type="submit"
         value="submit"
         className="hover:text-green-500">
         <FaCircleCheck />
+      </button>
+      <button
+        onClick={hideForm}
+        className="hover:text-red-600">
+        <MdCancel size={"1.5rem"} />
       </button>
     </form>
   );

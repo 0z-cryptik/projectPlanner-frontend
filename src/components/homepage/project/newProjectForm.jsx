@@ -75,9 +75,9 @@ export const CreateNewProjectForm = () => {
   }
 
   return (
-    <section className="w-full lg:h-full lg:flex lg:items-center lg:justify-center mt-5 lg:mt-0">
+    <section className="w-full h-full flex items-center justify-center mt-5 lg:mt-0">
       <form
-        className="border lg:w-1/2 p-4 rounded-xl text-sm lg:text-base"
+        className="border w-[70%] lg:w-1/2 p-4 rounded-xl text-sm lg:text-base"
         onSubmit={submitHandler}>
         <input
           className="w-full outline-none border-b mb-3 bg-transparent"
@@ -94,15 +94,15 @@ export const CreateNewProjectForm = () => {
 
         <div className="w-fit mx-auto mt-3 gap-x-2 flex">
           <button
-            onClick={hideForm}
-            className="bg-red-700 text-white p-2 rounded-xl">
-            Cancel
-          </button>
-          <button
             className="bg-green-500 p-2 rounded-xl text-white"
             type="submit"
             value="submit">
             Add project
+          </button>
+          <button
+            onClick={hideForm}
+            className="bg-red-700 text-white p-2 rounded-xl">
+            Cancel
           </button>
         </div>
       </form>

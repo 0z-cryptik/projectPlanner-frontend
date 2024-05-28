@@ -47,9 +47,8 @@ export const SideBar = () => {
           <button
             onClick={() => {
               setShowMenu(false);
-            }}
-            className="border">
-            <GoSidebarExpand />
+            }}>
+            <GoSidebarExpand size={"1.5rem"} />
           </button>
         </div>
         <div>

@@ -15,12 +15,14 @@ export const AddSectionButton = () => {
   }
 
   return (
-    <button
-      onClick={() => {
-        setShowForm(true);
-      }}
-      className={`border-b ml-[4rem] mb-6 w-[57%] pb-1 mt-5 hover:text-orange-600 hover:border-b-orange-600`}>
-      add section
-    </button>
+    <center className="ml-[4rem] pr-[4rem]">
+      <button
+        onClick={() => {
+          setShowForm(true);
+        }}
+        className={`border-b mb-6 w-[100%] pb-1 mt-5 text-orange-600 border-b-orange-600`}>
+        Add section
+      </button>
+    </center>
   );
 };

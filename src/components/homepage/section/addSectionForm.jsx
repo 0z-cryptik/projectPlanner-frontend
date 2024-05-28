@@ -51,8 +51,8 @@ export const AddSectionForm = ({ hideForm }) => {
       <input
         className="outline-none bg-transparent w-full mb-2"
         type="text"
-        pattern="[a-zA-Z0-9 ]*" 
-    title="Only letters and numbers are allowed"
+        pattern="[a-zA-Z0-9 ]*"
+        title="Only letters and numbers are allowed"
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);
@@ -64,15 +64,15 @@ export const AddSectionForm = ({ hideForm }) => {
       />
       <div className="w-fit ml-auto">
         <button
-          onClick={hideForm}
-          className="bg-red-600 mr-2 p-2 rounded-xl">
-          cancel
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-xl"
+          className="bg-green-500 p-2 mr-2 rounded-xl"
           type="submit"
           value="submit">
           Submit
+        </button>
+        <button
+          onClick={hideForm}
+          className="bg-red-600 p-2 rounded-xl">
+          cancel
         </button>
       </div>
     </form>

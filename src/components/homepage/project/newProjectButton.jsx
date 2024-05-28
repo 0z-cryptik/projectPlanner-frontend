@@ -3,6 +3,7 @@ import { useList } from "../../../hooks/stateProvider";
 import { HiMiniSquaresPlus } from "react-icons/hi2";
 import { CreateNewProjectForm } from "./newProjectForm";
 import { GoSidebarCollapse } from "react-icons/go";
+import { PhoneSideBarForm } from "./phoneSideBarForm";
 
 export const CreateNewProjectButton = () => {
   const { setCreatingNewProject, setShowMenu } = useList();
@@ -54,7 +55,7 @@ export const PhoneSideBarNewProjectButton = () => {
   const { showPhoneForm, setShowPhoneForm } = useList();
 
   if (showPhoneForm) {
-    return <CreateNewProjectForm />;
+    return <PhoneSideBarForm />;
   }
 
   return (
