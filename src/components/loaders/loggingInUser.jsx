@@ -5,7 +5,7 @@ export const LoggingInUser = () => {
     <main className="flex items-center justify-center h-screen w-screen">
       <center>
         <ThreeDots />
-        hold on a sec...
+        
       </center>
     </main>
   );

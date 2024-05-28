@@ -25,17 +25,17 @@ export const PasswordField = () => {
         required
       />
       {showPassword ? (
-        <button
+        <div
           onClick={showPasswordHandler}
-          className="px-2">
+          className="px-2 flex justify-center items-center">
           <IoMdEyeOff />
-        </button>
+        </div>
       ) : (
-        <button
+        <div
           onClick={showPasswordHandler}
-          className="px-2">
+          className="px-2 flex justify-center items-center">
           <IoMdEye />
-        </button>
+        </div>
       )}
     </div>
   );

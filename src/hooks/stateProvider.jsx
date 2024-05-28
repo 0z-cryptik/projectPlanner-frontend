@@ -6,9 +6,6 @@ export const useList = () => useContext(stateContext);
 
 export const StateProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  
-  
-  
   const [projects, setProjects] = useState([]);
   const [creatingNewProject, setCreatingNewProject] = useState(false);
   const [createNewTask, setCreateNewTask] = useState(false);
@@ -40,8 +37,6 @@ export const StateProvider = ({ children }) => {
   const stateObj = {
     user,
     setUser,
-    
-    
     projects,
     setProjects,
     creatingNewProject,

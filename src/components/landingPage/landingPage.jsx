@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useList } from "@/src/hooks/stateProvider";
+import { Img } from "react-image";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ThreeDots } from "react-loader-spinner";
 
 export const LandingPage = () => {
   const [checkingLoginState, setCheckLoginState] = useState(false);
@@ -26,13 +29,33 @@ export const LandingPage = () => {
         setProjects(response.user.projects.reverse());
         navigate("/workspace");
       } else {
-        setShowLandingPage(true)
+        setShowLandingPage(true);
       }
     } catch (err) {
-      setShowLandingPage(true)
+      setShowLandingPage(true);
     } finally {
       setCheckLoginState(false);
     }
+  };
+
+  const animation = {
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.3
+      }
+    },
+    initial: {
+      opacity: 0,
+      y: -10
+    }
+  };
+
+  const childrenAnimation = {
+    animate: { opacity: 1, y: 0 },
+    initial: { opacity: 0, y: -10 }
   };
 
   if (checkingLoginState) {
@@ -45,22 +68,31 @@ export const LandingPage = () => {
 
   if (showLandingPage) {
     return (
-      <main className="flex flex-col h-screen overflow-hidden">
+      <motion.main
+        initial="initial"
+        animate="animate"
+        variants={animation}
+        className="flex flex-col h-screen overflow-hidden">
         <nav className="w-full flex flex-row p-3 lg:order-1">
-          <p className="flex-grow">
-            <img
+          <motion.p
+            variants={childrenAnimation}
+            className="flex-grow">
+            <Img
               className="w-[3.5rem] ml-5"
               src={logo}
+              loader={<Skeleton className="w-[3.5rem] ml-5" />}
             />
-          </p>
-          <button
+          </motion.p>
+          <motion.button
+            variants={childrenAnimation}
             onClick={() => {
               navigate("/login");
             }}
             className="mr-3 hover:bg-gray-200 px-3 max-md:text-xs md:font-bold rounded-xl">
             Login
-          </button>
+          </motion.button>
           <motion.button
+            variants={childrenAnimation}
             onClick={() => {
               navigate("/signup");
             }}
@@ -70,17 +102,22 @@ export const LandingPage = () => {
           </motion.button>
         </nav>
 
-        <section className="flex flex-col mt-[5rem] md:mt-[3rem] lg:order-3">
+        <section className="flex flex-col flex-grow mt-[5rem] md:mt-[3rem] lg:order-3">
           <div className="text-center flex flex-col items-center max-md:order-2 justify-center">
-            <h1 className="text-4xl md:text-6xl md:w-[70%] font-bold mt-[4rem] lg:mt-[1rem] max-md:px-3">
+            <motion.h1
+              variants={childrenAnimation}
+              className="text-4xl md:text-6xl md:w-[70%] font-bold mt-[4rem] lg:mt-[1rem] max-md:px-3">
               Organize your work and projects today
-            </h1>
-            <p className="w-[70%] text-lg mt-5">
+            </motion.h1>
+            <motion.p
+              variants={childrenAnimation}
+              className="w-[70%] text-lg mt-5">
               Break down your projects into tasks, group your tasks into
               different sections
-            </p>
+            </motion.p>
 
             <motion.button
+              variants={childrenAnimation}
               onClick={() => {
                 navigate("/signup");
               }}
@@ -89,13 +126,17 @@ export const LandingPage = () => {
               Get started
             </motion.button>
           </div>
-
-          <img
+          <Img
             className="max-lg:order-1"
             src={heroImage}
+            loader={
+              <div className="max-lg:order-1 w-full h-full flex justify-center items-center">
+                <ThreeDots color="gray" />
+              </div>
+            }
           />
         </section>
-      </main>
+      </motion.main>
     );
   }
 };

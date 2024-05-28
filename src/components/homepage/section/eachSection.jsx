@@ -30,7 +30,7 @@ export const EachSection = ({ section }) => {
   };
 
   return (
-    <motion.section layout className="mt-7">
+    <section className="mt-7">
       <div className="text-xl lg:ml-[4rem] ml-6">
         <div className="flex flex-row">
           {!editSection && (
@@ -105,6 +105,6 @@ export const EachSection = ({ section }) => {
           />
         )}
       </div>
-    </motion.section>
+    </section>
   );
 };

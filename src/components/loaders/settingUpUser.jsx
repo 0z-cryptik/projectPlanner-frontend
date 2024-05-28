@@ -5,7 +5,7 @@ export const SettingUpUser = () => {
     <main className="flex items-center justify-center h-screen w-screen">
       <center>
         <ThreeDots />
-        Setting things up for you...
+        <p className="text-sm">Setting things up for you...</p>
       </center>
     </main>
   );

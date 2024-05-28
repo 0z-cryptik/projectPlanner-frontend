@@ -29,7 +29,8 @@ export const SignUpForm = () => {
           /^[a-zA-Z0-9 ]*$/,
           "Password can only contain letters and numbers"
         )
-        .min(2, { message: "must have at least 2 characters" }),
+        .min(2, { message: "must have at least 2 characters" })
+        .max(30, { message: "can't have over 30 characters" }),
       email: z.string().email(),
       password: z
         .string()
@@ -112,7 +113,8 @@ export const SignUpForm = () => {
       <Form {...form}>
         <form
           className="flex flex-col gap-y-3 w-[65%] max-lg:mt-[2.5rem]"
-          onSubmit={form.handleSubmit(submitHandler)}>
+          onSubmit={form.handleSubmit(submitHandler)}
+          >
           <FormField
             control={form.control}
             name="name"
