@@ -6,7 +6,9 @@ import { TaskLoader } from "../../../loaders/taskLoader";
 export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
   const { fetchFunc, setError, user } = useList();
   const [title, setTitle] = useState(task.title);
-  const [date, setDate] = useState(new Date(task.dueDate));
+  const [date, setDate] = useState(
+    task.dueDate ? new Date(task.dueDate) : null
+  );
   const [showLoader, setShowLoader] = useState(false);
 
   const titleChangeHandler = (e) => {
