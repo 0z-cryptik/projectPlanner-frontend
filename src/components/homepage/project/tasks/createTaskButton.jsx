@@ -1,4 +1,3 @@
-import { CiSquarePlus } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 
 export const CreateTaskButton = ({ clickHandler }) => {

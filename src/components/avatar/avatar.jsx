@@ -1,4 +1,3 @@
-import { PiUserSquareFill } from "react-icons/pi";
 import { Img } from "react-image";
 import { Skeleton } from "@/components/ui/skeleton";
 

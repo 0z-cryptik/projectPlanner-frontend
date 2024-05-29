@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { useList } from "../../../hooks/stateProvider";
 import { HiMiniSquaresPlus } from "react-icons/hi2";
-import { CreateNewProjectForm } from "./newProjectForm";
 import { GoSidebarCollapse } from "react-icons/go";
 import { PhoneSideBarForm } from "./phoneSideBarForm";
 

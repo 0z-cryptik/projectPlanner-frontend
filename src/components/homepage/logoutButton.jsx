@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 export const LogoutButton = () => {
   const navigate = useNavigate();
 
-  const clickHandler = async (e) => {
+  const clickHandler = async () => {
     try {
       const res = await fetch("/api/user/logout");
       const response = await res.json();

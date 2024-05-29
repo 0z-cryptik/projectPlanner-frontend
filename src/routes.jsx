@@ -1,10 +1,8 @@
 import { Route, Routes } from "react-router";
-import App from "./App";
 import { SignUpPage } from "./components/signup/signUpPage";
 import { LoginPage } from "./components/login/loginPage";
 import { Homepage } from "./components/homepage/homepage";
 import { LandingPage } from "./components/landingPage/landingPage";
-import { ShadCNPage } from "./components/datePicker/shadCN";
 
 export const RoutedApp = () => {
   return (
@@ -24,10 +22,6 @@ export const RoutedApp = () => {
       <Route
         path="/workspace"
         element={<Homepage />}
-      />
-      <Route
-        path="/shadcn"
-        element={<ShadCNPage />}
       />
     </Routes>
   );

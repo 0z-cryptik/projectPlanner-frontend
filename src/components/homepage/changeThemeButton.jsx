@@ -3,7 +3,7 @@ import { useList } from "../../hooks/stateProvider";
 import { motion } from "framer-motion";
 
 export const ChangeThemeButton = () => {
-  const { darkMode, setDarkMode, creatingNewProject } = useList();
+  const { darkMode, setDarkMode } = useList();
 
   return (
     <center>

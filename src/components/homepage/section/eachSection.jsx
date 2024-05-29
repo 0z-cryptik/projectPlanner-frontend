@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TaskList } from "../project/tasks/taskList";
 import { TaskForm } from "./newTaskFormForSections";
 import { CreateTaskButton } from "../project/tasks/createTaskButton";
@@ -8,7 +8,6 @@ import { DeleteWarning } from "../../warnings/sectionDeleteWarning";
 import { Overlay } from "../../overlay/overlay";
 import { SectionHeader } from "./sectionHeader";
 import { Options } from "./options";
-import { motion } from "framer-motion";
 
 export const EachSection = ({ section }) => {
   const [createTask, setCreateTask] = useState(false);
