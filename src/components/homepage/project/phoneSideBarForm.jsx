@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ProjectLoader } from "../../loaders/projectLoader";
 import { useList } from "@/src/hooks/stateProvider";
+import { FaPlus } from "react-icons/fa6";
+import { RiDeleteBin7Fill } from "react-icons/ri";
 
 export const PhoneSideBarForm = () => {
   const [projectName, setProjectName] = useState("");
@@ -66,15 +68,15 @@ export const PhoneSideBarForm = () => {
 
       <div className="w-fit mx-auto mt-3 gap-x-2 flex">
         <button
-          className="bg-green-500 p-2 rounded-xl text-white"
+          className="bg-green-500 py-2 px-4 rounded-xl text-white"
           type="submit"
           value="submit">
-          Add project
+          <FaPlus />
         </button>
         <button
           onClick={hideForm}
-          className="bg-red-700 text-white p-2 rounded-xl">
-          Cancel
+          className="bg-red-700 text-white py-2 px-4 rounded-xl">
+          <RiDeleteBin7Fill />
         </button>
       </div>
     </form>

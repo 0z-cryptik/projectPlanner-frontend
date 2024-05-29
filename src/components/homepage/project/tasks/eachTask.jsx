@@ -7,13 +7,13 @@ import { Options } from "./options";
 import { DueDate } from "./dueDate";
 import { useList } from "../../../../hooks/stateProvider";
 import soundEffect from "../../../../soundEffects/tap-notification-180637.mp3";
-import { motion } from "framer-motion";
 
 export const EachTask = ({ task }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [editTask, setEditTask] = useState(false);
   const [popAndFade, setPopAndFade] = useState(false);
+  const [goInvinsible, setGoInvinsible] = useState(false);
   const { fetchFunc, setError, user } = useList();
 
   const playAudio = () => {
@@ -28,11 +28,11 @@ export const EachTask = ({ task }) => {
           `/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
           { taskId: task._id }
         );
+      } catch (err) {
+        console.error(err);
+      } finally {
         playAudio();
         setPopAndFade(false);
-      } catch (err) {
-        setError("There was an error, please try again");
-        console.error(err);
       }
     }, 200);
   };
@@ -61,17 +61,19 @@ export const EachTask = ({ task }) => {
   }
 
   return (
-    <motion.div
-      layout
+    <div
       onMouseOver={() => {
         setShowOptions(true);
       }}
       onMouseLeave={() => {
         setShowOptions(false);
       }}
+      onAnimationEnd={() => {
+        setGoInvinsible(true);
+      }}
       className={`w-[90%] flex flex-row mt-7 border-b ${
         popAndFade && "growAndFade"
-      }`}>
+      } ${goInvinsible && "hidden"} `}>
       <CheckMarkButton
         clickFunc={completeTask}
         additionalStyling={`${!task.dueDate && "mb-2"}`}
@@ -108,6 +110,6 @@ export const EachTask = ({ task }) => {
           <Overlay deem={true} />
         </>
       )}
-    </motion.div>
+    </div>
   );
 };

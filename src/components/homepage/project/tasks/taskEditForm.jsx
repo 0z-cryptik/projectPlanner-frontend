@@ -71,7 +71,7 @@ export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
         <label
           className="mr-3"
           htmlFor="datePicker">
-          Due date/time:
+          Due date:
         </label>
         <DatePicker
           date={date}

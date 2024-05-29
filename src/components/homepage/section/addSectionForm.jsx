@@ -47,7 +47,7 @@ export const AddSectionForm = ({ hideForm }) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="ml-[4rem] w-[57%] border mt-5 p-4 rounded-xl">
+      className="ml-[4rem] w-[70%] md:w-[57%] border mt-5 p-4 rounded-xl">
       <input
         className="outline-none bg-transparent w-full mb-2"
         type="text"

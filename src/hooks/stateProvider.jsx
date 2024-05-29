@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 const stateContext = createContext();
 export const useList = () => useContext(stateContext);
@@ -14,9 +15,8 @@ export const StateProvider = ({ children }) => {
   const [fixPage, setFixPage] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showPhoneForm, setShowPhoneForm] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);;
   const [processingUser, setProcessingUser] = useState(false);
-  const [loggingInUser, setLoggingInUser] = useState(false);
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {
@@ -58,8 +58,6 @@ export const StateProvider = ({ children }) => {
     setDarkMode,
     processingUser,
     setProcessingUser,
-    loggingInUser,
-    setLoggingInUser
   };
 
   return (

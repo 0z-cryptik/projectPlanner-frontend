@@ -1,18 +1,10 @@
 import { LoginForm } from "./loginForm";
-import { LoggingInUser } from "../loaders/loggingInUser";
-import { useList } from "@/src/hooks/stateProvider";
 import Pic from "@/src/assets/6376174.jpg";
 import PhonePic from "@/src/assets/6262501.jpg";
 import { Img } from "react-image";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const LoginPage = () => {
-  const { loggingInUser } = useList();
-
-  if (loggingInUser) {
-    return <LoggingInUser />;
-  }
-
   return (
     <main className="flex max-lg:flex-col h-screen">
       <LoginForm />

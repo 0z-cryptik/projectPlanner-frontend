@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useList } from "../../hooks/stateProvider";
 import { useNavigate } from "react-router";
-import { LoginError } from "../errorPages/loginError";
 import { PasswordField } from "./passwordField";
+import { Oval } from "react-loader-spinner";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
-
-  const { setUser, setProjects, setLoggingInUser } = useList();
+  const [showLoader, setShowLoader] = useState(false);
+  const { setUser, setProjects } = useList();
 
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export const LoginForm = () => {
     };
 
     try {
-      setLoggingInUser(true);
+      setShowLoader(true);
       const loginRes = await fetch("/api/user/login", {
         method: "POST",
         body: JSON.stringify(data2submit),
@@ -36,18 +36,14 @@ export const LoginForm = () => {
       const loginResponse = await loginRes.json();
       console.log(loginResponse);
 
-      if (loginResponse.user) {
-        setUser(loginResponse.user);
-        setProjects(loginResponse.user.projects.reverse());
-        setLoggingInUser(false);
-        navigate("/workspace");
-      } else {
-        setError(true);
-        setLoggingInUser(false);
-      }
+      setUser(loginResponse.user);
+      setProjects(loginResponse.user.projects.reverse());
+      navigate("/workspace");
     } catch (err) {
       console.error(err);
       setError(true);
+    } finally {
+      setShowLoader(false);
     }
   };
 
@@ -80,12 +76,24 @@ export const LoginForm = () => {
         </label>
         <PasswordField />
         <button
-          className="bg-[#df5569] lg:hover:bg-[#73bfd9] lg:bg-[#23446f] text-white h-[2.8rem] rounded"
+          className="bg-[#df5569] lg:hover:bg-[#73bfd9] lg:bg-[#23446f] text-white h-[2.8rem] rounded flex justify-center items-center"
           type="submit"
-          value="submit">
-          Login
+          value="submit"
+          disabled={showLoader ? true : false}>
+          {showLoader ? (
+            <Oval
+              color="black"
+              secondaryColor="white"
+              width={"2rem"}
+            />
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
+      {error && (
+        <p className="text-red-500 mt-3">Wrong email or password</p>
+      )}
       <p className="mt-5 text-sm">
         Don't have an account yet?{" "}
         <button
@@ -96,7 +104,6 @@ export const LoginForm = () => {
           Sign up
         </button>
       </p>
-      {error && <LoginError />}
     </main>
   );
 };
