@@ -17,9 +17,9 @@ export const Homepage = () => {
     showMenu,
     creatingNewProject,
     error,
-    fixPage,
     darkMode,
-    setProjects
+    setProjects,
+    server
   } = useList();
 
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export const Homepage = () => {
   const loginStateCheck = async () => {
     setCheckLoginState(true);
     try {
-      const res = await fetch("/api/user/check");
+      const res = await fetch(`${server}/api/user/check`);
       const response = await res.json();
       console.log(response);
       setUser(response.user);
@@ -59,7 +59,7 @@ export const Homepage = () => {
         <main
           className={`w-screen min-h-screen flex flex-row ${
             darkMode && "bg-black text-white"
-          } ${fixPage && "fixed"}`}>
+          }`}>
           <SideBar />
           <section className="lg:ml-[20%] w-full">
             {!creatingNewProject && projects.length === 0 && (

@@ -14,11 +14,11 @@ export const EachSection = ({ section }) => {
   const [editSection, setEditSection] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-  const { fetchFunc, setError, user } = useList();
+  const { fetchFunc, setError, user, server } = useList();
 
   const deleteFunc = () => {
     try {
-      fetchFunc(`/api/section/delete?_method=DELETE&apiToken=${user.apiToken}`, {
+      fetchFunc(`${server}/api/section/delete?_method=DELETE&apiToken=${user.apiToken}`, {
         sectionId: section._id
       });
     } catch (err) {

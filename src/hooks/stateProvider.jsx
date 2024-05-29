@@ -12,11 +12,11 @@ export const StateProvider = ({ children }) => {
   const [createNewTask, setCreateNewTask] = useState(false);
   const [activeProject, setActiveProject] = useState(0);
   const [error, setError] = useState("");
-  const [fixPage, setFixPage] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showPhoneForm, setShowPhoneForm] = useState(false);
-  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);;
+  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
   const [processingUser, setProcessingUser] = useState(false);
+  const server = import.meta.env.VITE_SERVER_URL;
 
   const fetchFunc = async (url, data2submit) => {
     const res = await fetch(url, {
@@ -48,8 +48,6 @@ export const StateProvider = ({ children }) => {
     fetchFunc,
     error,
     setError,
-    fixPage,
-    setFixPage,
     showMenu,
     setShowMenu,
     showPhoneForm,
@@ -58,6 +56,7 @@ export const StateProvider = ({ children }) => {
     setDarkMode,
     processingUser,
     setProcessingUser,
+    server
   };
 
   return (

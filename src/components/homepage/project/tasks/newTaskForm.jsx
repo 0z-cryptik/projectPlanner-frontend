@@ -7,7 +7,7 @@ export const TaskForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
-  const { projects, activeProject, setError, fetchFunc, user } = useList();
+  const { projects, activeProject, setError, fetchFunc, user, server } = useList();
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -26,7 +26,7 @@ export const TaskForm = ({ hideForm }) => {
 
     try {
       const { success } = await fetchFunc(
-        `/api/task/create?apiToken=${user.apiToken}`,
+        `${server}/api/task/create?apiToken=${user.apiToken}`,
         data2submit
       );
       if (success) {

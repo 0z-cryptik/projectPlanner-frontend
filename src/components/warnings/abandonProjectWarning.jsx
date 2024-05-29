@@ -7,8 +7,7 @@ export const AbandonProjectWarning = ({
   projectId,
   cancelHandler = (f) => f
 }) => {
-  const { fetchFunc, setError, setFixPage, user } = useList();
-
+  const { fetchFunc, setError, user, server } = useList();
   const [topPosition, setTopPosition] = useState(0);
   const fixedElementRef = createRef();
 
@@ -26,15 +25,10 @@ export const AbandonProjectWarning = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    setFixPage(true);
-    return () => setFixPage(false);
-  }, []);
-
   const abandonProject = async () => {
     try {
       const { success } = await fetchFunc(
-        `/api/project/delete?_method=DELETE&apiToken=${user.apiToken}`,
+        `${server}/api/project/delete?_method=DELETE&apiToken=${user.apiToken}`,
         {
           projectId
         }

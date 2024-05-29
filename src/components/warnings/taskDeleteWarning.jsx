@@ -1,10 +1,8 @@
 import { IoIosWarning } from "react-icons/io";
-import { useList } from "../../hooks/stateProvider";
 import { useEffect, useState, createRef } from "react";
 import { motion } from "framer-motion";
 
 export const DeleteWarning = ({ cancelHandler, deleteHandler }) => {
-  const { setFixPage } = useList();
   const [topPosition, setTopPosition] = useState(0);
   const fixedElementRef = createRef();
 
@@ -20,11 +18,6 @@ export const DeleteWarning = ({ cancelHandler, deleteHandler }) => {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    setFixPage(true);
-    return () => setFixPage(false);
   }, []);
 
   return (

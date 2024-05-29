@@ -14,7 +14,7 @@ export const EachTask = ({ task }) => {
   const [editTask, setEditTask] = useState(false);
   const [popAndFade, setPopAndFade] = useState(false);
   const [goInvinsible, setGoInvinsible] = useState(false);
-  const { fetchFunc, setError, user } = useList();
+  const { fetchFunc, setError, user, server } = useList();
 
   const playAudio = () => {
     new Audio(soundEffect).play();
@@ -25,7 +25,7 @@ export const EachTask = ({ task }) => {
     setTimeout(() => {
       try {
         fetchFunc(
-          `/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
+          `${server}/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
           { taskId: task._id }
         );
       } catch (err) {
@@ -40,7 +40,7 @@ export const EachTask = ({ task }) => {
   const deleteTask = () => {
     try {
       fetchFunc(
-        `/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
+        `${server}/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
         { taskId: task._id }
       );
     } catch (err) {

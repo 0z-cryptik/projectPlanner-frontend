@@ -13,7 +13,7 @@ export const PhoneSideBarForm = () => {
     setError,
     setShowPhoneForm,
     setShowMenu,
-    user
+    user, server
   } = useList();
 
   const projectNameHandler = (e) => {
@@ -30,7 +30,7 @@ export const PhoneSideBarForm = () => {
     const form = new FormData(e.target);
 
     try {
-      await fetchFunc(`/api/project/create?apiToken=${user.apiToken}`, {
+      await fetchFunc(`${server}/api/project/create?apiToken=${user.apiToken}`, {
         title: form.get("title")
       });
       setShowPhoneForm(false);

@@ -4,14 +4,8 @@ import { useEffect, useState, createRef } from "react";
 import { motion } from "framer-motion";
 
 export const DeleteWarning = ({ cancelHandler, deleteHandler }) => {
-  const { setFixPage } = useList();
   const [topPosition, setTopPosition] = useState(0);
   const fixedElementRef = createRef();
-
-  useEffect(() => {
-    setFixPage(true);
-    return () => setFixPage(false);
-  }, []);
 
   useEffect(() => {
     const handleResize = () => {

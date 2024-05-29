@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TaskLoader } from "../../../loaders/taskLoader";
 
 export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
-  const { fetchFunc, setError, user } = useList();
+  const { fetchFunc, setError, user, server } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(
     task.dueDate ? new Date(task.dueDate) : null
@@ -29,7 +29,7 @@ export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
 
     try {
       const { success } = await fetchFunc(
-        `/api/task/update?_method=PUT&apiToken=${user.apiToken}`,
+        `${server}/api/task/update?_method=PUT&apiToken=${user.apiToken}`,
         data2submit
       );
       if (success) {

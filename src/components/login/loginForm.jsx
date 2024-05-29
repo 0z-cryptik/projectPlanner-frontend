@@ -8,7 +8,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
-  const { setUser, setProjects } = useList();
+  const { setUser, setProjects, server } = useList();
 
   const navigate = useNavigate();
 
@@ -27,14 +27,13 @@ export const LoginForm = () => {
 
     try {
       setShowLoader(true);
-      const loginRes = await fetch("/api/user/login", {
+      const loginRes = await fetch(`${server}/api/user/login`, {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" }
       });
 
       const loginResponse = await loginRes.json();
-      console.log(loginResponse);
 
       setUser(loginResponse.user);
       setProjects(loginResponse.user.projects.reverse());

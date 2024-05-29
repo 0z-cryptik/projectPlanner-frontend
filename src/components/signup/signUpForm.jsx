@@ -19,7 +19,7 @@ import { Footer } from "./footer";
 export const SignUpForm = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const { setUser, setProcessingUser } = useList();
+  const { setUser, setProcessingUser, server } = useList();
 
   const formSchema = z
     .object({
@@ -71,11 +71,11 @@ export const SignUpForm = () => {
 
     try {
       const signupResponse = await fetchData(
-        "/api/user/signup",
+        `${server}/api/user/signup`,
         data2submit
       );
       if (signupResponse.success) {
-        const loginResponse = await fetchData("/api/user/login", {
+        const loginResponse = await fetchData(`${server}/api/user/login`, {
           email: values.email,
           password: values.password
         });

@@ -11,7 +11,7 @@ import { ThreeDots } from "react-loader-spinner";
 export const LandingPage = () => {
   const [checkingLoginState, setCheckLoginState] = useState(false);
   const [showLandingPage, setShowLandingPage] = useState(false);
-  const { setUser, setProjects } = useList();
+  const { setUser, setProjects, server } = useList();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const LandingPage = () => {
   const loginStateCheck = async () => {
     setCheckLoginState(true);
     try {
-      const res = await fetch("/api/user/check");
+      const res = await fetch(`${server}/api/user/check`);
       const response = await res.json();
       console.log(response);
       if (response.success) {

@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router";
+import { useList } from "@/src/hooks/stateProvider";
 
 export const LogoutButton = () => {
   const navigate = useNavigate();
+  const { server } = useList();
 
   const clickHandler = async () => {
     try {
-      const res = await fetch("/api/user/logout");
+      const res = await fetch(`${server}/api/user/logout`);
       const response = await res.json();
       console.log(response);
 
