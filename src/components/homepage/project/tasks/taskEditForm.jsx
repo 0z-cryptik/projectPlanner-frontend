@@ -1,5 +1,5 @@
 import { useList } from "../../../../hooks/stateProvider";
-import { DatePicker } from "@/src/components/shadCNTest/datePicker";
+import { DatePicker } from "@/src/components/datePicker/datePicker";
 import { useState } from "react";
 import { TaskLoader } from "../../../loaders/taskLoader";
 

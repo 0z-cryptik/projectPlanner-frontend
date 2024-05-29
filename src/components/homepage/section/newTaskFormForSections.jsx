@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useList } from "@/src/hooks/stateProvider";
-import { DatePicker } from "@/src/components/shadCNTest/datePicker";
+import { DatePicker } from "@/src/components/datePicker/datePicker";
 import { TaskLoader } from "@/src/components/loaders/taskLoader";
 
 export const TaskForm = ({ hideForm, parentSection }) => {
@@ -82,7 +82,7 @@ export const TaskForm = ({ hideForm, parentSection }) => {
         />
       </span>
       <div className="w-fit mx-auto mt-5">
-      <button
+        <button
           className="bg-green-500 text-white p-2 rounded-xl mr-3"
           type="submit"
           value="submit">
@@ -93,7 +93,6 @@ export const TaskForm = ({ hideForm, parentSection }) => {
           className="bg-red-500 text-white p-2 rounded-xl">
           Cancel
         </button>
-        
       </div>
     </form>
   );

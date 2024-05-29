@@ -4,7 +4,7 @@ import { SignUpPage } from "./components/signup/signUpPage";
 import { LoginPage } from "./components/login/loginPage";
 import { Homepage } from "./components/homepage/homepage";
 import { LandingPage } from "./components/landingPage/landingPage";
-import { ShadCNPage } from "./components/shadCNTest/shadCN";
+import { ShadCNPage } from "./components/datePicker/shadCN";
 
 export const RoutedApp = () => {
   return (
