@@ -7,6 +7,7 @@ import { useList } from "@/src/hooks/stateProvider";
 import { Img } from "react-image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ThreeDots } from "react-loader-spinner";
+import { LandingPageLoader } from "../loaders/landingPageLoader";
 
 export const LandingPage = () => {
   const [checkingLoginState, setCheckLoginState] = useState(false);
@@ -59,11 +60,7 @@ export const LandingPage = () => {
   };
 
   if (checkingLoginState) {
-    return (
-      <main className="w-screen h-screen flex items-center justify-center">
-        <p className="text-2xl">LOADING</p>
-      </main>
-    );
+    return <LandingPageLoader />
   }
 
   if (showLandingPage) {
