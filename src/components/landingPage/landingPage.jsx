@@ -22,7 +22,9 @@ export const LandingPage = () => {
   const loginStateCheck = async () => {
     setCheckLoginState(true);
     try {
-      const res = await fetch(`${server}/api/user/check`);
+      const res = await fetch(`${server}/api/user/check`, {
+        credentials: "include"
+      });
       const response = await res.json();
       console.log(response);
       if (response.success) {
@@ -60,7 +62,7 @@ export const LandingPage = () => {
   };
 
   if (checkingLoginState) {
-    return <LandingPageLoader />
+    return <LandingPageLoader />;
   }
 
   if (showLandingPage) {

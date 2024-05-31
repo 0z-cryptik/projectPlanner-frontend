@@ -101,7 +101,8 @@ export const SignUpForm = () => {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
-      credentials: "include"
+      credentials: "include",
+      
     });
     return res.json();
   };
