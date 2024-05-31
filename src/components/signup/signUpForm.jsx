@@ -100,7 +100,8 @@ export const SignUpForm = () => {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      credentials: "include"
     });
     return res.json();
   };
@@ -113,8 +114,7 @@ export const SignUpForm = () => {
       <Form {...form}>
         <form
           className="flex flex-col gap-y-3 w-[65%] max-lg:mt-[2.5rem]"
-          onSubmit={form.handleSubmit(submitHandler)}
-          >
+          onSubmit={form.handleSubmit(submitHandler)}>
           <FormField
             control={form.control}
             name="name"

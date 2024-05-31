@@ -33,7 +33,9 @@ export const Homepage = () => {
   const loginStateCheck = async () => {
     setCheckLoginState(true);
     try {
-      const res = await fetch(`${server}/api/user/check`);
+      const res = await fetch(`${server}/api/user/check`, {
+        credentials: "include"
+      });
       const response = await res.json();
       console.log(response);
       setUser(response.user);
