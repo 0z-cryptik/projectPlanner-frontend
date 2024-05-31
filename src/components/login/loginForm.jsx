@@ -31,6 +31,7 @@ export const LoginForm = () => {
         method: "POST",
         body: JSON.stringify(data2submit),
         headers: { "Content-Type": "application/json" },
+        credentials: "include"
       });
 
       const loginResponse = await loginRes.json();
@@ -66,7 +67,6 @@ export const LoginForm = () => {
           value={email}
           onChange={emailChangeHandler}
           required
-          autoFocus
         />
         <label
           className="mb-2 font-extralight"

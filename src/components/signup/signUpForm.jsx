@@ -130,7 +130,6 @@ export const SignUpForm = () => {
                     type="text"
                     placeholder="Enter your name or nickname"
                     required
-                    autoFocus
                   />
                 </FormControl>
                 <FormMessage />
