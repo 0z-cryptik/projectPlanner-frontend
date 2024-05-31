@@ -22,8 +22,7 @@ export const StateProvider = ({ children }) => {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(data2submit),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include"
+      headers: { "Content-Type": "application/json" }
     });
 
     const response = await res.json();

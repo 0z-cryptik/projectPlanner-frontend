@@ -30,8 +30,7 @@ export const LoginForm = () => {
       const loginRes = await fetch(`${server}/api/user/login`, {
         method: "POST",
         body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include"
+        headers: { "Content-Type": "application/json" }
       });
 
       const loginResponse = await loginRes.json();
