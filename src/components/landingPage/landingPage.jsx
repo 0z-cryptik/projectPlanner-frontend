@@ -26,7 +26,6 @@ export const LandingPage = () => {
         credentials: "include"
       });
       const response = await res.json();
-      console.log(response);
       if (response.success) {
         setUser(response.user);
         setProjects(response.user.projects.reverse());

@@ -9,7 +9,6 @@ export const LogoutButton = () => {
     try {
       const res = await fetch(`${server}/api/user/logout`);
       const response = await res.json();
-      console.log(response);
 
       if (response.success) {
         navigate("/login");

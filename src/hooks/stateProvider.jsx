@@ -27,7 +27,6 @@ export const StateProvider = ({ children }) => {
     });
 
     const response = await res.json();
-    console.log(response);
     setProjects(response.user.projects.reverse());
 
     if (response.success) {

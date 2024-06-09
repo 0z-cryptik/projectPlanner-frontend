@@ -37,7 +37,6 @@ export const Homepage = () => {
         credentials: "include"
       });
       const response = await res.json();
-      console.log(response);
       setUser(response.user);
       setProjects(response.user.projects.reverse());
     } catch (err) {
