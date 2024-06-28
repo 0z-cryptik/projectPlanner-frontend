@@ -9,7 +9,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  PopoverClose
+  //PopoverClose
 } from "@/components/ui/popover";
 import { useList } from "@/src/hooks/stateProvider";
 
@@ -36,7 +36,7 @@ export const DatePicker = ({ date, setDate }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <PopoverClose>
+        {/* <PopoverClose> */}
           <Calendar
             mode="single"
             selected={date}
@@ -44,7 +44,7 @@ export const DatePicker = ({ date, setDate }) => {
             disabled={{ before: new Date() }}
             initialFocus
           />
-        </PopoverClose>
+        {/* </PopoverClose> */}
       </PopoverContent>
     </Popover>
   );
