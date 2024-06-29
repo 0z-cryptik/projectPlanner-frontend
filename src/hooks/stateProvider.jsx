@@ -16,6 +16,7 @@ export const StateProvider = ({ children }) => {
   const [showPhoneForm, setShowPhoneForm] = useState(false);
   const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
   const [processingUser, setProcessingUser] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const server = import.meta.env.VITE_SERVER_URL;
 
   const fetchFunc = async (url, data2submit) => {
@@ -56,6 +57,8 @@ export const StateProvider = ({ children }) => {
     setDarkMode,
     processingUser,
     setProcessingUser,
+    completed,
+    setCompleted,
     server
   };
 

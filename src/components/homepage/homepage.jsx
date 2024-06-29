@@ -5,8 +5,9 @@ import { SideBar } from "./sideBar";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { ProjectPage } from "./project/projectPage";
-import { ErrorFlashMessage } from "../errorPages/errorFlashMessage";
+import { ErrorFlashMessage } from "../flashMessages/errorFlashMessage";
 import { Overlay } from "../overlay/overlay";
+import { TaskCompleted } from "../flashMessages/taskCompletedFlash";
 
 export const Homepage = () => {
   const [checkingLoginState, setCheckLoginState] = useState();
@@ -19,6 +20,7 @@ export const Homepage = () => {
     error,
     darkMode,
     setProjects,
+    completed,
     server
   } = useList();
 
@@ -70,6 +72,7 @@ export const Homepage = () => {
             {!creatingNewProject && projects.length > 0 && <ProjectPage />}
           </section>
           {error && <ErrorFlashMessage message={error} />}
+          {completed && <TaskCompleted />}
           {showMenu && <Overlay deem />}
         </main>
       </>

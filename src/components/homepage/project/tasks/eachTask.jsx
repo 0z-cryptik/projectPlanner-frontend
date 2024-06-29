@@ -7,34 +7,38 @@ import { Options } from "./options";
 import { DueDate } from "./dueDate";
 import { useList } from "../../../../hooks/stateProvider";
 import soundEffect from "../../../../soundEffects/tap-notification-180637.mp3";
+import { TaskCompletingLoader } from "@/src/components/loaders/taskCompleting";
 
 export const EachTask = ({ task }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [editTask, setEditTask] = useState(false);
-  const [popAndFade, setPopAndFade] = useState(false);
-  const [goInvinsible, setGoInvinsible] = useState(false);
-  const { fetchFunc, setError, user, server } = useList();
+  const [completing, setCompleting] = useState(false);
+
+  const { fetchFunc, setError, user, server, setCompleted } = useList();
 
   const playAudio = () => {
     new Audio(soundEffect).play();
   };
 
-  const completeTask = () => {
-    setPopAndFade(true);
-    setTimeout(() => {
-      try {
-        fetchFunc(
-          `${server}/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
-          { taskId: task._id }
-        );
-      } catch (err) {
-        console.error(err);
-      } finally {
+  const completeTask = async () => {
+    setCompleting(true);
+
+    try {
+      const { success } = await fetchFunc(
+        `${server}/api/task/delete?_method=DELETE&apiToken=${user.apiToken}`,
+        { taskId: task._id }
+      );
+
+      if (success) {
         playAudio();
-        setPopAndFade(false);
+        setCompleted(true);
       }
-    }, 200);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setCompleting(false);
+    }
   };
 
   const deleteTask = () => {
@@ -68,16 +72,16 @@ export const EachTask = ({ task }) => {
       onMouseLeave={() => {
         setShowOptions(false);
       }}
-      onAnimationEnd={() => {
-        setGoInvinsible(true);
-      }}
-      className={`w-[90%] flex flex-row mt-7 border-b ${
-        popAndFade && "growAndFade"
-      } ${goInvinsible && "hidden"} `}>
-      <CheckMarkButton
-        clickFunc={completeTask}
-        additionalStyling={`${!task.dueDate && "mb-2"}`}
-      />
+      
+      className={`w-[90%] flex flex-row mt-7 border-b`}>
+      {completing ? (
+        <TaskCompletingLoader />
+      ) : (
+        <CheckMarkButton
+          clickFunc={completeTask}
+          additionalStyling={`${!task.dueDate && "mb-2"}`}
+        />
+      )}
 
       <div className="flex-grow">
         <p className="flex-grow text-sm lg:text-base">{task.title}</p>
