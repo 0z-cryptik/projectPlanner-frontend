@@ -75,7 +75,7 @@ export const EachTask = ({ task }) => {
       
       className={`w-[90%] flex flex-row mt-7 border-b`}>
       {completing ? (
-        <TaskCompletingLoader />
+        <TaskCompletingLoader conditionalStyling={`${!task.dueDate && "mb-2"}`} />
       ) : (
         <CheckMarkButton
           clickFunc={completeTask}
