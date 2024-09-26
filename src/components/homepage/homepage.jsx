@@ -8,6 +8,7 @@ import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../flashMessages/errorFlashMessage";
 import { Overlay } from "../overlay/overlay";
 import { TaskCompleted } from "../flashMessages/taskCompletedFlash";
+import { LandingPageLoader } from "../loaders/landingPageLoader";
 
 export const Homepage = () => {
   const [checkingLoginState, setCheckLoginState] = useState();
@@ -34,6 +35,7 @@ export const Homepage = () => {
 
   const loginStateCheck = async () => {
     setCheckLoginState(true);
+
     try {
       const res = await fetch(`${server}/api/user/check`, {
         credentials: "include"
@@ -50,9 +52,7 @@ export const Homepage = () => {
 
   if (!user && checkingLoginState) {
     return (
-      <main className="w-screen h-screen flex items-center justify-center">
-        <p className="text-2xl">LOADING</p>
-      </main>
+      <LandingPageLoader />
     );
   }
 

@@ -33,8 +33,11 @@ export const EachTask = ({ task }) => {
       if (success) {
         playAudio();
         setCompleted(true);
+      } else {
+        throw new Error("there was an error");
       }
     } catch (err) {
+      setError("There was an error, please try again");
       console.error(err);
     } finally {
       setCompleting(false);
@@ -72,10 +75,11 @@ export const EachTask = ({ task }) => {
       onMouseLeave={() => {
         setShowOptions(false);
       }}
-      
       className={`w-[90%] flex flex-row mt-7 border-b`}>
       {completing ? (
-        <TaskCompletingLoader conditionalStyling={`${!task.dueDate && "mb-2"}`} />
+        <TaskCompletingLoader
+          conditionalStyling={`${!task.dueDate && "mb-2"}`}
+        />
       ) : (
         <CheckMarkButton
           clickFunc={completeTask}

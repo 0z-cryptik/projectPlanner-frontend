@@ -30,17 +30,14 @@ export const TaskForm = ({ hideForm, parentSection }) => {
         data2submit
       );
 
-      if (success) {
-        setShowLoader(false);
-      } else {
-        setError(
-          "An error occured while creating your task, please try again"
-        );
+      if (!success) {
+        throw new Error("there was an error");
       }
     } catch (err) {
       setError(
         "An error occured while creating your task, please try again"
       );
+    } finally {
       setShowLoader(false);
     }
 

@@ -5,7 +5,8 @@ import { SectionLoader } from "../../loaders/sectionLoader";
 export const AddSectionForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
   const [showLoader, setShowLoader] = useState(false);
-  const { projects, activeProject, fetchFunc, setError, user, server } = useList();
+  const { projects, activeProject, fetchFunc, setError, user, server } =
+    useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -25,17 +26,15 @@ export const AddSectionForm = ({ hideForm }) => {
       );
 
       if (success) {
-        setShowLoader(false);
         hideForm();
       } else {
-        setError(
-          "An error occured while creating your section, please try again"
-        );
+        throw new Error("there was an error");
       }
     } catch (err) {
       setError(
         "An error occured while creating your section, please try again"
       );
+    } finally {
       setShowLoader(false);
     }
   };

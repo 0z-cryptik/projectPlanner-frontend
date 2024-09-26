@@ -24,9 +24,7 @@ export const ProjectList = () => {
             }`}
             onClick={() => {
               if (!creatingNewProject) {
-                if (showMenu) {
-                  setShowMenu(false);
-                }
+                setShowMenu(false);
                 setActiveProject(i);
               }
             }}>

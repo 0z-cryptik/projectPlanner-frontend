@@ -6,7 +6,6 @@ export const CreateNewProjectForm = () => {
   const [projectName, setProjectName] = useState("");
   const [showLoader, setShowLoader] = useState(false);
   const {
-    creatingNewProject,
     setCreatingNewProject,
     fetchFunc,
     setActiveProject,
@@ -14,7 +13,8 @@ export const CreateNewProjectForm = () => {
     showPhoneForm,
     setShowPhoneForm,
     setShowMenu,
-    user, server
+    user,
+    server
   } = useList();
 
   const projectNameHandler = (e) => {
@@ -22,13 +22,8 @@ export const CreateNewProjectForm = () => {
   };
 
   const hideForm = () => {
-    if (creatingNewProject) {
-      setCreatingNewProject(false);
-    }
-
-    if (showPhoneForm) {
-      setShowPhoneForm(false);
-    }
+    setCreatingNewProject(false);
+    setShowPhoneForm(false);
   };
 
   const submitHandler = async (e) => {
@@ -45,28 +40,19 @@ export const CreateNewProjectForm = () => {
       );
 
       if (success) {
-        setShowLoader(false);
-        if (creatingNewProject) {
-          setCreatingNewProject(false);
-        }
-
-        if (showPhoneForm) {
-          setShowPhoneForm(false);
-          setShowMenu(false);
-        }
-
+        setCreatingNewProject(false);
+        setShowPhoneForm(false);
+        setShowMenu(false);
         setActiveProject(0);
       } else {
-        setError(
-          "There was an error creating the project, please try again"
-        );
+        throw new Error("There was an error");
       }
     } catch (err) {
       setError(
         "There was an error creating the project, please try again"
       );
+    } finally {
       setShowLoader(false);
-      setCreatingNewProject(false);
     }
   };
 

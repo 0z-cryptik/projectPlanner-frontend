@@ -7,7 +7,8 @@ export const TaskForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
-  const { projects, activeProject, setError, fetchFunc, user, server } = useList();
+  const { projects, activeProject, setError, fetchFunc, user, server } =
+    useList();
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -29,14 +30,12 @@ export const TaskForm = ({ hideForm }) => {
         `${server}/api/task/create?apiToken=${user.apiToken}`,
         data2submit
       );
-      if (success) {
-        setShowLoader(false);
-      } else {
-        setError("there was an error creating the task, please try again");
-        setShowLoader(false);
+      if (!success) {
+        throw new Error("there was an error");
       }
     } catch (err) {
       setError("there was an error creating the task, please try again");
+    } finally {
       setShowLoader(false);
     }
 

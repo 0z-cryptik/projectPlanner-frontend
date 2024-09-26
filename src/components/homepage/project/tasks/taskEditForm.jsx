@@ -33,14 +33,13 @@ export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
         data2submit
       );
       if (success) {
-        setShowLoader(false);
         hideForm();
       } else {
-        setError("there was an error editing the task, please try again");
-        setShowLoader(false);
+        throw new Error("There was an error");
       }
     } catch (err) {
       setError("there was an error editing the task, please try again");
+    } finally {
       setShowLoader(false);
     }
   };

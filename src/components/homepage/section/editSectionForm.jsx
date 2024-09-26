@@ -26,18 +26,15 @@ export const EditSectionForm = ({ section, hideForm }) => {
       );
 
       if (success) {
-        setShowLoader(false);
         hideForm();
       } else {
-        setError(
-          "An error occured while editing your section, please try again"
-        );
-        setShowLoader(false);
+        throw new Error("there was an error");
       }
     } catch (err) {
       setError(
         "An error occured while editing your section, please try again"
       );
+    } finally {
       setShowLoader(false);
     }
   };

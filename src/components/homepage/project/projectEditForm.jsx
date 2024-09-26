@@ -28,19 +28,15 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
         `${server}/api/project/update?_method=PUT&apiToken=${user.apiToken}`,
         data2submit
       );
-      if (success) {
-        setShowLoader(false);
-      } else {
-        setError(
-          "There was an error editing this project, please try again"
-        );
-        setShowLoader(false);
+      if (!success) {
+        throw new Error("there was an error");
       }
       cancelHandler();
     } catch (err) {
       setError(
         "There was an error editing this project, please try again"
       );
+    } finally {
       setShowLoader(false);
     }
   };
