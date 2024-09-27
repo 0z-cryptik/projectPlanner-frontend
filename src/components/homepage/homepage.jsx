@@ -2,7 +2,7 @@ import { useList } from "../../hooks/stateProvider";
 import { CreateNewProjectForm } from "./project/newProjectForm";
 import { CreateNewProjectButton } from "./project/newProjectButton";
 import { SideBar } from "./sideBar";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ProjectPage } from "./project/projectPage";
 import { ErrorFlashMessage } from "../flashMessages/errorFlashMessage";

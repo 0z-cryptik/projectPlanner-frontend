@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = ({ error, errorMsg }) => {
   const navigate = useNavigate();

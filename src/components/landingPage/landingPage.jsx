@@ -1,6 +1,6 @@
 import heroImage from "./images/3682888.jpg";
 import logo from "./images/logo/task-list-2.png";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useList } from "@/src/hooks/stateProvider";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useList } from "../../hooks/stateProvider";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { PasswordField } from "./passwordField";
 import { Oval } from "react-loader-spinner";
 

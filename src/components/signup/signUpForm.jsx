@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useList } from "../../hooks/stateProvider";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
