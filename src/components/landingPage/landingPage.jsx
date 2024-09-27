@@ -104,12 +104,12 @@ export const LandingPage = () => {
           <div className="text-center flex flex-col items-center max-md:order-2 justify-center">
             <motion.h1
               variants={childrenAnimation}
-              className="text-4xl md:text-6xl md:w-[70%] font-bold mt-[4rem] lg:mt-[1rem] max-md:px-3">
+              className="text-4xl md:text-6xl md:w-[70%] font-bold mt-[4rem] lg:mt-[1rem] max-md:px-3 font-mono">
               Organize your work and projects today
             </motion.h1>
             <motion.p
               variants={childrenAnimation}
-              className="w-[70%] text-lg mt-5">
+              className="w-[70%] text-lg mt-5 font-mono">
               Break down your projects into tasks, group your tasks into
               different sections
             </motion.p>
