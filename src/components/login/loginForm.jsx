@@ -18,6 +18,8 @@ export const LoginForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setError(false); // Reset error state on new submit
+    
     const form = new FormData(e.target);
 
     const data2submit = {
@@ -30,17 +32,28 @@ export const LoginForm = () => {
       const loginRes = await fetch(`${server}/api/user/login`, {
         method: "POST",
         body: JSON.stringify(data2submit),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include"
+        headers: { "Content-Type": "application/json" }
       });
 
       const loginResponse = await loginRes.json();
 
+      // Handle invalid login credentials returned from API
+      if (!loginResponse.success || !loginResponse.token) {
+        setError(true);
+        return;
+      }
+
+      // 1. Save JWT to localStorage for future authenticated requests
+      localStorage.setItem("userToken", loginResponse.token);
+
+      // 2. Update React State
       setUser(loginResponse.user);
-      setProjects(loginResponse.user.projects.reverse());
+      setProjects(loginResponse.user.projects ? [...loginResponse.user.projects].reverse() : []);
+
+      // 3. Navigate to workspace
       navigate("/workspace");
     } catch (err) {
-      console.error(err);
+      console.error("Login request failed:", err);
       setError(true);
     } finally {
       setShowLoader(false);
@@ -78,7 +91,7 @@ export const LoginForm = () => {
           className="bg-[#df5569] lg:hover:bg-[#73bfd9] lg:bg-[#23446f] text-white h-[2.8rem] rounded flex justify-center items-center"
           type="submit"
           value="submit"
-          disabled={showLoader ? true : false}>
+          disabled={showLoader}>
           {showLoader ? (
             <Oval
               color="black"

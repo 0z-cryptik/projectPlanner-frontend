@@ -11,7 +11,7 @@ import { TaskCompleted } from "../flashMessages/taskCompletedFlash";
 import { LandingPageLoader } from "../loaders/landingPageLoader";
 
 export const Homepage = () => {
-  const [checkingLoginState, setCheckLoginState] = useState();
+  const [checkingLoginState, setCheckLoginState] = useState(false);
   const {
     user,
     setUser,
@@ -34,16 +34,41 @@ export const Homepage = () => {
   }, []);
 
   const loginStateCheck = async () => {
+    const token = localStorage.getItem("userToken");
+
+    // 1. If no token exists in storage, don't bother fetching; go straight to login
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     setCheckLoginState(true);
 
     try {
+      // 2. Pass JWT in the Authorization header
       const res = await fetch(`${server}/api/user/check`, {
-        credentials: "include"
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
       });
+
       const response = await res.json();
-      setUser(response.user);
-      setProjects(response.user.projects.reverse());
+
+      if (response.success && response.user) {
+        setUser(response.user);
+        setProjects(
+          response.user.projects ? [...response.user.projects].reverse() : []
+        );
+      } else {
+        // Token is invalid or expired
+        localStorage.removeItem("userToken");
+        navigate("/login");
+      }
     } catch (err) {
+      console.error("Authentication check failed:", err);
+      localStorage.removeItem("userToken");
       navigate("/login");
     } finally {
       setCheckLoginState(false);
@@ -51,9 +76,7 @@ export const Homepage = () => {
   };
 
   if (!user && checkingLoginState) {
-    return (
-      <LandingPageLoader />
-    );
+    return <LandingPageLoader />;
   }
 
   if (user) {
@@ -78,4 +101,6 @@ export const Homepage = () => {
       </>
     );
   }
+
+  return null;
 };

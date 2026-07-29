@@ -7,7 +7,7 @@ export const TaskForm = ({ hideForm }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
-  const { projects, activeProject, setError, fetchFunc, user, server } =
+  const { projects, activeProject, setError, fetchFunc, server } =
     useList();
 
   const titleChangeHandler = (e) => {
@@ -26,8 +26,9 @@ export const TaskForm = ({ hideForm }) => {
     };
 
     try {
+      // Clean endpoint call without ?apiToken parameter
       const { success } = await fetchFunc(
-        `${server}/api/task/create?apiToken=${user.apiToken}`,
+        `${server}/api/task/create`,
         data2submit
       );
       if (!success) {
@@ -84,6 +85,7 @@ export const TaskForm = ({ hideForm }) => {
           Submit
         </button>
         <button
+          type="button"
           onClick={hideForm}
           className="bg-red-500 text-white p-2 rounded-xl">
           Cancel

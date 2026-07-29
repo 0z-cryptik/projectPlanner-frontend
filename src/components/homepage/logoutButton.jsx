@@ -3,19 +3,20 @@ import { useList } from "@/src/hooks/stateProvider";
 
 export const LogoutButton = () => {
   const navigate = useNavigate();
-  const { server } = useList();
+  const { setUser, setProjects } = useList();
 
-  const clickHandler = async () => {
-    try {
-      const res = await fetch(`${server}/api/user/logout`);
-      const response = await res.json();
+  const clickHandler = () => {
+    // 1. Clear JWT token from local storage
+    localStorage.removeItem("userToken");
 
-      if (response.success) {
-        navigate("/login");
-      }
-    } catch (err) {
-      console.error(err);
+    // 2. Reset local user and project state
+    setUser(null);
+    if (setProjects) {
+      setProjects([]);
     }
+
+    // 3. Redirect to login page
+    navigate("/login");
   };
 
   return (

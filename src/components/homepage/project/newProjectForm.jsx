@@ -10,10 +10,8 @@ export const CreateNewProjectForm = () => {
     fetchFunc,
     setActiveProject,
     setError,
-    showPhoneForm,
     setShowPhoneForm,
     setShowMenu,
-    user,
     server
   } = useList();
 
@@ -33,7 +31,7 @@ export const CreateNewProjectForm = () => {
 
     try {
       const { success } = await fetchFunc(
-        `${server}/api/project/create?apiToken=${user.apiToken}`,
+        `${server}/api/project/create`,
         {
           title: form.get("title")
         }
@@ -86,6 +84,7 @@ export const CreateNewProjectForm = () => {
             Add project
           </button>
           <button
+            type="button"
             onClick={hideForm}
             className="bg-red-700 text-white p-2 rounded-xl">
             Cancel

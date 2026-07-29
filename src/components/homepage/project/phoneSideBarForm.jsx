@@ -13,7 +13,7 @@ export const PhoneSideBarForm = () => {
     setError,
     setShowPhoneForm,
     setShowMenu,
-    user, server
+    server
   } = useList();
 
   const projectNameHandler = (e) => {
@@ -30,7 +30,7 @@ export const PhoneSideBarForm = () => {
     const form = new FormData(e.target);
 
     try {
-      await fetchFunc(`${server}/api/project/create?apiToken=${user.apiToken}`, {
+      await fetchFunc(`${server}/api/project/create`, {
         title: form.get("title")
       });
       setShowPhoneForm(false);
@@ -75,7 +75,8 @@ export const PhoneSideBarForm = () => {
         </button>
         <button
           onClick={hideForm}
-          className="bg-red-700 text-white py-2 px-4 rounded-xl">
+          className="bg-red-700 text-white py-2 px-4 rounded-xl"
+          type="button">
           <RiDeleteBin7Fill />
         </button>
       </div>

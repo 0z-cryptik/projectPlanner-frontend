@@ -7,7 +7,7 @@ import { SectionLoader } from "../../loaders/sectionLoader";
 export const EditSectionForm = ({ section, hideForm }) => {
   const [title, setTitle] = useState(section.title);
   const [showLoader, setShowLoader] = useState(false);
-  const { fetchFunc, setError, user, server } = useList();
+  const { fetchFunc, setError, server } = useList();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export const EditSectionForm = ({ section, hideForm }) => {
 
     try {
       const { success } = await fetchFunc(
-        `${server}/api/section/update?_method=PUT&apiToken=${user.apiToken}`,
+        `${server}/api/section/update?_method=PUT`,
         data2submit
       );
 
@@ -66,6 +66,7 @@ export const EditSectionForm = ({ section, hideForm }) => {
         <FaCircleCheck />
       </button>
       <button
+        type="button"
         onClick={hideForm}
         className="hover:text-red-600">
         <MdCancel size={"1.5rem"} />

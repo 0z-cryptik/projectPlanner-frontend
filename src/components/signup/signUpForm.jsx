@@ -19,7 +19,7 @@ import { Footer } from "./footer";
 export const SignUpForm = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const { setUser, setProcessingUser, server } = useList();
+  const { setUser, setProjects, setProcessingUser, server } = useList();
 
   const formSchema = z
     .object({
@@ -27,7 +27,7 @@ export const SignUpForm = () => {
         .string()
         .regex(
           /^[a-zA-Z0-9 ]*$/,
-          "Password can only contain letters and numbers"
+          "Name can only contain letters, numbers, and spaces"
         )
         .min(2, { message: "must have at least 2 characters" })
         .max(30, { message: "can't have over 30 characters" }),
@@ -61,6 +61,8 @@ export const SignUpForm = () => {
 
   const submitHandler = async (values) => {
     setProcessingUser(true);
+    setError(false);
+    setErrorMsg("");
 
     const data2submit = {
       email: values.email,
@@ -74,23 +76,27 @@ export const SignUpForm = () => {
         `${server}/api/user/signup`,
         data2submit
       );
-      if (signupResponse.success) {
-        const loginResponse = await fetchData(`${server}/api/user/login`, {
-          email: values.email,
-          password: values.password
-        });
 
-        if (loginResponse.user) {
-          setUser(signupResponse.data);
-          navigate("/workspace");
+      if (signupResponse.success && signupResponse.token) {
+        // 1. Save JWT to localStorage
+        localStorage.setItem("userToken", signupResponse.token);
+
+        // 2. Set React State
+        setUser(signupResponse.user);
+        if (setProjects) {
+          setProjects(signupResponse.user.projects ? [...signupResponse.user.projects].reverse() : []);
         }
+
+        // 3. Navigate to workspace
+        navigate("/workspace");
       } else {
         setError(true);
-        setErrorMsg(signupResponse.reason);
+        setErrorMsg(signupResponse.reason || "Signup failed. Please try again.");
       }
     } catch (err) {
       console.error(err);
       setError(true);
+      setErrorMsg("Network error. Please check your connection.");
     } finally {
       setProcessingUser(false);
     }
@@ -100,9 +106,7 @@ export const SignUpForm = () => {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      
+      headers: { "Content-Type": "application/json" }
     });
     return res.json();
   };

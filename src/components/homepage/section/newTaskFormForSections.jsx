@@ -7,7 +7,7 @@ export const TaskForm = ({ hideForm, parentSection }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
-  const { setError, fetchFunc, user, server } = useList();
+  const { setError, fetchFunc, server } = useList();
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -26,7 +26,7 @@ export const TaskForm = ({ hideForm, parentSection }) => {
 
     try {
       const { success } = await fetchFunc(
-        `${server}/api/task/create?apiToken=${user.apiToken}`,
+        `${server}/api/task/create`,
         data2submit
       );
 
@@ -86,6 +86,7 @@ export const TaskForm = ({ hideForm, parentSection }) => {
           Submit
         </button>
         <button
+          type="button"
           onClick={hideForm}
           className="bg-red-500 text-white p-2 rounded-xl">
           Cancel

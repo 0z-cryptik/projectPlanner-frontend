@@ -7,7 +7,7 @@ export const AbandonProjectWarning = ({
   projectId,
   cancelHandler = (f) => f
 }) => {
-  const { fetchFunc, setError, user, server } = useList();
+  const { fetchFunc, setError, server } = useList();
   const [topPosition, setTopPosition] = useState(0);
   const fixedElementRef = createRef();
 
@@ -28,7 +28,7 @@ export const AbandonProjectWarning = ({
   const abandonProject = async () => {
     try {
       const { success } = await fetchFunc(
-        `${server}/api/project/delete?_method=DELETE&apiToken=${user.apiToken}`,
+        `${server}/api/project/delete?_method=DELETE`,
         {
           projectId
         }
@@ -63,11 +63,13 @@ export const AbandonProjectWarning = ({
       </p>
       <div className="w-fit mx-auto mt-5">
         <button
+          type="button"
           onClick={cancelHandler}
           className="mr-3 border p-2 rounded bg-green-500 text-white">
           No
         </button>
         <button
+          type="button"
           onClick={abandonProject}
           className="border p-2 rounded bg-red-600  text-white">
           Yes

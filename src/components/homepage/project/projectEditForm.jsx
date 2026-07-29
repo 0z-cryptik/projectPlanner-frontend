@@ -5,7 +5,7 @@ import { MdCancel } from "react-icons/md";
 import { ProjectEditLoader } from "../../loaders/projectEditLoader";
 
 export const ProjectEditForm = ({ project, cancelHandler }) => {
-  const { fetchFunc, setError, user, server } = useList();
+  const { fetchFunc, setError, server } = useList();
   const [title, setTitle] = useState(project.title);
   const [showLoader, setShowLoader] = useState(false);
 
@@ -25,7 +25,7 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
 
     try {
       const { success } = await fetchFunc(
-        `${server}/api/project/update?_method=PUT&apiToken=${user.apiToken}`,
+        `${server}/api/project/update?_method=PUT`,
         data2submit
       );
       if (!success) {
@@ -70,6 +70,7 @@ export const ProjectEditForm = ({ project, cancelHandler }) => {
       </button>
 
       <button
+        type="button"
         onClick={cancelHandler}
         className="rounded-xl hover:text-red-600">
         <MdCancel size={"1.8rem"} />

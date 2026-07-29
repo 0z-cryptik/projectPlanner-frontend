@@ -20,18 +20,36 @@ export const StateProvider = ({ children }) => {
   const server = import.meta.env.VITE_SERVER_URL;
 
   const fetchFunc = async (url, data2submit) => {
-    const res = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(data2submit),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include"
-    });
+    try {
+      const token = localStorage.getItem("userToken");
 
-    const response = await res.json();
-    setProjects(response.user.projects.reverse());
+      const res = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data2submit),
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        }
+      });
 
-    if (response.success) {
-      return { success: true };
+      const response = await res.json();
+
+      if (response.success && response.user) {
+        setProjects(
+          response.user.projects ? [...response.user.projects].reverse() : []
+        );
+        return { success: true, response };
+      }
+
+      // If token expired or invalid, handle gracefully
+      if (res.status === 401 || res.status === 403) {
+        localStorage.removeItem("userToken");
+      }
+
+      return { success: false, reason: response.reason || "Request failed" };
+    } catch (err) {
+      console.error("fetchFunc error:", err);
+      return { success: false, reason: "Network error" };
     }
   };
 
