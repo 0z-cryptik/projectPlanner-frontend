@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TaskLoader } from "../../../loaders/taskLoader";
 
 export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
-  const { fetchFunc, setError, server } = useList();
+  const { fetchFunc, setError, server, darkMode } = useList();
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(
     task.dueDate ? new Date(task.dueDate) : null
@@ -51,7 +51,7 @@ export const TaskEditForm = ({ task, hideForm = (f) => f }) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="mt-4 w-[90%] lg:w-[58%] text-xs lg:text-base border rounded-xl p-3">
+      className={`mt-4 w-[90%] lg:w-[58%] text-xs lg:text-base border rounded-xl p-3 ${darkMode && "bg-black text-white"}`}>
       <span className="flex flex-row border-b mb-3">
         <input
           className="outline-none w-3/4 h-[2rem]"
